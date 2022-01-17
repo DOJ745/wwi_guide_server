@@ -1,0 +1,17 @@
+{
+  "name": "wwi_guide_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2",
+    "mongoose": "^6.1.7",
+    "nodemon": "^2.0.15"
+  }
+}
