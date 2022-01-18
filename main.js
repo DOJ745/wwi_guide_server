@@ -1,13 +1,16 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const cookieParser = require('cookie-parser')
+
 const authRouter = require('./routers/authRouter')
 const {dbName, dbUsername, dbPassword} = require('./config/config')
 
 const PORT = process.env.PORT || 9000
-
 const app = express()
 
 app.use(express.json())
+app.use(cookieParser())
+
 app.use('/auth', authRouter)
 
 const start = async () => {

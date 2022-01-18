@@ -9,7 +9,8 @@ module.exports = function(roles) {
         try {
             let token = ""
             if(req.headers.authorization) { token = req.headers.authorization.split(' ')[1] }
-            else { return res.status(403).json({message: "User without authorization token!"}) }
+            //else { return res.status(403).json({message: "User without authorization token!"}) }
+            else { token = req.cookies.access_token }
 
             const {roles: userRoles} = jwt.verify(token, secret)
             let hasRole = false

@@ -56,6 +56,10 @@ class AuthController {
             }
 
             const token = generateAccessToken(user._id, user.roles)
+            res.cookie('access_token', token, {
+                maxAge: 3600 * 1000,
+                httpOnly: true
+            })
             return res.status(200).json({token})
         }
         catch (e) {
