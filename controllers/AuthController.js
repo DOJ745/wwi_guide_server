@@ -3,7 +3,7 @@ const Role = require('../models/Role')
 const bcrypt = require('bcryptjs')
 const { validationResult } = require('express-validator')
 const jwt = require('jsonwebtoken')
-const {secret} = require('../config/config')
+const { secret } = require('../config/config')
 
 const generateAccessToken = (id, roles) => {
     const payload = {id, roles}
@@ -22,7 +22,7 @@ class AuthController {
             const {login, password} = req.body
             const candidate = await User.findOne({login})
 
-            if(candidate) {
+            if (candidate) {
                 res.status(400).json({message: "Such user already exist!"})
             }
 
@@ -46,12 +46,12 @@ class AuthController {
             const {login, password} = req.body
             const user = await User.findOne({login})
 
-            if(!user){
+            if (!user){
                 res.status(400).json({message: "No such user!"})
             }
 
             const validPassword = bcrypt.compareSync(password, user.password)
-            if(!validPassword){
+            if (!validPassword){
                 res.status(400).json({message: "Incorrect password!"})
             }
 
@@ -66,7 +66,8 @@ class AuthController {
 
     async getUsers(req, res) {
         try {
-            res.json("json message")
+            const users = await User.find()
+            res.json(users)
         }
         catch (e) {
             console.log(e)
