@@ -1,0 +1,2 @@
+GET http://localhost:9000/auth/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxZTY4N2ZhZTIzZWIzMGM3Y2QyYjEyMCIsInJvbGVzIjpbIkFETUlOIl0sImlhdCI6MTY0MjUzMzMyMCwiZXhwIjoxNjQyNTQ3NzIwfQ.hVNmJAheISfgJXSIfqNhITDSFAAtvM1IrwrqeLmrh3I

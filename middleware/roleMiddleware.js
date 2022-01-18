@@ -7,10 +7,9 @@ module.exports = function(roles) {
         if (req.method === "OPTIONS") { next() }
 
         try {
-            const token = req.headers.authorization.split(' ')[1]
-            if (!token) {
-                return res.status(403).json({message: "User without authorization token!"})
-            }
+            let token = ""
+            if(req.headers.authorization) { token = req.headers.authorization.split(' ')[1] }
+            else { return res.status(403).json({message: "User without authorization token!"}) }
 
             const {roles: userRoles} = jwt.verify(token, secret)
             let hasRole = false
@@ -20,9 +19,7 @@ module.exports = function(roles) {
                 }
             })
 
-            if(!hasRole) {
-                return res.status(403).json({message: "You role doesn't have access"})
-            }
+            if(!hasRole) { return res.status(403).json({message: "You role doesn't have access"}) }
 
             next()
         }

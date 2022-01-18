@@ -56,10 +56,6 @@ class AuthController {
             }
 
             const token = generateAccessToken(user._id, user.roles)
-
-            user.roles.forEach(role => {
-                if(role === "ADMIN") { this.adminToken = token}
-            })
             return res.status(200).json({token})
         }
         catch (e) {
