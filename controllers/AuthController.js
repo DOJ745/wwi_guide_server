@@ -7,7 +7,7 @@ const { secret } = require('../config/config')
 
 const generateAccessToken = (id, roles) => {
     const payload = {id, roles}
-    return jwt.sign(payload, secret, {expiresIn: "1h"})
+    return jwt.sign(payload, secret, {expiresIn: "4h"})
 }
 
 class AuthController {
@@ -33,7 +33,7 @@ class AuthController {
             const newUser = new User({login: login, password: hashPassword, roles: [userRole.value]})
             await newUser.save()
 
-            return res.status(200).json({"message": "Success registration"})
+            return res.status(200).json({"message": "Successful registration"})
         }
         catch (e) {
             console.log(e)
@@ -56,6 +56,10 @@ class AuthController {
             }
 
             const token = generateAccessToken(user._id, user.roles)
+
+            user.roles.forEach(role => {
+                if(role === "ADMIN") { this.adminToken = token}
+            })
             return res.status(200).json({token})
         }
         catch (e) {
