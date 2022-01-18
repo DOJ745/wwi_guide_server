@@ -9,6 +9,7 @@ const app = express()
 
 app.use(express.json())
 app.use('/auth', authRouter)
+app.use('/db')
 
 const start = async () => {
     try {
