@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
+const cors = require('cors')
 
 const authRouter = require('./routers/authRouter')
 const {dbName, dbUsername, dbPassword} = require('./config/config')
@@ -10,6 +11,13 @@ const app = express()
 
 app.use(express.json())
 app.use(cookieParser())
+app.use(cors({
+    origin: '*',
+    credentials: true
+}))
+app.use((req, res, next, err) => {
+  res.status(500).json({"message": "Internal server error!", "error": err.message})
+})
 
 app.use('/auth', authRouter)
 
