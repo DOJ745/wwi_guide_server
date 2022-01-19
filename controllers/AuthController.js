@@ -56,11 +56,22 @@ class AuthController {
             }
 
             const token = generateAccessToken(user._id, user.roles)
-            res.cookie('access_token', token, {
-                maxAge: 3600 * 1000,
-                httpOnly: true
+
+            let isLogAdmin = false
+            user.roles.forEach(role => {
+                if (role === "ADMIN") {
+                    isLogAdmin = true
+                }
             })
-            return res.status(200).json({token})
+
+            if(isLogAdmin) {
+                res.cookie('access_token', token, {
+                    maxAge: 3600 * 1000,
+                    httpOnly: true
+                })
+                return res.status(200).json({message: "Welcome, admin"})
+            }
+            else { return res.status(200).json({token}) }
         }
         catch (e) {
             console.log(e)

@@ -8,9 +8,21 @@ module.exports = function(roles) {
 
         try {
             let token = ""
-            if(req.headers.authorization) { token = req.headers.authorization.split(' ')[1] }
-            //else { return res.status(403).json({message: "User without authorization token!"}) }
-            else { token = req.cookies.access_token }
+
+            if (req.cookies.access_token) {
+                console.log(`COOKIE: ${req.cookies.access_token}, TYPE: ${typeof req.cookies.access_token}`)
+                token = req.cookies.access_token
+            }
+            else if (req.headers.authorization &&
+                req.cookies.access_token === undefined &&
+                typeof req.cookies.access_token === "undefined"
+                )
+            {
+                console.log(`AUTHORIZATION: ${req.headers.authorization}`)
+                token = req.headers.authorization.split(' ')[1]
+            }
+
+            else { return res.status(403).json({message: "User without authorization token!"}) }
 
             const {roles: userRoles} = jwt.verify(token, secret)
             let hasRole = false
