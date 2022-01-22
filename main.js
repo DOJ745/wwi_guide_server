@@ -21,7 +21,7 @@ app.use((req, res, next, err) => {
 })
 
 app.use('/auth', authRouter)
-app.use('/db', dbRouter)
+app.use('/api', dbRouter)
 
 const start = async () => {
     try {
