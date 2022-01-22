@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser')
 const cors = require('cors')
 
 const authRouter = require('./routers/authRouter')
+const dbRouter = require('./routers/dbRouter')
 const {dbName, dbUsername, dbPassword} = require('./config/config')
 
 const PORT = process.env.PORT || 9000
@@ -20,6 +21,7 @@ app.use((req, res, next, err) => {
 })
 
 app.use('/auth', authRouter)
+app.use('/db', dbRouter)
 
 const start = async () => {
     try {

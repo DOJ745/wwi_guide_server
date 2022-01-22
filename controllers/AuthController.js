@@ -66,7 +66,7 @@ class AuthController {
 
             if(isLogAdmin) {
                 res.cookie('access_token', token, {
-                    maxAge: 3600 * 1000,
+                    maxAge: 3600 * 4000,
                     httpOnly: true
                 })
                 return res.status(200).json({message: "Welcome, admin"})
