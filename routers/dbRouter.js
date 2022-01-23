@@ -5,7 +5,7 @@ const { check } = require('express-validator')
 
 const roleMiddleware = require('../middleware/roleMiddleware')
 
-router.post('/year',
+router.post('/years',
     [
         check('date', 'Date of the year cannot be empty and must be 4 symbols!')
             .notEmpty()
