@@ -14,6 +14,6 @@ router.post('/year',
     roleMiddleware(['ADMIN', 'USER']),
     yearController.addYear)
 
-router.get('/year', roleMiddleware(['ADMIN', 'USER']), yearController.getYears)
+router.get('/years', roleMiddleware(['ADMIN', 'USER']), yearController.getYears)
 
 module.exports = router
