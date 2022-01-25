@@ -14,7 +14,7 @@ const Year = new mongoose.Schema({
 
     img: {
         type: String,
-        default: "placeholder.png"
+        default: "https://pixy.org/images/placeholder.png"
     }
 })
 
