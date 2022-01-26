@@ -1,17 +1,17 @@
 const mongoose = require('mongoose')
 
-const Country = new mongoose.Schema({
-    name: {
+const TestQuestion = new mongoose.Schema({
+
+    text: {
         type: String,
         required: true,
-        default: "France"
+        default: 'Type question here'
     },
 
     img: {
         type: String,
-        required: true,
         default: "https://pixy.org/images/placeholder.png"
     }
 })
 
-module.exports = mongoose.model('Country', Country)
+module.exports = mongoose.model('TestQuestion', TestQuestion)

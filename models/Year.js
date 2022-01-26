@@ -9,11 +9,14 @@ const Year = new mongoose.Schema({
 
     title: {
         type: String,
-        default: "Here we go"
+        default: "Here we go",
+        minLength: 6,
+        maxLength: 60
     },
 
     img: {
         type: String,
+        required: true,
         default: "https://pixy.org/images/placeholder.png"
     }
 })

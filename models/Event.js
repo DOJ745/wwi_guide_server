@@ -2,6 +2,12 @@ const mongoose = require('mongoose')
 
 const Event = new mongoose.Schema({
 
+    title:{
+        type: String,
+        required: true,
+        default: "Event name"
+    },
+
     text: {
         type: String,
         required: true,
@@ -12,8 +18,9 @@ const Event = new mongoose.Schema({
         type: String
     }],
 
-    surveyId: {
+    yearId: {
         type: String,
+        ref: 'Year',
         required: true
     }
 })
