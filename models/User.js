@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 
 const User = new mongoose.Schema({
+
     login: {
         type: String,
         unique: true,
@@ -14,21 +15,29 @@ const User = new mongoose.Schema({
 
     roles: [{
         type: String,
-        ref: 'Role'
-    }]
+        ref: 'Role',
+        required: true
+    }],
 
-    /*
     score: {
-        type: Number
+        type: Number,
+        default: 0
     },
 
     rankId: {
-        type: String
+        type: String,
+        ref: 'Rank'
     },
 
     achievements: [{
-        type: Number
-    }]*/
+        type: String,
+        ref: 'Achievement'
+    }],
+
+    country: {
+        type: String,
+        ref: 'Country'
+    }
 })
 
 module.exports = mongoose.model('User', User)

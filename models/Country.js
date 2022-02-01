@@ -7,6 +7,7 @@ const Country = new mongoose.Schema({
         default: "France"
     },
 
+    // Image of flag should be here
     img: {
         type: String,
         required: true,
