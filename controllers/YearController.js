@@ -11,8 +11,8 @@ class YearController {
                 res.status(400).json({message: "Such year already exist!"})
             }
 
-            const newYear = new Year({date: date, title: title, img: img})
-            await newYear.save()
+            const newElem = new Year({date: date, title: title, img: img})
+            await newElem.save()
 
             return res.status(200).json({"message": "Year successfully added"})
         }

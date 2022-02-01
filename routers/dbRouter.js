@@ -21,6 +21,8 @@ router.get('/years', roleMiddleware(['ADMIN', 'USER']), yearController.getYears)
 
 // ----- COUNTRIES -----
 
-router.get('/countries', roleMiddleware(['ADMIN', 'USER']), countryController.getCountries)
+//router.get('/countries', roleMiddleware(['ADMIN', 'USER']), countryController.getCountries)
+router.post('/countries', countryController.addCountry)
+router.get('/countries',  countryController.getCountries)
 
 module.exports = router

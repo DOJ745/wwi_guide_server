@@ -29,3 +29,14 @@ Content-Type: application/json
 
 ### Get years
 GET http://localhost:9000/api/years
+
+### Add new country
+POST http://localhost:9000/api/countries
+Content-Type: application/json
+
+{
+  "name": "Austria-Hungary Empire"
+}
+
+### Get countries
+GET http://localhost:9000/api/countries
