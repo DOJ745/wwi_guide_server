@@ -1,9 +1,12 @@
 const Router = require('express')
 const router = new Router()
 const yearController = require('../controllers/YearController')
+const countryController = require('../controllers/CountryController')
 const { check } = require('express-validator')
 
 const roleMiddleware = require('../middleware/roleMiddleware')
+
+// ----- YEARS -----
 
 router.post('/years',
     [
@@ -15,5 +18,9 @@ router.post('/years',
     yearController.addYear)
 
 router.get('/years', roleMiddleware(['ADMIN', 'USER']), yearController.getYears)
+
+// ----- COUNTRIES -----
+
+router.get('/countries', roleMiddleware(['ADMIN', 'USER']), countryController.getCountries)
 
 module.exports = router
