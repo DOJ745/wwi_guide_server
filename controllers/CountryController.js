@@ -1,18 +1,9 @@
 const Country = require('../models/Country')
-
-class DataControllerInterface {
-
-    constructor() {}
-
-    getElems(req, res){}
-    addElem(req, res){}
-    updateElem(req, res){}
-    deleteElem(req, res){}
-}
+const DataControllerInterface = require("./interfaces/DataControllerInterface");
 
 class CountryController extends DataControllerInterface {
 
-    constructor() {super();}
+    constructor() { super(); }
 
     async addElem(req, res) {
         try {
