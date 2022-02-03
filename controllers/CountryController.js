@@ -1,8 +1,20 @@
 const Country = require('../models/Country')
 
-class CountryController {
+class DataControllerInterface {
 
-    async addCountry(req, res) {
+    constructor() {}
+
+    getElems(req, res){}
+    addElem(req, res){}
+    updateElem(req, res){}
+    deleteElem(req, res){}
+}
+
+class CountryController extends DataControllerInterface {
+
+    constructor() {super();}
+
+    async addElem(req, res) {
         try {
             const {name, img} = req.body
             const candidate = await Country.findOne({name})
@@ -22,7 +34,15 @@ class CountryController {
         }
     }
 
-    async getCountries(req, res) {
+    async updateElem(req, res) {
+
+    }
+
+    async deleteElem(req, res) {
+
+    }
+
+    async getElems(req, res) {
         try {
             const countries = await Country.find()
             res.json(countries)
