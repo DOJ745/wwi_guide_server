@@ -8,12 +8,6 @@ const SurveyAnswer = new mongoose.Schema({
         default: 'Type answer here'
     },
 
-    isTrue: {
-        type: Boolean,
-        required: true,
-        default: true
-    },
-
     points: {
         type: Number,
         required: true,

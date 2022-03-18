@@ -16,6 +16,14 @@ const SurveyQuestion = new mongoose.Schema({
         type: String,
         ref: 'Event',
         required: true
+    },
+
+    weaponId: {
+        type: String
+    },
+
+    techniqueId: {
+        type: String
     }
 })
 
