@@ -19,11 +19,15 @@ const SurveyQuestion = new mongoose.Schema({
     },
 
     weaponId: {
-        type: String
+        type: String,
+        ref: '',
+        default: null
     },
 
     techniqueId: {
-        type: String
+        type: String,
+        ref: '',
+        default: null
     }
 })
 

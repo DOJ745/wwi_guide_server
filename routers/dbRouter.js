@@ -15,13 +15,12 @@ router.post('/years',
             .isLength({min: 4, max: 4})
     ],
     roleMiddleware(['ADMIN', 'USER']),
-    yearController.addYear)
+    yearController.addElem)
 
-router.get('/years', roleMiddleware(['ADMIN', 'USER']), yearController.getYears)
+router.get('/years', roleMiddleware(['ADMIN', 'USER']), yearController.getElems)
 
 // ----- COUNTRIES -----
 
-//router.get('/countries', roleMiddleware(['ADMIN', 'USER']), countryController.getCountries)
 router.post('/countries', countryController.addElem)
 router.get('/countries',  countryController.getElems)
 
