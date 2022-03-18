@@ -1,8 +1,9 @@
 const Year = require('../models/Year')
+const DataControllerInterface = require("./interfaces/DataControllerInterface");
 
-class YearController {
+class YearController extends DataControllerInterface {
 
-    async addYear(req, res) {
+    async addElem(req, res) {
         try {
             const {date, title, img} = req.body
             const candidate = await Year.findOne({date})
@@ -22,15 +23,15 @@ class YearController {
         }
     }
 
-    async updateYear(req, res) {
+    async updateElem(req, res) {
 
     }
 
-    async deleteYear(req, res) {
+    async deleteElem(req, res) {
 
     }
 
-    async getYears(req, res) {
+    async getElems(req, res) {
         try {
             const years = await Year.find()
             res.json(years)
