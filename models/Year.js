@@ -11,7 +11,8 @@ const Year = new mongoose.Schema({
         type: String,
         default: "Here we go",
         minLength: 6,
-        maxLength: 60
+        maxLength: 60,
+        required: true
     },
 
     img: {
