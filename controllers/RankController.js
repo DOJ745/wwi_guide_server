@@ -1,20 +1,18 @@
 const Rank = require('../models/Rank')
-const DataControllerInterface = require("./interfaces/DataControllerInterface");
+const IDataController = require("./interfaces/DataControllerInterface");
 
-class RankController extends DataControllerInterface {
-
-    constructor() { super(); }
+class RankController extends IDataController {
 
     async addElem(req, res) {
         try {
-            /*const {name, img} = req.body
+            const {name, points, img, countryId} = req.body
             const candidate = await Rank.findOne({name})
 
             if (candidate) {
-                res.status(400).json({message: "Such country already exist!"})
+                res.status(400).json({message: "Such rank already exist!"})
             }
 
-            const newElem = new Rank({name: name, img: img})*/
+            const newElem = new Rank({name: name, points: points, img: img, countryId: countryId})
             await newElem.save()
 
             return res.status(200).json({"message": "Rank successfully added"})

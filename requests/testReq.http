@@ -1,3 +1,5 @@
+// ------------ AUTH ------------
+
 ### Login user request
 POST http://localhost:9000/auth/login
 Content-Type: application/json
@@ -19,6 +21,19 @@ Content-Type: application/json
 ### Get users without jwt
 GET http://localhost:9000/auth/users
 
+// ------------ GET DATA------------
+
+### Get Years
+GET http://localhost:9000/api/years
+
+### Get Countries
+GET http://localhost:9000/api/countries
+
+### Get Ranks
+GET http://localhost:9000/api/ranks
+
+// ------------ ADD DATA------------
+
 ### Add new year
 POST http://localhost:9000/api/years
 Content-Type: application/json
@@ -26,9 +41,6 @@ Content-Type: application/json
 {
   "date": "1918"
 }
-
-### Get years
-GET http://localhost:9000/api/years
 
 ### Add new country
 POST http://localhost:9000/api/countries
@@ -38,5 +50,3 @@ Content-Type: application/json
   "name": "Austria-Hungary Empire"
 }
 
-### Get countries
-GET http://localhost:9000/api/countries

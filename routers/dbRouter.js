@@ -1,7 +1,10 @@
 const Router = require('express')
 const router = new Router()
+
 const yearController = require('../controllers/YearController')
 const countryController = require('../controllers/CountryController')
+const rankController = require('../controllers/RankController')
+
 const { check } = require('express-validator')
 
 const roleMiddleware = require('../middleware/roleMiddleware')

@@ -1,4 +1,4 @@
-class DataControllerInterface {
+class IDataController {
 
     constructor() {
         if (!this.getElems) {
@@ -24,4 +24,4 @@ class DataControllerInterface {
     deleteElem(req, res){}
 }
 
-module.exports = DataControllerInterface
+module.exports = IDataController

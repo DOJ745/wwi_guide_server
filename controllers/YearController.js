@@ -1,7 +1,7 @@
 const Year = require('../models/Year')
-const DataControllerInterface = require("./interfaces/DataControllerInterface");
+const IDataController = require("./interfaces/DataControllerInterface");
 
-class YearController extends DataControllerInterface {
+class YearController extends IDataController {
 
     async addElem(req, res) {
         try {

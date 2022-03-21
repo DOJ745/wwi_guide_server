@@ -1,7 +1,7 @@
 const Country = require('../models/Country')
-const DataControllerInterface = require("./interfaces/DataControllerInterface");
+const IDataController = require("./interfaces/DataControllerInterface");
 
-class CountryController extends DataControllerInterface {
+class CountryController extends IDataController {
 
     constructor() { super(); }
 
