@@ -1,4 +1,5 @@
 const Rank = require('../models/Rank')
+const Country = require('../models/Country')
 const IDataController = require("./interfaces/DataControllerInterface");
 
 class RankController extends IDataController {
@@ -6,10 +7,18 @@ class RankController extends IDataController {
     async addElem(req, res) {
         try {
             const {name, points, img, countryId} = req.body
+
             const candidate = await Rank.findOne({name})
+            const idCandidate = await Country.findById(countryId)
 
             if (candidate) {
                 res.status(400).json({message: "Such rank already exist!"})
+                return;
+            }
+
+            if (idCandidate === null){
+                res.status(400).json({message: "No such country!"})
+                return;
             }
 
             const newElem = new Rank({name: name, points: points, img: img, countryId: countryId})
@@ -19,7 +28,7 @@ class RankController extends IDataController {
         }
         catch (e) {
             console.log(e)
-            res.status(400).json({message: "Error with adding the country!", error: e.message})
+            res.status(400).json({message: "Error with adding the rank!", error: e.message})
         }
     }
 

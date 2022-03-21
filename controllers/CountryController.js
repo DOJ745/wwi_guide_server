@@ -12,6 +12,7 @@ class CountryController extends IDataController {
 
             if (candidate) {
                 res.status(400).json({message: "Such country already exist!"})
+                return;
             }
 
             const newElem = new Country({name: name, img: img})

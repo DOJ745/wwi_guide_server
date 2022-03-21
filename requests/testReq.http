@@ -50,3 +50,14 @@ Content-Type: application/json
   "name": "Austria-Hungary Empire"
 }
 
+### Add new rank
+POST http://localhost:9000/api/ranks
+Content-Type: application/json
+
+{
+    "name": "Private",
+    "points": 100,
+    "img": "https://pixy.org/images/placeholder.png",
+    "countryId": "61f987b85d289d4cb3c483aa"
+}
+

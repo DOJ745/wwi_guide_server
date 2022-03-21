@@ -10,7 +10,7 @@ module.exports = function(roles) {
             let token = ""
 
             if (req.cookies.access_token) {
-                console.log(`COOKIE: ${req.cookies.access_token}, TYPE: ${typeof req.cookies.access_token}`)
+                console.log(`COOKIE: ${req.cookies.access_token}, \n\tTYPE OF COOKIE: ${typeof req.cookies.access_token}`)
                 token = req.cookies.access_token
             }
             else if (req.headers.authorization &&

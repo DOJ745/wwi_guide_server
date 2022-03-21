@@ -10,6 +10,7 @@ class YearController extends IDataController {
 
             if (candidate) {
                 res.status(400).json({message: "Such year already exist!"})
+                return;
             }
 
             const newElem = new Year({date: date, title: title, img: img})

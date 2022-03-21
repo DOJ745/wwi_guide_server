@@ -25,6 +25,7 @@ router.get('/years', roleMiddleware(['ADMIN', 'USER']), yearController.getElems)
 // ----- RANKS -----
 
 router.get('/ranks', roleMiddleware(['ADMIN', 'USER']), rankController.getElems)
+router.post('/ranks', roleMiddleware(['ADMIN', 'USER']), rankController.addElem)
 
 // ----- COUNTRIES -----
 
