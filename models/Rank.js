@@ -25,7 +25,8 @@ const Rank = new mongoose.Schema({
 
     countryId: {
         type: String,
-        ref: 'Country'
+        ref: 'Country',
+        required: true
     }
 })
 

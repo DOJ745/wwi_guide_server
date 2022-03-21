@@ -1,23 +1,23 @@
-const Country = require('../models/Country')
+const Rank = require('../models/Rank')
 const DataControllerInterface = require("./interfaces/DataControllerInterface");
 
-class CountryController extends DataControllerInterface {
+class RankController extends DataControllerInterface {
 
     constructor() { super(); }
 
     async addElem(req, res) {
         try {
-            const {name, img} = req.body
-            const candidate = await Country.findOne({name})
+            /*const {name, img} = req.body
+            const candidate = await Rank.findOne({name})
 
             if (candidate) {
                 res.status(400).json({message: "Such country already exist!"})
             }
 
-            const newElem = new Country({name: name, img: img})
+            const newElem = new Rank({name: name, img: img})*/
             await newElem.save()
 
-            return res.status(200).json({"message": "Country successfully added"})
+            return res.status(200).json({"message": "Rank successfully added"})
         }
         catch (e) {
             console.log(e)
@@ -35,7 +35,7 @@ class CountryController extends DataControllerInterface {
 
     async getElems(req, res) {
         try {
-            const elems = await Country.find()
+            const elems = await Rank.find()
             res.json(elems)
         }
         catch (e) {
@@ -46,4 +46,4 @@ class CountryController extends DataControllerInterface {
 
 }
 
-module.exports = new CountryController()
+module.exports = new RankController()
