@@ -21,12 +21,14 @@ const User = new mongoose.Schema({
 
     score: {
         type: Number,
-        default: 0
+        default: 0,
+        required: true
     },
 
     rankId: {
         type: String,
-        ref: 'Rank'
+        ref: 'Rank',
+        required: true
     },
 
     achievements: [{
@@ -36,7 +38,8 @@ const User = new mongoose.Schema({
 
     country: {
         type: String,
-        ref: 'Country'
+        ref: 'Country',
+        required: true
     }
 })
 
