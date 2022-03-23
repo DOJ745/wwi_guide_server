@@ -10,15 +10,26 @@ const {dbName, dbUsername, dbPassword} = require('./config/config')
 const PORT = process.env.PORT || 9000
 const app = express()
 
+// ---------- MIDDLEWARE ----------
+
+const simpleMiddleware = function (req, res, next) {
+    console.log('LOGGED MIDDLEWARE')
+    next()
+}
+
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
     origin: '*',
     credentials: true
 }))
-/*app.use((req, res, next, err) => {
-  res.status(500).json({"message": "Internal server error!", "error": err.message})
-})*/
+app.use(simpleMiddleware)
+app.use(function(err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).json({"message":"Something broke!"});
+});
+
+// ---------- ROUTES MIDDLEWARE ----------
 
 app.use('/auth', authRouter)
 app.use('/api', dbRouter)
