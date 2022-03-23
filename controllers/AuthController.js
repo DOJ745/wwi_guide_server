@@ -7,7 +7,7 @@ const { secret } = require('../config/config')
 
 const generateAccessToken = (id, roles) => {
     const payload = {id, roles}
-    return jwt.sign(payload, secret, {expiresIn: "4h"})
+    return jwt.sign(payload, secret, {expiresIn: "10h"})
 }
 
 class AuthController {
