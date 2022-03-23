@@ -1,6 +1,6 @@
 // ------------ AUTH ------------
 
-### Login user request
+### Login user
 POST http://localhost:9000/auth/login
 Content-Type: application/json
 
@@ -9,7 +9,7 @@ Content-Type: application/json
   "password": "123456"
 }
 
-### Login admin request
+### Login MAIN ADMIN
 POST http://localhost:9000/auth/login
 Content-Type: application/json
 
@@ -18,10 +18,44 @@ Content-Type: application/json
   "password": "admin"
 }
 
+### Login TEST ADMIN
+POST http://localhost:9000/auth/login
+Content-Type: application/json
+
+{
+  "login": "testAdmin",
+  "password": "123456"
+}
+
 ### Get users without jwt
 GET http://localhost:9000/auth/users
 
-// ------------ GET DATA------------
+### Reg new user
+POST http://localhost:9000/auth/reg
+Content-Type: application/json
+
+{
+  "login": "testUser1",
+  "password": "123456"
+}
+
+### Reg new admin
+POST http://localhost:9000/auth/regAdm
+Content-Type: application/json
+
+{
+  "login": "testAdmin",
+  "password": "123456"
+}
+
+### Reg wrong route
+POST http://localhost:9000/auth/regAdm123456
+Content-Type: application/json
+
+{
+  "login": "testAdmin",
+  "password": "123456"
+}
 
 ### Get Years
 GET http://localhost:9000/api/years

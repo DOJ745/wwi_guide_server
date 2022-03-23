@@ -18,7 +18,7 @@ module.exports = function(roles) {
                 typeof req.cookies.access_token === "undefined"
                 )
             {
-                console.log(`AUTHORIZATION HAS BEEN MADE: ${req.headers.authorization}`)
+                console.log(`USER TOKEN: ${req.headers.authorization}`)
                 token = req.headers.authorization.split(' ')[1]
             }
 

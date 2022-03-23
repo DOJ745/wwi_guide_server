@@ -28,7 +28,8 @@ const User = new mongoose.Schema({
     rankId: {
         type: String,
         ref: 'Rank',
-        required: true
+        required: true,
+        default: '62388a35efcd519f16afdb7e' // Рядовой (Российская империя)
     },
 
     achievements: [{
@@ -36,10 +37,11 @@ const User = new mongoose.Schema({
         ref: 'Achievement'
     }],
 
-    country: {
+    countryId: {
         type: String,
         ref: 'Country',
-        required: true
+        required: true,
+        default: '61f987b85d289d4cb3c483aa' // Российская империя
     }
 })
 

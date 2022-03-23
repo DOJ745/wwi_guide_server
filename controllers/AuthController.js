@@ -29,9 +29,21 @@ class AuthController {
             const salt = bcrypt.genSaltSync(6);
             const hashPassword = bcrypt.hashSync(password, salt);
 
-            const userRole = await Role.findOne({value: "USER"})
-            const newUser = new User({login: login, password: hashPassword, roles: [userRole.value]})
-            await newUser.save()
+            if(req.url === '/reg') {
+                const userRole = await Role.findOne({value: "USER"})
+                const newUser = new User({login: login, password: hashPassword, roles: [userRole.value]})
+                await newUser.save()
+            }
+
+            else if(req.url === '/regAdm') {
+                const userRole = await Role.findOne({value: "ADMIN"})
+                const newUser = new User({login: login, password: hashPassword, roles: [userRole.value]})
+                await newUser.save()
+            }
+
+            else {
+                return res.status(404).json({"message": "No such route!"})
+            }
 
             return res.status(200).json({"message": "Successful registration"})
         }

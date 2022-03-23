@@ -16,9 +16,9 @@ app.use(cors({
     origin: '*',
     credentials: true
 }))
-app.use((req, res, next, err) => {
+/*app.use((req, res, next, err) => {
   res.status(500).json({"message": "Internal server error!", "error": err.message})
-})
+})*/
 
 app.use('/auth', authRouter)
 app.use('/api', dbRouter)
