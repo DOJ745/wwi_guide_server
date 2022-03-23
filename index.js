@@ -24,9 +24,12 @@ app.use(cors({
     credentials: true
 }))
 app.use(simpleMiddleware)
+
+// ----------ERROR HANDLER ----------
+
 app.use(function(err, req, res, next) {
     console.error(err.stack);
-    res.status(500).json({"message":"Something broke!"});
+    res.status(500).json({"message":`Something broke!\n ${err.message}`});
 });
 
 // ---------- ROUTES MIDDLEWARE ----------
