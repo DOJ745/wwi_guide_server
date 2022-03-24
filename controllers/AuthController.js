@@ -1,5 +1,6 @@
 const User = require('../models/User')
 const Role = require('../models/Role')
+const Rank = require('../models/Rank')
 const bcrypt = require('bcryptjs')
 const { validationResult } = require('express-validator')
 const jwt = require('jsonwebtoken')
@@ -19,7 +20,7 @@ class AuthController {
                 return res.status(400).json({ message: "Registration validation error!", errors: errors.array() });
             }
 
-            const {login, password} = req.body
+            const {login, password, countryId} = req.body
             const candidate = await User.findOne({login})
 
             if (candidate) {
@@ -31,7 +32,16 @@ class AuthController {
 
             if(req.url === '/reg') {
                 const userRole = await Role.findOne({value: "USER"})
-                const newUser = new User({login: login, password: hashPassword, roles: [userRole.value]})
+                const userRank = await Rank.findOne({countryId: countryId})
+                const newUser = new User(
+                    {
+                        login: login,
+                        password: hashPassword,
+                        roles: [userRole.value],
+                        rank: userRank,
+                        countryId: countryId
+                    }
+                )
                 await newUser.save()
             }
 
