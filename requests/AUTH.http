@@ -33,8 +33,9 @@ POST http://localhost:9000/auth/reg
 Content-Type: application/json
 
 {
-  "login": "testUser1",
-  "password": "123456"
+  "login": "testUser123",
+  "password": "123456",
+  "countryId": "61f988955d289d4cb3c483ad"
 }
 
 ### Reg new admin
