@@ -29,7 +29,7 @@ router.post('/ranks', roleMiddleware(['ADMIN', 'USER']), rankController.addElem)
 
 // ----- COUNTRIES -----
 
-router.post('/countries', countryController.addElem)
+router.post('/countries', roleMiddleware(['ADMIN']), countryController.addElem)
 router.get('/countries',  countryController.getElems)
 
 module.exports = router
