@@ -2,7 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
-const logMiddleware = require('./middleware/consoleLogMiddleware')
+const morganBody = require('morgan-body'); // Log middleware
 
 const authRouter = require('./routers/authRouter')
 const dbRouter = require('./routers/dbRouter')
@@ -13,19 +13,13 @@ const app = express()
 
 // ---------- MIDDLEWARE ----------
 
-const simpleMiddleware = function (req, res, next) {
-    console.log('LOGGED MIDDLEWARE')
-    next()
-}
-
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
     origin: '*',
     credentials: true
 }))
-//app.use(simpleMiddleware)
-app.use(logMiddleware)
+morganBody(app);
 
 // ----------ERROR HANDLER ----------
 
