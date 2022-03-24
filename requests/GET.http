@@ -1,0 +1,8 @@
+### Get Years
+GET http://localhost:9000/api/years
+
+### Get Countries
+GET http://localhost:9000/api/countries
+
+### Get Ranks
+GET http://localhost:9000/api/ranks

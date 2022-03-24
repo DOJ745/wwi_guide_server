@@ -1,0 +1,26 @@
+### Add new year
+POST http://localhost:9000/api/years
+Content-Type: application/json
+
+{
+  "date": "1918"
+}
+
+### Add new country
+POST http://localhost:9000/api/countries
+Content-Type: application/json
+
+{
+  "name": "Austria-Hungary Empire"
+}
+
+### Add new rank
+POST http://localhost:9000/api/ranks
+Content-Type: application/json
+
+{
+  "name": "Feldmarschall",
+  "points": 1000,
+  "img": "https://pixy.org/images/placeholder.png",
+  "countryId": "61f988955d289d4cb3c483ad"
+}
