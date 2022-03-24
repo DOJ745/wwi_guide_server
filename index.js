@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
+const logMiddleware = require('./middleware/consoleLogMiddleware')
 
 const authRouter = require('./routers/authRouter')
 const dbRouter = require('./routers/dbRouter')
@@ -23,7 +24,8 @@ app.use(cors({
     origin: '*',
     credentials: true
 }))
-app.use(simpleMiddleware)
+//app.use(simpleMiddleware)
+app.use(logMiddleware)
 
 // ----------ERROR HANDLER ----------
 
