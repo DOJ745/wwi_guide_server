@@ -9,8 +9,7 @@ class YearController extends IDataController {
             const candidate = await Year.findOne({date})
 
             if (candidate) {
-                res.status(400).json({message: "Such year already exist!"})
-                return;
+                return res.status(400).json({message: "Such year already exist!"})
             }
 
             const newElem = new Year({date: date, title: title, img: img})

@@ -11,8 +11,7 @@ class CountryController extends IDataController {
             const candidate = await Country.findOne({name})
 
             if (candidate) {
-                res.status(400).json({message: "Such country already exist!"})
-                return;
+                return res.status(400).json({message: "Such country already exist!"})
             }
 
             const newElem = new Country({name: name, img: img})

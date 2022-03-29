@@ -24,7 +24,7 @@ class AuthController {
             const candidate = await User.findOne({login})
 
             if (candidate) {
-                res.status(400).json({message: "Such user already exist!"})
+                return res.status(400).json({message: "Such user already exists!"})
             }
 
             const salt = bcrypt.genSaltSync(6);

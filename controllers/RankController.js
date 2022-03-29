@@ -12,13 +12,11 @@ class RankController extends IDataController {
             const idCandidate = await Country.findById(countryId)
 
             if (candidate) {
-                res.status(400).json({message: "Such rank already exist!"})
-                return;
+                return res.status(400).json({message: "Such rank already exist!"})
             }
 
             if (idCandidate === null){
-                res.status(400).json({message: "No such country!"})
-                return;
+                return res.status(400).json({message: "No such country!"})
             }
 
             const newElem = new Rank({name: name, points: points, img: img, countryId: countryId})
