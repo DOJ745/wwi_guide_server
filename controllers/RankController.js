@@ -22,7 +22,7 @@ class RankController extends IDataController {
             const newElem = new Rank({name: name, points: points, img: img, countryId: countryId})
             await newElem.save()
 
-            return res.status(200).json({"message": "Rank successfully added"})
+            return res.status(200).json({message: "Rank successfully added"})
         }
         catch (e) {
             console.log(e)

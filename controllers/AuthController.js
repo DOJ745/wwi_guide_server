@@ -17,7 +17,7 @@ class AuthController {
         try {
             const errors = validationResult(req)
             if (!errors.isEmpty()) {
-                return res.status(400).json({ message: "Registration validation error!", errors: errors.array() });
+                return res.status(400).json({ message: "Registration validation error!", "error": errors.array() });
             }
 
             const {login, password, countryId} = req.body
@@ -53,10 +53,10 @@ class AuthController {
             }
 
             else {
-                return res.status(404).json({"message": "No such route!"})
+                return res.status(404).json({message: "No such route!"})
             }
 
-            return res.status(200).json({"message": "Successful registration"})
+            return res.status(200).json({message: "Successful registration"})
         }
         catch (e) {
             console.log(e)

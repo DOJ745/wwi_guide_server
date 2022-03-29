@@ -17,7 +17,7 @@ class CountryController extends IDataController {
             const newElem = new Country({name: name, img: img})
             await newElem.save()
 
-            return res.status(200).json({"message": "Country successfully added"})
+            return res.status(200).json({message: "Country successfully added"})
         }
         catch (e) {
             console.log(e)
