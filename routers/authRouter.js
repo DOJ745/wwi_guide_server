@@ -12,9 +12,9 @@ router.post(
             'Login cannot be empty and is length must be between 4 and 48 symbols!')
             .notEmpty()
             .isLength({min: 4, max: 48 }),
-        check('password', 'Password cannot be empty and and is length must be between 4 and 12 symbols!')
+        check('password', 'Password cannot be empty and and is length must be between 6 and 12 symbols!')
             .notEmpty()
-            .isLength({min: 4, max: 12})
+            .isLength({min: 6, max: 12})
     ],
     authController.reg)
 
@@ -27,7 +27,7 @@ router.post('/regAdm',[
             .isLength({min: 4, max: 48 }),
         check('password', 'Password cannot be empty and and is length must be between 4 and 12 symbols!')
             .notEmpty()
-            .isLength({min: 4, max: 12})
+            .isLength({min: 6, max: 12})
     ],
     authController.reg)
 

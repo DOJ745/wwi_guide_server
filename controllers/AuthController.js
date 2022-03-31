@@ -70,12 +70,12 @@ class AuthController {
             const user = await User.findOne({login})
 
             if (!user){
-                res.status(400).json({message: "No such user!"})
+                return res.status(400).json({message: "No such user!"})
             }
 
             const validPassword = bcrypt.compareSync(password, user.password)
             if (!validPassword){
-                res.status(400).json({message: "Incorrect password!"})
+                return res.status(400).json({message: "Incorrect password!"})
             }
 
             const token = generateAccessToken(user._id, user.roles)
@@ -94,7 +94,7 @@ class AuthController {
                 })
                 return res.status(200).json({message: "Welcome, admin"})
             }
-            else { return res.status(200).json({token}) }
+            else { return res.status(200).json({message: "Successful login", token}) }
         }
         catch (e) {
             console.log(e)
