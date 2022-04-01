@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "login": "testUser123",
-  "password": "123456"
+  "password": "Passss_1"
 }
 
 ### Login MAIN ADMIN
@@ -34,7 +34,7 @@ Content-Type: application/json
 
 {
   "login": "testUser123",
-  "password": "Pas_1",
+  "password": "Passss_1",
   "countryId": "61f988955d289d4cb3c483ad"
 }
 

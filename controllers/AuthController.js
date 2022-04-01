@@ -81,11 +81,7 @@ class AuthController {
             const token = generateAccessToken(user._id, user.roles)
 
             let isLogAdmin = false
-            user.roles.forEach(role => {
-                if (role === "ADMIN") {
-                    isLogAdmin = true
-                }
-            })
+            user.roles.forEach(role => { if (role === "ADMIN") { isLogAdmin = true } })
 
             if(isLogAdmin) {
                 res.cookie('access_token', token, {
@@ -94,7 +90,7 @@ class AuthController {
                 })
                 return res.status(200).json({message: "Welcome, admin"})
             }
-            else { return res.status(200).json({message: "Successful login", token}) }
+            else { return res.status(200).json({message: "Successful login", user}) }
         }
         catch (e) {
             console.log(e)
