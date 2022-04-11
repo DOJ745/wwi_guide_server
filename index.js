@@ -4,17 +4,11 @@ const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const morganBody = require('morgan-body'); // Log middleware
 
-//const https = require("https");
-//const fs = require("fs");
-
 const authRouter = require('./routers/authRouter')
 const dbRouter = require('./routers/dbRouter')
 const {dbName, dbUsername, dbPassword, apiURL} = require('./config/config')
 
-const PORT = process.env.PORT || 9000
-
-//const KEY = fs.readFileSync('./cert/localhost.key');
-//const CERT = fs.readFileSync('./cert/localhost.crt');
+const PORT = process.env.PORT || 5000
 
 const app = express()
 
@@ -37,14 +31,12 @@ app.use(function(err, req, res, next) {
 
 // ---------- ROUTES MIDDLEWARE ----------
 
-app.use(`/auth`, authRouter)
-app.use("/", dbRouter)
+app.use(`${apiURL}/auth`, authRouter)
+app.use(`${apiURL}`, dbRouter)
 
-app.get("/test", (req, res) => {
-    res.send("Test GET request 123124515151")
+app.get(`${apiURL}/test`, (req, res) => {
+    res.send("Test GET request 12345678")
 })
-
-//const SERVER = https.createServer({ KEY, CERT }, app);
 
 const start = async () => {
     try {

@@ -1,11 +1,11 @@
 ### Get Years
-GET {{apiURL}}/years
+GET {{localhost}}/years
 
 ### Get Countries
-GET {{apiURL}}/countries
+GET {{localhost}}/countries
 
 ### Get Ranks
-GET {{apiURL}}/ranks
+GET {{localhost}}/ranks
 
 ### Get test
-GET {{apiURL}}/test
+GET {{localhost}}/test

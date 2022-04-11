@@ -1,5 +1,5 @@
 ### Login user
-POST http://{{apiURL}}:9000/auth/login
+POST {{localhost}}/auth/login
 Content-Type: application/json
 
 {

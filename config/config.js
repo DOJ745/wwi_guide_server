@@ -4,4 +4,5 @@ module.exports = {
     dbUsername: "mainUser",
     dbPassword: "mainUserPassword",
     adminData: "login:admin, password: admin",
+    apiURL: "/api.wwi-guide.by"
 }
