@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 
 ### Login MAIN ADMIN
-POST http://localhost:9000/auth/login
+POST{{localhost}}/auth/login
 Content-Type: application/json
 
 {
@@ -17,7 +17,7 @@ Content-Type: application/json
 }
 
 ### Login TEST ADMIN
-POST http://localhost:9000/auth/login
+POST {{localhost}}/auth/login
 Content-Type: application/json
 
 {
@@ -26,10 +26,10 @@ Content-Type: application/json
 }
 
 ### Get users without jwt
-GET http://localhost:9000/auth/users
+GET {{localhost}}/auth/users
 
 ### Reg new user
-POST http://localhost:9000/auth/reg
+POST {{localhost}}/auth/reg
 Content-Type: application/json
 
 {
@@ -39,7 +39,7 @@ Content-Type: application/json
 }
 
 ### Reg new admin
-POST http://localhost:9000/auth/regAdm
+POST {{localhost}}/auth/reg-adm
 Content-Type: application/json
 
 {
@@ -48,7 +48,7 @@ Content-Type: application/json
 }
 
 ### Reg wrong route
-POST http://localhost:9000/auth/regAdm123456
+POST {{localhost}}/auth/reg-adm123456
 Content-Type: application/json
 
 {

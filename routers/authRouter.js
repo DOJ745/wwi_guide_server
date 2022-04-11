@@ -20,7 +20,7 @@ router.post(
 
 router.post('/login', authController.login)
 
-router.post('/regAdm',[
+router.post('/reg-adm',[
         check('login',
             'Login cannot be empty and is length must be between 4 and 48 symbols!')
             .notEmpty()

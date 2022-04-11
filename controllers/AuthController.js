@@ -46,7 +46,7 @@ class AuthController {
                 await newUser.save()
             }
 
-            else if(req.url === '/regAdm') {
+            else if(req.url === '/reg-adm') {
                 const userRole = await Role.findOne({value: "ADMIN"})
                 const newUser = new User({login: login, password: hashPassword, roles: [userRole.value]})
                 await newUser.save()
