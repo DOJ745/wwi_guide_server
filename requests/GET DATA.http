@@ -8,4 +8,4 @@ GET {{apiURL}}/countries
 GET {{apiURL}}/ranks
 
 ### Get test
-GET {{apiURL}}/test-https
+GET {{apiURL}}/test

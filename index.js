@@ -40,6 +40,10 @@ app.use(function(err, req, res, next) {
 app.use(`/auth`, authRouter)
 app.use("/", dbRouter)
 
+app.get("/test", (req, res) => {
+    res.send("Test GET request")
+})
+
 //const SERVER = https.createServer({ KEY, CERT }, app);
 
 const start = async () => {
