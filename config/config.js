@@ -4,5 +4,4 @@ module.exports = {
     dbUsername: "mainUser",
     dbPassword: "mainUserPassword",
     adminData: "login:admin, password: admin",
-    for_test: "12345"
 }

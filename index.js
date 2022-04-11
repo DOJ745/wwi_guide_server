@@ -41,7 +41,7 @@ app.use(`/auth`, authRouter)
 app.use("/", dbRouter)
 
 app.get("/test", (req, res) => {
-    res.send("Test GET request")
+    res.send("Test GET request 123124515151")
 })
 
 //const SERVER = https.createServer({ KEY, CERT }, app);
