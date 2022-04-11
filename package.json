@@ -1,7 +1,7 @@
 {
   "name": "wwi_guide_server",
   "version": "1.0.0",
-  "description": "",
+  "description": "web app for diploma project",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js"
@@ -19,5 +19,8 @@
     "mongoose": "^6.1.7",
     "morgan-body": "^2.6.6",
     "nodemon": "^2.0.15"
+  },
+  "engines": {
+    "node": "16.13.2"
   }
 }

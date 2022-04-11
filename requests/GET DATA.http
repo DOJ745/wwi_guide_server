@@ -1,0 +1,11 @@
+### Get Years
+GET {{apiURL}}/years
+
+### Get Countries
+GET {{apiURL}}/countries
+
+### Get Ranks
+GET {{apiURL}}/ranks
+
+### Get test
+GET {{apiURL}}/test-https

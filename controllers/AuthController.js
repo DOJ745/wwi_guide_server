@@ -90,7 +90,19 @@ class AuthController {
                 })
                 return res.status(200).json({message: "Welcome, admin"})
             }
-            else { return res.status(200).json({message: "Successful login", user}) }
+            else { return res.status(200).json(
+                {
+                    message: "Successful login",
+                    login: user.login,
+                    password: user.password,
+                    achievements: user.achievements,
+                    roles: user.roles,
+                    score: user.score,
+                    rankId: user.rankId,
+                    countryId: user.countryId,
+                    token
+                })
+            }
         }
         catch (e) {
             console.log(e)

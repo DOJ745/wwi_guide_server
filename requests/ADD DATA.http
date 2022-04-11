@@ -1,5 +1,5 @@
 ### Add new year
-POST http://localhost:9000/api/years
+POST http://localhost:9000/api.wwi-guide.by/years
 Content-Type: application/json
 
 {
@@ -7,7 +7,7 @@ Content-Type: application/json
 }
 
 ### Add new country
-POST http://localhost:9000/api/countries
+POST http://localhost:9000/api.wwi-guide.by/countries
 Content-Type: application/json
 
 {
@@ -15,7 +15,7 @@ Content-Type: application/json
 }
 
 ### Add new rank
-POST http://localhost:9000/api/ranks
+POST http://localhost:9000/api.wwi-guide.by/ranks
 Content-Type: application/json
 
 {
