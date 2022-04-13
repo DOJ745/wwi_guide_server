@@ -1,6 +1,7 @@
 const Country = require('../models/Country')
 const IDataController = require("./interfaces/DataControllerInterface");
-
+const ErrorResponses = require("../responses/error_responses")
+const ModelsElements = require("../models/models_elements")
 class CountryController extends IDataController {
 
     constructor() { super(); }
@@ -11,7 +12,7 @@ class CountryController extends IDataController {
             const candidate = await Country.findOne({name})
 
             if (candidate) {
-                return res.status(400).json({message: "Such country already exist!"})
+                return ErrorResponses.elementExists(res, ModelsElements.COUNTRY)
             }
 
             const newElem = new Country({name: name, img: img})
@@ -21,7 +22,7 @@ class CountryController extends IDataController {
         }
         catch (e) {
             console.log(e)
-            res.status(400).json({message: "Error with adding the country!", error: e.message})
+            ErrorResponses.addingElementError(res, ModelsElements.COUNTRY, e)
         }
     }
 
@@ -40,7 +41,7 @@ class CountryController extends IDataController {
         }
         catch (e) {
             console.log(e)
-            res.status(400).json({message: "Bad request!", error: e.message})
+            ErrorResponses.badRequest(res, e)
         }
     }
 

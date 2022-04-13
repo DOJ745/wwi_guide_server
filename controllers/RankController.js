@@ -1,5 +1,7 @@
 const Rank = require('../models/Rank')
 const Country = require('../models/Country')
+const ErrorResponses = require("../responses/error_responses")
+const ModelsElements = require("../models/models_elements")
 const IDataController = require("./interfaces/DataControllerInterface");
 
 class RankController extends IDataController {
@@ -12,11 +14,11 @@ class RankController extends IDataController {
             const idCandidate = await Country.findById(countryId)
 
             if (candidate) {
-                return res.status(400).json({message: "Such rank already exist!"})
+                return ErrorResponses.elementExists(res, ModelsElements.RANK)
             }
 
             if (idCandidate === null){
-                return res.status(400).json({message: "No such country!"})
+                return ErrorResponses.noSuchElement(res, ModelsElements.RANK)
             }
 
             const newElem = new Rank({name: name, points: points, img: img, countryId: countryId})
@@ -26,7 +28,7 @@ class RankController extends IDataController {
         }
         catch (e) {
             console.log(e)
-            res.status(400).json({message: "Error with adding the rank!", error: e.message})
+            ErrorResponses.addingElementError(res, ModelsElements.RANK, e)
         }
     }
 
@@ -45,7 +47,7 @@ class RankController extends IDataController {
         }
         catch (e) {
             console.log(e)
-            res.status(400).json({message: "Bad request!", error: e.message})
+            ErrorResponses.badRequest(res, e)
         }
     }
 

@@ -1,6 +1,7 @@
 const Year = require('../models/Year')
 const IDataController = require("./interfaces/DataControllerInterface");
-
+const ErrorResponses = require("../responses/error_responses")
+const ModelsElements = require("../models/models_elements")
 class YearController extends IDataController {
 
     async addElem(req, res) {
@@ -8,9 +9,7 @@ class YearController extends IDataController {
             const {date, title, img} = req.body
             const candidate = await Year.findOne({date})
 
-            if (candidate) {
-                return res.status(400).json({message: "Such year already exist!"})
-            }
+            if (candidate) { return ErrorResponses.elementExists(res, ModelsElements.YEAR) }
 
             const newElem = new Year({date: date, title: title, img: img})
             await newElem.save()
@@ -19,7 +18,7 @@ class YearController extends IDataController {
         }
         catch (e) {
             console.log(e)
-            res.status(400).json({message: "Error with adding the year!", error: e.message})
+            ErrorResponses.addingElementError(res, ModelsElements.YEAR, e)
         }
     }
 
@@ -38,7 +37,7 @@ class YearController extends IDataController {
         }
         catch (e) {
             console.log(e)
-            res.status(400).json({message: "Bad request!", error: e.message})
+            ErrorResponses.badRequest(res, e)
         }
     }
 }

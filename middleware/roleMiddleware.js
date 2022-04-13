@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const { secret } = require('../config/config')
+const ErrorResponses = require('../responses/error_responses')
 
 module.exports = function(roles) {
 
@@ -22,7 +23,7 @@ module.exports = function(roles) {
                 token = req.headers.authorization.split(' ')[1]
             }
 
-            else { return res.status(401).json({message: "User without authorization token!"}) }
+            else { return ErrorResponses.unauthorized(res) }
 
             const {roles: userRoles} = jwt.verify(token, secret)
             let hasRole = false
@@ -32,13 +33,13 @@ module.exports = function(roles) {
                 }
             })
 
-            if(!hasRole) { return res.status(403).json({message: "You role doesn't have access"}) }
+            if(!hasRole) { ErrorResponses.noRoleAccess(res) }
 
             next()
         }
         catch (e) {
             console.log(e)
-            return res.status(401).json({message: "Unauthorised user"})
+            ErrorResponses.unauthorized(res)
         }
     }
 }

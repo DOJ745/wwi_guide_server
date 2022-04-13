@@ -5,6 +5,8 @@ const bcrypt = require('bcryptjs')
 const { validationResult } = require('express-validator')
 const jwt = require('jsonwebtoken')
 const { secret } = require('../config/config')
+const ModelsElements = require("../models/models_elements")
+const ErrorResponses = require('../responses/error_responses')
 
 const generateAccessToken = (id, roles) => {
     const payload = {id, roles}
@@ -17,15 +19,13 @@ class AuthController {
         try {
             const errors = validationResult(req)
             if (!errors.isEmpty()) {
-                return res.status(400).json({ message: "Registration validation error!", "error": errors.array() });
+                return ErrorResponses.regValidationError(res, errors)
             }
 
             const {login, password, countryId} = req.body
             const candidate = await User.findOne({login})
 
-            if (candidate) {
-                return res.status(400).json({message: "Such user already exists!"})
-            }
+            if (candidate) { return ErrorResponses.elementExists(res, ModelsElements.USER) }
 
             const salt = bcrypt.genSaltSync(6);
             const hashPassword = bcrypt.hashSync(password, salt);
@@ -53,14 +53,14 @@ class AuthController {
             }
 
             else {
-                return res.status(404).json({message: "No such route!"})
+                return ErrorResponses.noRoute(res)
             }
 
             return res.status(200).json({message: "Successful registration"})
         }
         catch (e) {
             console.log(e)
-            res.status(400).json({message: "Registration error occurred!", error: e.message})
+            ErrorResponses.exceptionOccurred(res, "Registration", e)
         }
     }
 
@@ -69,14 +69,10 @@ class AuthController {
             const {login, password} = req.body
             const user = await User.findOne({login})
 
-            if (!user){
-                return res.status(400).json({message: "No such user!"})
-            }
+            if (!user){ return ErrorResponses.noSuchElement(res, ModelsElements.USER) }
 
             const validPassword = bcrypt.compareSync(password, user.password)
-            if (!validPassword){
-                return res.status(400).json({message: "Incorrect password!"})
-            }
+            if (!validPassword){ return ErrorResponses.incorrectPassword(res) }
 
             const token = generateAccessToken(user._id, user.roles)
 
@@ -106,7 +102,7 @@ class AuthController {
         }
         catch (e) {
             console.log(e)
-            res.status(400).json({message: "Login error occurred!", error: e.message})
+            ErrorResponses.exceptionOccurred(res, "Login", e)
         }
     }
 
@@ -117,7 +113,7 @@ class AuthController {
         }
         catch (e) {
             console.log(e)
-            res.status(400).json({message: "Bad request!", error: e.message})
+            ErrorResponses.badRequest(res, e)
         }
     }
 }
