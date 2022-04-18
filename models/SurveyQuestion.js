@@ -20,7 +20,7 @@ const SurveyQuestion = new mongoose.Schema({
 
     weaponsTechnologyId: {
         type: String,
-        ref: '',
+        ref: 'Armament',
         default: null
     }
 })

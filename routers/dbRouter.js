@@ -10,7 +10,8 @@ const { check } = require('express-validator')
 const roleMiddleware = require('../middleware/roleMiddleware')
 
 // ----- YEARS -----
-router.get('/years', roleMiddleware(['ADMIN', 'USER']), yearController.getElems)
+//router.get('/years', roleMiddleware(['ADMIN', 'USER']), yearController.getElems)
+router.get('/years', yearController.getElems)
 router.post('/years',
     [
         check('date', 'Date of the year cannot be empty and must be 4 symbols!')
@@ -30,7 +31,7 @@ router.put('/ranks', roleMiddleware(['ADMIN']), rankController.updateElem)
 router.delete('/ranks', roleMiddleware(['ADMIN']), rankController.deleteElem)
 
 // ----- COUNTRIES -----
-router.get('/countries',  countryController.getElems)
+router.get('/countries', countryController.getElems)
 router.post('/countries', roleMiddleware(['ADMIN']), countryController.addElem)
 router.put('/countries', roleMiddleware(['ADMIN']), countryController.updateElem)
 router.delete('/countries', roleMiddleware(['ADMIN']), countryController.deleteElem)
