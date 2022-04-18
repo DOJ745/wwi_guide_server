@@ -79,14 +79,14 @@ module.exports = {
      * @param res response object
      * @returns {json}
      * Status code: 401
-     * message: Unauthorised user
+     * { message: Unauthorised user }
      */
     unauthorized: function (res) { return res.status(CODES.UNAUTHORIZED).json({message: "Unauthorised user"}) },
     /**
      * @param res response object
      * @returns {json}
      * Status code: 403
-     * message: Your role doesn't have access
+     * { message: Your role doesn't have access }
      */
     noRoleAccess: function (res){ return res.status(CODES.FORBIDDEN).json({message: "Your role doesn't have access"}) }
 };

@@ -52,9 +52,7 @@ class AuthController {
                 await newUser.save()
             }
 
-            else {
-                return ErrorResponses.noRoute(res)
-            }
+            else { return ErrorResponses.noRoute(res) }
 
             return res.status(200).json({message: "Successful registration"})
         }
