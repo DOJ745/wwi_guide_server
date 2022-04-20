@@ -4,6 +4,7 @@ const router = new Router()
 const yearController = require('../controllers/YearController')
 const countryController = require('../controllers/CountryController')
 const rankController = require('../controllers/RankController')
+const userController = require('../controllers/UserController')
 
 const { check } = require('express-validator')
 
@@ -25,7 +26,7 @@ router.delete('/years', roleMiddleware(['ADMIN']), yearController.deleteElem)
 
 // ----- RANKS -----
 
-router.get('/ranks', roleMiddleware(['ADMIN', 'USER']), rankController.getElems)
+router.get('/ranks', rankController.getElems)
 router.post('/ranks', roleMiddleware(['ADMIN']), rankController.addElem)
 router.put('/ranks', roleMiddleware(['ADMIN']), rankController.updateElem)
 router.delete('/ranks', roleMiddleware(['ADMIN']), rankController.deleteElem)
@@ -37,6 +38,11 @@ router.put('/countries', roleMiddleware(['ADMIN']), countryController.updateElem
 router.delete('/countries', roleMiddleware(['ADMIN']), countryController.deleteElem)
 
 // ----- USERS -----
+router.get('/users', roleMiddleware(['ADMIN']), userController.getElems)
+router.post('/users', roleMiddleware(['ADMIN']), userController.addElem)
+router.put('/users', roleMiddleware(['ADMIN']), userController.updateElem)
+router.delete('/users', roleMiddleware(['ADMIN']), userController.deleteElem)
+
 // ----- EVENTS -----
 // ----- ACHIEVEMENTS -----
 // ----- SURVEYS -----
