@@ -1,9 +1,11 @@
-const User = require('../models/User')
-const ErrorResponses = require("../responses/error_responses")
-const ModelsElements = require("../models/models_elements")
-const IDataController = require("./interfaces/DataControllerInterface");
+const User = require('../../models/User')
+const ErrorResponses = require("../../responses/error_responses")
+const ModelsElements = require("../../models/models_elements")
+const IDataController = require("../interfaces/DataControllerInterface");
 
 class UserController extends IDataController {
+
+    constructor() { super(); }
 
     async addElem(req, res) {
         try {}

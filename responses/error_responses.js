@@ -1,6 +1,7 @@
 const CODES = require('../config/status_codes')
 
 module.exports = {
+
     /**
      * @param res response object
      * @param elementName string
@@ -88,5 +89,5 @@ module.exports = {
      * Status code: 403
      * { message: Your role doesn't have access }
      */
-    noRoleAccess: function (res){ return res.status(CODES.FORBIDDEN).json({message: "Your role doesn't have access"}) }
+    noRoleAccess: function (res) { return res.status(CODES.FORBIDDEN).json({message: "Your role doesn't have access"}) }
 };

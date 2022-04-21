@@ -1,7 +1,9 @@
-const Year = require('../models/Year')
-const IDataController = require("./interfaces/DataControllerInterface");
-const ErrorResponses = require("../responses/error_responses")
-const ModelsElements = require("../models/models_elements")
+const Year = require('../../models/Year')
+const IDataController = require("../interfaces/DataControllerInterface");
+const ErrorResponses = require("../../responses/error_responses")
+const SuccessResponses = require("../../responses/success_responses")
+const ModelsElements = require("../../models/models_elements")
+const CRUD_OPERATIONS = require('../../config/crud_operations')
 class YearController extends IDataController {
 
     async addElem(req, res) {
@@ -14,7 +16,7 @@ class YearController extends IDataController {
             const newElem = new Year({date: date, title: title, img: img})
             await newElem.save()
 
-            return res.status(200).json({"message": "Year successfully added"})
+            return SuccessResponses.successElemOperation(res, ModelsElements.YEAR, CRUD_OPERATIONS.ADDED)
         }
         catch (e) {
             console.log(e)

@@ -1,8 +1,8 @@
-const Rank = require('../models/Rank')
-const Country = require('../models/Country')
-const ErrorResponses = require("../responses/error_responses")
-const ModelsElements = require("../models/models_elements")
-const IDataController = require("./interfaces/DataControllerInterface");
+const Rank = require('../../models/Rank')
+const Country = require('../../models/Country')
+const ErrorResponses = require("../../responses/error_responses")
+const ModelsElements = require("../../models/models_elements")
+const IDataController = require("../interfaces/DataControllerInterface");
 
 class RankController extends IDataController {
 
@@ -13,13 +13,8 @@ class RankController extends IDataController {
             const candidate = await Rank.findOne({name})
             const idCandidate = await Country.findById(countryId)
 
-            if (candidate) {
-                return ErrorResponses.elementExists(res, ModelsElements.RANK)
-            }
-
-            if (idCandidate === null){
-                return ErrorResponses.noSuchElement(res, ModelsElements.RANK)
-            }
+            if (candidate) { return ErrorResponses.elementExists(res, ModelsElements.RANK) }
+            if (idCandidate === null){ return ErrorResponses.noSuchElement(res, ModelsElements.COUNTRY) }
 
             const newElem = new Rank({name: name, points: points, img: img, countryId: countryId})
             await newElem.save()

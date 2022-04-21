@@ -1,7 +1,7 @@
-const Country = require('../models/Country')
-const IDataController = require("./interfaces/DataControllerInterface");
-const ErrorResponses = require("../responses/error_responses")
-const ModelsElements = require("../models/models_elements")
+const Country = require('../../models/Country')
+const IDataController = require("../interfaces/DataControllerInterface");
+const ErrorResponses = require("../../responses/error_responses")
+const ModelsElements = require("../../models/models_elements")
 class CountryController extends IDataController {
 
     constructor() { super(); }
