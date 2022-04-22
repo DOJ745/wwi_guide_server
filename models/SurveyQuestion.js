@@ -14,16 +14,9 @@ const SurveyQuestion = new mongoose.Schema({
 
     itemId: {
         type: String,
-        ref: 'Event',
         required: true,
         default: null
     }
-
-    /*armamentId: {
-        type: String,
-        ref: 'Armament',
-        default: null
-    }*/
 })
 
 module.exports = mongoose.model('SurveyQuestion', SurveyQuestion)
