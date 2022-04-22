@@ -12,17 +12,18 @@ const SurveyQuestion = new mongoose.Schema({
         default: "https://pixy.org/images/placeholder.png"
     },
 
-    eventId: {
+    itemId: {
         type: String,
         ref: 'Event',
-        required: true
-    },
+        required: true,
+        default: null
+    }
 
-    weaponsTechnologyId: {
+    /*armamentId: {
         type: String,
         ref: 'Armament',
         default: null
-    }
+    }*/
 })
 
 module.exports = mongoose.model('SurveyQuestion', SurveyQuestion)
