@@ -2,7 +2,8 @@ const Achievement = require('../../models/Achievement')
 const ErrorResponses = require("../../responses/error_responses")
 const ModelsElements = require("../../models/models_elements")
 const IDataController = require("../interfaces/DataControllerInterface");
-const Event = require("../../models/Event");
+const SuccessResponses = require("../../responses/success_responses");
+const CRUD_OPERATIONS = require("../../config/crud_operations");
 
 class AchievementController extends IDataController {
 
@@ -13,10 +14,12 @@ class AchievementController extends IDataController {
             const {name, description, points, img} = req.body
             const candidate = await Achievement.findOne({name})
 
-            const newElem = new Event({name: name, description: description, points: points, img: img})
+            if(candidate) { return ErrorResponses.elementExists(res, ModelsElements.ACHIEVEMENT) }
+
+            const newElem = new Achievement({name: name, description: description, points: points, img: img})
             await newElem.save()
 
-            if(candidate) { return ErrorResponses.elementExists(res, ModelsElements.ACHIEVEMENT) }
+            return SuccessResponses.successElemOperation(res, ModelsElements.ACHIEVEMENT, CRUD_OPERATIONS.ADDED)
         }
         catch (e) {
             console.log(e)

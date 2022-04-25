@@ -51,7 +51,8 @@ router.delete('/events', roleMiddleware(['ADMIN']), eventController.deleteElem)
 
 // ----- ACHIEVEMENTS -----
 router.get('/achievements', achievementController.getElems)
-router.post('/achievements', roleMiddleware(['ADMIN']), achievementController.addElem)
+//router.post('/achievements', roleMiddleware(['ADMIN']), achievementController.addElem)
+router.post('/achievements', achievementController.addElem)
 router.put('/achievements', roleMiddleware(['ADMIN']), achievementController.updateElem)
 router.delete('/achievements', roleMiddleware(['ADMIN']), achievementController.deleteElem)
 

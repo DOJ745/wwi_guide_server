@@ -14,7 +14,8 @@ const Achievement = new mongoose.Schema({
     description: {
         type: String,
         required: true,
-        default: 'Accomplish something'
+        default: 'Accomplish something',
+        maxLength: 128
     },
 
     points: {

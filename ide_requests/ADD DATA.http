@@ -1,21 +1,21 @@
-### Add new year
-POST http://{{localhost}}/api.wwi-guide.by/years
+### Year
+POST {{localhost}}/years
 Content-Type: application/json
 
 {
   "date": "1918"
 }
 
-### Add new country
-POST http://{{localhost}}/api.wwi-guide.by/countries
+### Country
+POST{{localhost}}/countries
 Content-Type: application/json
 
 {
   "name": "Austria-Hungary Empire"
 }
 
-### Add new rank
-POST http://{{localhost}}/api.wwi-guide.by/ranks
+### Rank
+POST {{localhost}}/ranks
 Content-Type: application/json
 
 {
@@ -23,4 +23,14 @@ Content-Type: application/json
   "points": 1000,
   "img": "https://pixy.org/images/placeholder.png",
   "countryId": "61f988955d289d4cb3c483ad"
+}
+
+### Achievement
+POST {{localhost}}/achievements
+Content-Type: application/json
+
+{
+  "name": "Achievement 3",
+  "description": "{{loren-ipsum-10}}",
+  "points": 100
 }
