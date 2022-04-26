@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const morganBody = require('morgan-body'); // Log middleware
-const path = require("path");
 
 const AuthRouter = require('./routers/AuthRouter')
 const DbRouter = require('./routers/DbRouter')
@@ -16,9 +15,10 @@ const app = express()
 
 // VIEW ENGINE SETUP
 //app.set('views', path.join(__dirname, 'views'));
-app.use(express.static(__dirname + "/views"));
+app.use(express.static(__dirname + "/public"));
+app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
+app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 app.set("view engine", "pug");
-//app.use(express.static(__dirname + "views"));
 
 // ---------- MIDDLEWARES ----------
 

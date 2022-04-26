@@ -1,12 +1,12 @@
 const Router = require('express')
 const router = new Router()
 
-router.get("/pug",
+router.get("/test-page",
     (req, res) => {
     res.render('test')
 })
-router.get("/carousel", (req, res) => {
-    res.render('layouts/carousel')
+router.get("/log-in", (req, res) => {
+    res.render('log_in')
 })
 
 module.exports = router
