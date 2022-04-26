@@ -3,16 +3,24 @@ const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const morganBody = require('morgan-body'); // Log middleware
+const path = require("path");
 
-const authRouter = require('./routers/AuthRouter')
-const dbRouter = require('./routers/DbRouter')
+const AuthRouter = require('./routers/AuthRouter')
+const DbRouter = require('./routers/DbRouter')
+const ViewRouter = require('./routers/ViewRouter')
 const {dbName, dbUsername, dbPassword, apiURL} = require('./config/config')
 
 const PORT = process.env.PORT || 5000
 
 const app = express()
 
-// ---------- MIDDLEWARE ----------
+// VIEW ENGINE SETUP
+//app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(__dirname + "/views"));
+app.set("view engine", "pug");
+//app.use(express.static(__dirname + "views"));
+
+// ---------- MIDDLEWARES ----------
 
 app.use(express.json())
 app.use(cookieParser())
@@ -22,7 +30,7 @@ app.use(cors({
 }))
 morganBody(app);
 
-// ----------ERROR HANDLER ----------
+// ---------- ERROR HANDLERS ----------
 
 app.use(function(err, req, res, next) {
     console.error(err.stack);
@@ -31,8 +39,9 @@ app.use(function(err, req, res, next) {
 
 // ---------- ROUTES MIDDLEWARE ----------
 
-app.use(`${apiURL}/auth`, authRouter)
-app.use(`${apiURL}`, dbRouter)
+app.use(`${apiURL}/auth`, AuthRouter)
+app.use(`${apiURL}`, DbRouter)
+app.use(`/test`, ViewRouter)
 
 app.get(`${apiURL}/test`, (req, res) => {
     res.send("Test GET request 12345678")
