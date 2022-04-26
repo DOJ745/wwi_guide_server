@@ -9,7 +9,12 @@ class UserController extends IDataController {
     constructor() { super(); }
 
     async addElem(req, res) {
-        try {}
+        try {
+            const errors = validationResult(req)
+            if (!errors.isEmpty()) {
+                return ErrorResponses.modelValidationError(res, ModelsElements.USER, errors)
+            }
+        }
         catch (e) {
             console.log(e)
             ErrorResponses.crudOperationError(res, ModelsElements.USER, CRUD_OPERATIONS.ADDING,  e)
@@ -29,7 +34,15 @@ class UserController extends IDataController {
     }
 
     async deleteElem(req, res) {
+        try {
+            const errors = validationResult(req)
+            if (!errors.isEmpty()) {
+                return ErrorResponses.modelValidationError(res, ModelsElements.USER, errors)
+            }
+        }
+        catch (e){
 
+        }
     }
 
     async getElems(req, res) {

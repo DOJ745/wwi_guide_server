@@ -12,7 +12,7 @@ class CountryController extends IDataController {
         try {
             const errors = validationResult(req)
             if (!errors.isEmpty()) {
-                return ErrorResponses.modelValidationError(res, ModelsElements.EVENT, errors)
+                return ErrorResponses.modelValidationError(res, ModelsElements.COUNTRY, errors)
             }
 
             const {name, img} = req.body
@@ -34,11 +34,27 @@ class CountryController extends IDataController {
     }
 
     async updateElem(req, res) {
+        try {
+            const errors = validationResult(req)
+            if (!errors.isEmpty()) {
+                return ErrorResponses.modelValidationError(res, ModelsElements.COUNTRY, errors)
+            }
+        }
+        catch (e){
 
+        }
     }
 
     async deleteElem(req, res) {
+        try {
+            const errors = validationResult(req)
+            if (!errors.isEmpty()) {
+                return ErrorResponses.modelValidationError(res, ModelsElements.COUNTRY, errors)
+            }
+        }
+        catch (e){
 
+        }
     }
 
     async getElems(req, res) {

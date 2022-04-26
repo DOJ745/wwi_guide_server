@@ -6,6 +6,9 @@ module.exports = {
     ROLE: "role",
     USER: "user",
     ACHIEVEMENT: "achievement",
-    QUESTION: "question",
-    ANSWER: "answer"
+    TEST_QUESTION: "test question",
+    TEST_ANSWER: "test answer",
+    SURVEY_QUESTION: "survey question",
+    SURVEY_ANSWER: "survey answer",
+    ARMAMENT: "armament"
 }

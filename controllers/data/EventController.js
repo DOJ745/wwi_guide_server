@@ -36,11 +36,27 @@ class EventController extends IDataController {
     }
 
     async updateElem(req, res) {
+        try {
+            const errors = validationResult(req)
+            if (!errors.isEmpty()) {
+                return ErrorResponses.modelValidationError(res, ModelsElements.EVENT, errors)
+            }
+        }
+        catch (e){
 
+        }
     }
 
     async deleteElem(req, res) {
+        try {
+            const errors = validationResult(req)
+            if (!errors.isEmpty()) {
+                return ErrorResponses.modelValidationError(res, ModelsElements.EVENT, errors)
+            }
+        }
+        catch (e){
 
+        }
     }
 
     async getElems(req, res) {
