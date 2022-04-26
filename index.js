@@ -4,8 +4,8 @@ const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const morganBody = require('morgan-body'); // Log middleware
 
-const authRouter = require('./routers/authRouter')
-const dbRouter = require('./routers/dbRouter')
+const authRouter = require('./routers/AuthRouter')
+const dbRouter = require('./routers/DbRouter')
 const {dbName, dbUsername, dbPassword, apiURL} = require('./config/config')
 
 const PORT = process.env.PORT || 5000

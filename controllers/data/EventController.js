@@ -1,17 +1,22 @@
 const Event = require('../../models/Event')
 const Year = require('../../models/Year')
-const ErrorResponses = require("../../responses/error_responses")
-const SuccessResponses = require("../../responses/success_responses")
+const ErrorResponses = require("../../responses/ErrorResponses")
+const SuccessResponses = require("../../responses/SuccessResponses")
 const ModelsElements = require("../../models/models_elements")
 const CRUD_OPERATIONS = require('../../config/crud_operations')
 const IDataController = require("../interfaces/DataControllerInterface");
+const {validationResult} = require("express-validator");
 
 class EventController extends IDataController {
-
     constructor() { super(); }
 
     async addElem(req, res) {
         try {
+            const errors = validationResult(req)
+            if (!errors.isEmpty()) {
+                return ErrorResponses.modelValidationError(res, ModelsElements.EVENT, errors)
+            }
+
             const {title, text, images, yearId} = req.body
             const candidate = await Event.findOne({title})
             const idCandidate = await Year.findOne({yearId})
@@ -26,7 +31,7 @@ class EventController extends IDataController {
         }
         catch (e) {
             console.log(e)
-            ErrorResponses.addingElementError(res, ModelsElements.EVENT, e)
+            ErrorResponses.crudOperationError(res, ModelsElements.EVENT, CRUD_OPERATIONS.ADDING, e)
         }
     }
 

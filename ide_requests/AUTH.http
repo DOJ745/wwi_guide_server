@@ -33,7 +33,7 @@ POST {{localhost}}/auth/reg
 Content-Type: application/json
 
 {
-  "login": "testUser",
+  "login": "tes",
   "password": "Pass_1",
   "countryId": "61f988955d289d4cb3c483ad"
 }

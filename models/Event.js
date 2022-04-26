@@ -16,7 +16,6 @@ const Event = new mongoose.Schema({
 
     images: [{
         type: String,
-        min: 1,
         default: "https://pixy.org/images/placeholder.png"
     }],
 

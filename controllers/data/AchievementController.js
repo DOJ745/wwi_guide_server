@@ -1,16 +1,21 @@
 const Achievement = require('../../models/Achievement')
-const ErrorResponses = require("../../responses/error_responses")
+const ErrorResponses = require("../../responses/ErrorResponses")
 const ModelsElements = require("../../models/models_elements")
 const IDataController = require("../interfaces/DataControllerInterface");
-const SuccessResponses = require("../../responses/success_responses");
+const SuccessResponses = require("../../responses/SuccessResponses");
 const CRUD_OPERATIONS = require("../../config/crud_operations");
+const {validationResult} = require("express-validator");
 
 class AchievementController extends IDataController {
-
     constructor() { super(); }
 
     async addElem(req, res) {
         try {
+            const errors = validationResult(req)
+            if (!errors.isEmpty()) {
+                return ErrorResponses.modelValidationError(res, ModelsElements.ACHIEVEMENT, errors)
+            }
+
             const {name, description, points, img} = req.body
             const candidate = await Achievement.findOne({name})
 
@@ -23,7 +28,7 @@ class AchievementController extends IDataController {
         }
         catch (e) {
             console.log(e)
-            ErrorResponses.addingElementError(res, ModelsElements.ACHIEVEMENT, e)
+            ErrorResponses.crudOperationError(res, ModelsElements.ACHIEVEMENT, CRUD_OPERATIONS.ADDING, e)
         }
     }
 

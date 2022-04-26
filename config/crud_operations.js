@@ -10,5 +10,17 @@ module.exports = {
     /**
      * Value: updated
      **/
-    UPDATED: "updated"
+    UPDATED: "updated",
+    /**
+     * Value: adding
+     **/
+    ADDING: "adding",
+    /**
+     * Value: deleting
+     **/
+    DELETING: "deleting",
+    /**
+     * Value: updating
+     **/
+    UPDATING: "updating"
 }

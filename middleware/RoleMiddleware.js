@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const { secret } = require('../config/config')
-const ErrorResponses = require('../responses/error_responses')
+const ErrorResponses = require('../responses/ErrorResponses')
 
 module.exports = function(roles) {
 

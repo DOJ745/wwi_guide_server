@@ -12,9 +12,15 @@ const SurveyQuestion = new mongoose.Schema({
         default: "https://pixy.org/images/placeholder.png"
     },
 
-    itemId: {
+    eventId:[{
         type: String,
-        required: true,
+        ref: 'Event',
+        default: null
+    }],
+
+    armamentId: {
+        type: String,
+        ref: 'Armament',
         default: null
     }
 })

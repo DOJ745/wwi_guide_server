@@ -1,13 +1,20 @@
 const Country = require('../../models/Country')
 const IDataController = require("../interfaces/DataControllerInterface");
-const ErrorResponses = require("../../responses/error_responses")
+const ErrorResponses = require("../../responses/ErrorResponses")
+const CRUD_OPERATIONS = require('../../config/crud_operations')
 const ModelsElements = require("../../models/models_elements")
-class CountryController extends IDataController {
+const {validationResult} = require("express-validator");
 
+class CountryController extends IDataController {
     constructor() { super(); }
 
     async addElem(req, res) {
         try {
+            const errors = validationResult(req)
+            if (!errors.isEmpty()) {
+                return ErrorResponses.modelValidationError(res, ModelsElements.EVENT, errors)
+            }
+
             const {name, img} = req.body
             const candidate = await Country.findOne({name})
 
@@ -22,7 +29,7 @@ class CountryController extends IDataController {
         }
         catch (e) {
             console.log(e)
-            ErrorResponses.addingElementError(res, ModelsElements.COUNTRY, e)
+            ErrorResponses.crudOperationError(res, ModelsElements.COUNTRY, CRUD_OPERATIONS.ADDING, e)
         }
     }
 

@@ -6,7 +6,7 @@ const { validationResult } = require('express-validator')
 const jwt = require('jsonwebtoken')
 const { secret } = require('../config/config')
 const ModelsElements = require("../models/models_elements")
-const ErrorResponses = require('../responses/error_responses')
+const ErrorResponses = require('../responses/ErrorResponses')
 
 const generateAccessToken = (id, roles) => {
     const payload = {id, roles}
@@ -19,7 +19,7 @@ class AuthController {
         try {
             const errors = validationResult(req)
             if (!errors.isEmpty()) {
-                return ErrorResponses.regValidationError(res, errors)
+                return ErrorResponses.modelValidationError(res, ModelsElements.USER, errors)
             }
 
             const {login, password, countryId} = req.body
@@ -102,17 +102,6 @@ class AuthController {
         catch (e) {
             console.log(e)
             ErrorResponses.exceptionOccurred(res, "Login", e)
-        }
-    }
-
-    async getUsers(req, res) {
-        try {
-            const users = await User.find()
-            res.json(users)
-        }
-        catch (e) {
-            console.log(e)
-            ErrorResponses.badRequest(res, e)
         }
     }
 }

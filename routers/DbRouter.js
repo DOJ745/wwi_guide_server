@@ -7,21 +7,15 @@ const rankController = require('../controllers/data/RankController')
 const userController = require('../controllers/data/UserController')
 const achievementController = require('../controllers/data/AchievementController')
 const eventController = require('../controllers/data/EventController')
-
-const { check } = require('express-validator')
-
-const roleMiddleware = require('../middleware/roleMiddleware')
+const CheckFactory = require('../middleware/CheckHandlersFactory')
+const roleMiddleware = require('../middleware/RoleMiddleware')
 
 // ----- YEARS -----
 router.get('/years', yearController.getElems)
 router.post('/years',
-    [
-        check('date', 'Date of the year cannot be empty and must be 4 symbols!')
-            .notEmpty()
-            .isLength({min: 4, max: 4})
-    ],
-    roleMiddleware(['ADMIN', 'USER']),
+    [CheckFactory.createIsIntNotEmpty('date', 1914, 1918),],
     yearController.addElem)
+
 router.put('/years', roleMiddleware(['ADMIN']), yearController.updateElem)
 router.delete('/years', roleMiddleware(['ADMIN']), yearController.deleteElem)
 

@@ -21,15 +21,16 @@ module.exports = {
     badRequest: function (res, error) { return res.status(CODES.BAD_REQUEST).json({message: "Bad request!", error: error.message}) },
     /**
      * @param res response object
-     * @param elementName string
+     * @param elementName string (name of the model)
+     * @param operationName string (adding/deleting/updating)
      * @param error error object
      * @returns {json}
      * Status code: 400
      * message: Error with adding the element!,
      * error: error.message
      */
-    addingElementError: function (res, elementName, error) {
-        return res.status(CODES.BAD_REQUEST).json({message: `Error with adding the ${elementName}!`, error: error.message})
+    crudOperationError: function (res, elementName, operationName, error) {
+        return res.status(CODES.BAD_REQUEST).json({message: `Error with ${operationName} the ${elementName}!`, error: error.message})
     },
     /**
      * @param res response object
@@ -60,14 +61,15 @@ module.exports = {
     },
     /**
      * @param res response object
+     * @param modelName process name (year/user/rank validation error)
      * @param errors errors stack trace
      * @returns {json}
      * Status code: 400
      * message: Registration validation error!,
      * error: errors array
      */
-    regValidationError: function (res, errors) {
-        return res.status(CODES.BAD_REQUEST).json({ message: "Registration validation error!", "error": errors.array() })
+    modelValidationError: function (res, modelName, errors) {
+        return res.status(CODES.BAD_REQUEST).json({ message: `${modelName} validation error!`, "error": errors.array() })
     },
     /**
      * @param res response object

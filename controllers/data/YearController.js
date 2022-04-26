@@ -1,13 +1,21 @@
 const Year = require('../../models/Year')
 const IDataController = require("../interfaces/DataControllerInterface");
-const ErrorResponses = require("../../responses/error_responses")
-const SuccessResponses = require("../../responses/success_responses")
+const ErrorResponses = require("../../responses/ErrorResponses")
+const SuccessResponses = require("../../responses/SuccessResponses")
 const ModelsElements = require("../../models/models_elements")
 const CRUD_OPERATIONS = require('../../config/crud_operations')
+const {validationResult} = require("express-validator");
+
 class YearController extends IDataController {
+    constructor() { super(); }
 
     async addElem(req, res) {
         try {
+            const errors = validationResult(req)
+            if (!errors.isEmpty()) {
+                return ErrorResponses.modelValidationError(res, ModelsElements.YEAR, errors)
+            }
+
             const {date, title, img} = req.body
             const candidate = await Year.findOne({date})
 
@@ -20,7 +28,7 @@ class YearController extends IDataController {
         }
         catch (e) {
             console.log(e)
-            ErrorResponses.addingElementError(res, ModelsElements.YEAR, e)
+            ErrorResponses.crudOperationError(res, ModelsElements.YEAR, CRUD_OPERATIONS.ADDING, e)
         }
     }
 
