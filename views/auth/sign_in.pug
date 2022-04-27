@@ -1,0 +1,58 @@
+extends ../basic_layout
+
+block content
+    div.container.h-100
+        div.row.align-items-center.justify-content-center.h-100
+            img.col.img-thumbnail.w-25.m-1(src="https://sun1-30.userapi.com/c851320/v851320146/1f543f/dDRICq8Lv8A.jpg")
+            form#myForm.col-6.w-25(
+                action="http://localhost:5000/api.wwi-guide.by/auth/login"
+                method="POST")
+                h1.text-center Time to write some guides
+                div.form-group
+                    label.form-label(for='loginField') Login
+                    input#loginField.form-control(
+                        type='text'
+                        name='login'
+                        placeholder='Username'
+                        required=''
+                        minlength=4
+                        maxlength=48)
+                div.form-group
+                    label.form-label(for='passwordField') Password
+                    input#passwordField.form-control(
+                        type='password'
+                        name='password'
+                        required=''
+                        minlength=6
+                        maxlength=18)
+                div.form-check
+                    input#rememberMe.form-check-input(
+                        type='checkbox'
+                        value='remember')
+                    label.form-check-label(for='rememberMe')
+                        | Remember me
+                div.row.form-signin
+                    button.col.btn.btn-primary.m-1(type='submit' onclick='submitForm') Sign in
+                    a.col.btn.btn-primary.m-1(href='http://localhost:5000/reg' role='button') Sign up
+
+    script(type='text/javascript').
+        function submitForm() {
+            const loginForm = $("#myForm")
+            const loginField = $("#loginField")
+            const passwordField = $("#passwordField")
+
+            const loginValue = loginField.val()
+            const passwordValue = passwordField.val()
+
+            const formData = {
+                "login": loginValue,
+                "password": passwordValue
+            }
+            $.ajax({
+                headers: { "Accept": "application/json", },
+                url: loginForm.action,
+                type: loginForm.method,
+                data: JSON.stringify(formData)
+            });
+        }
+

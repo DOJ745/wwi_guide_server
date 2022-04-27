@@ -8,7 +8,10 @@ router.get("test-page",
     res.render('test')
 })
 router.get("/", (req, res) => {
-    res.render('auth/log_in')
+    res.render('auth/sign_in')
+})
+router.get("/reg", (req, res) => {
+    res.render('auth/sign_up')
 })
 router.get("/home", roleMiddleware(['ADMIN']), (req, res) =>{
     res.render('home')
