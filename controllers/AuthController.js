@@ -82,7 +82,8 @@ class AuthController {
                     maxAge: 3600 * 10000,
                     httpOnly: true
                 })
-                return res.status(200).json({message: "Welcome, admin"})
+                //return res.status(200).json({message: "Welcome, admin"})
+                return res.render('home')
             }
             else {
                 return res.status(200).json(

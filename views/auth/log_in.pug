@@ -1,0 +1,54 @@
+extends ../basic_layout
+
+block content
+    div.container
+        form#myForm.row.g-2(action="http://localhost:5000/api.wwi-guide.by/auth/login" method="POST")
+            .col-md-4
+                label.form-label(for='loginField') Login
+                .input-group.has-validation
+                    input#loginField.form-control.is-invalid(
+                        type='text'
+                        aria-describedby='inputGroupPrepend3 validationServerUsernameFeedback'
+                        name='login')
+                    #validationServerUsernameFeedback.invalid-feedback
+                        | Login length must be between 4 and 48 symbols.
+            .col-md-4
+                label.form-label(for='passwordField') Password
+                .input-group.has-validation
+                    input#passwordField.form-control.is-invalid(
+                        type='text'
+                        aria-describedby='inputGroupPrepend3 validationServerUsernameFeedback'
+                        name='password')
+                    #validationServerPasswordFeedback.invalid-feedback
+                        | Password length must be between 6 and 18 symbols.
+            .col-12
+                .form-check
+                    input#invalidCheck3.form-check-input(
+                        type='checkbox'
+                        value=''
+                        aria-describedby='invalidCheck3Feedback'
+                        required='')
+                    label.form-check-label(for='invalidCheck3')
+                        | Remember me
+            .col-12
+                button.btn.btn-primary(type='submit' onclick='submitForm') Sign in
+                a.btn.btn-primary(href='#' role='button') Sign up
+
+    script(type='text/javascript').
+        function submitForm() {
+            const loginForm = $("#myForm")
+            const loginValue = $("#loginField").val()
+            const passwordValue = $("#passwordField").val()
+
+            const formData = {
+                "login": loginValue,
+                "password": passwordValue
+            }
+            $.ajax({
+                headers: { "Accept": "application/json", },
+                url: loginForm.action,
+                type: loginForm.method,
+                data: JSON.stringify(formData)
+            });
+        }
+

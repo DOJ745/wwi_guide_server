@@ -21,8 +21,8 @@ POST {{localhost}}/auth/login
 Content-Type: application/json
 
 {
-  "login": "testAdmin",
-  "password": "123456"
+  "login": "mainadmin",
+  "password": "Pass_1"
 }
 
 ### Get users without jwt
@@ -43,8 +43,8 @@ POST {{localhost}}/auth/reg-adm
 Content-Type: application/json
 
 {
-  "login": "testAdmin",
-  "password": "123456"
+  "login": "mainadmin",
+  "password": "Pass_1"
 }
 
 ### Reg wrong route

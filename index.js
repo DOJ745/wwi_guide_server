@@ -23,6 +23,7 @@ app.set("view engine", "pug");
 // ---------- MIDDLEWARES ----------
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
 app.use(cors({
     origin: '*',
@@ -41,7 +42,7 @@ app.use(function(err, req, res, next) {
 
 app.use(`${apiURL}/auth`, AuthRouter)
 app.use(`${apiURL}`, DbRouter)
-app.use(`/test`, ViewRouter)
+app.use(`/`, ViewRouter)
 
 app.get(`${apiURL}/test`, (req, res) => {
     res.send("Test GET request 12345678")
