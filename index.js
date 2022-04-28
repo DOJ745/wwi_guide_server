@@ -13,13 +13,15 @@ const PORT = process.env.PORT || 5000
 
 const app = express()
 
-// VIEW ENGINE SETUP
+// ---------- PUBLIC RESOURCES ----------
 //app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(__dirname + "/public"));
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 app.use('/toggle-pass/css', express.static(__dirname + '/node_modules/bootstrap-show-password-toggle/css'));
 app.use('/toggle-pass/js', express.static(__dirname + '/node_modules/bootstrap-show-password-toggle/js'));
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
+
+// VIEW ENGINE SETUP
 app.set("view engine", "pug");
 
 // ---------- MIDDLEWARES ----------

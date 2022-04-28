@@ -10,13 +10,13 @@ router.get("test-page",
 router.get("/", (req, res) => {
     if(req.cookies.access_token)
         res.redirect('/home')
-    else res.render('auth/sign_in')
+    else res.render('auth/sign_in', {title: "Sign in"})
 })
 router.get("/reg", (req, res) => {
-    res.render('auth/sign_up')
+    res.render('auth/sign_up', {title: "Sign up"})
 })
-router.get("/home", roleMiddleware(['ADMIN']), (req, res) =>{
-    res.render('home')
+router.get("/home", roleMiddleware(['ADMIN']), (req, res) => {
+    res.render('home', {title: "Home"})
 })
 
 module.exports = router
