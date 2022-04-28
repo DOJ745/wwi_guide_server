@@ -8,7 +8,9 @@ router.get("test-page",
     res.render('test')
 })
 router.get("/", (req, res) => {
-    res.render('auth/sign_in')
+    if(req.cookies.access_token)
+        res.redirect('/home')
+    else res.render('auth/sign_in')
 })
 router.get("/reg", (req, res) => {
     res.render('auth/sign_up')

@@ -64,12 +64,7 @@ class AuthController {
 
     async login(req, res) {
         try {
-            /*const errors = validationResult(req)
-            if (!errors.isEmpty()) {
-                return ErrorResponses.modelValidationError(res, ModelsElements.USER, errors)
-            }*/
-
-            const {login, password} = req.body
+            const {login, password, remember} = req.body
             const user = await User.findOne({login})
 
             if (!user){ return ErrorResponses.noSuchElement(res, ModelsElements.USER) }
@@ -77,20 +72,30 @@ class AuthController {
             const validPassword = bcrypt.compareSync(password, user.password)
             if (!validPassword){ return ErrorResponses.incorrectPassword(res) }
 
-            const token = generateAccessToken(user._id, user.roles, "10h")
+            let token
+            //const token = generateAccessToken(user._id, user.roles, "10h")
 
             let isLogAdmin = false
             user.roles.forEach(role => { if (role === "ADMIN") { isLogAdmin = true } })
 
-            if(isLogAdmin) {
+            if(isLogAdmin && remember === "off") {
+                token = generateAccessToken(user._id, user.roles, "10h")
                 res.cookie('access_token', token, {
-                    maxAge: 3600 * 10000,
+                    maxAge: 3600000 * 10,
                     httpOnly: true
                 })
-                //return res.status(200).json({message: "Welcome, admin"})
+                return res.render('home')
+            }
+            else if(isLogAdmin && remember === "on"){
+                token = generateAccessToken(user._id, user.roles, "336h")
+                res.cookie('access_token', token, {
+                    maxAge: 3600000 * 336,
+                    httpOnly: true
+                })
                 return res.render('home')
             }
             else {
+                token = generateAccessToken(user._id, user.roles, "10h")
                 return res.status(200).json(
                 {
                     message: "Successful login",
