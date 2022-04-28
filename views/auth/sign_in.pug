@@ -5,7 +5,7 @@ block content
         div.row.align-items-center.justify-content-center.h-100
             img.col.img-thumbnail.w-25.m-1(src="https://sun1-30.userapi.com/c851320/v851320146/1f543f/dDRICq8Lv8A.jpg")
             form#myForm.col-6.w-25(
-                action="http://localhost:5000/api.wwi-guide.by/auth/login"
+                action="/api.wwi-guide.by/auth/login"
                 method="POST")
                 h1.text-center Time to write some guides
                 div.form-group
@@ -17,7 +17,17 @@ block content
                         required=''
                         minlength=4
                         maxlength=48)
-                div.form-group
+                label.form-label(for='passwordContainer') Password
+                div#passwordContainer.input-group
+                    input#passwordField.form-control.rounded(
+                        type='password'
+                        name='password'
+                        required=''
+                        minlength=6
+                        maxlength=18)
+                    button#toggle-password.d-none(type='button'
+                        aria-label='Show password as plain text. Warning: this will display your password on the screen.')
+                //div.form-group
                     label.form-label(for='passwordField') Password
                     input#passwordField.form-control(
                         type='password'
@@ -41,6 +51,7 @@ block content
                     button#btnSubmit.col.btn.btn-primary.m-1(type='submit') Sign in
                     a.col.btn.btn-primary.m-1(href='http://localhost:5000/reg' role='button') Sign up
 
+    script(src='/toggle-pass/js/show-password-toggle.js')
     script(type='text/javascript').
         $(document).ready(function() {
             const loginForm = $("#myForm")
@@ -53,10 +64,10 @@ block content
                 else { rememberMeBox.val('off') }
             })
 
-            $('#showPassword').on('click', function () {
+            /*$('#showPassword').on('click', function () {
                 if ($(this).is(':checked')) passwordField.attr('type', 'text');
                 else passwordField.attr('type', 'password')
-            });
+            });*/
 
             let validateForm = function (event) {
                 let formData = {
@@ -72,7 +83,7 @@ block content
                     data: formData
                 })
                     .done(() => {
-                        location.href = "http://localhost:5000/home"
+                        location.href = "/home"
                     })
                     .fail((jqXHR) => {
                         let responseMsg = $("#response")
