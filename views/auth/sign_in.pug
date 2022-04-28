@@ -28,31 +28,83 @@ block content
                 div.form-check
                     input#rememberMe.form-check-input(
                         type='checkbox'
-                        value='remember')
+                        name='remember')
                     label.form-check-label(for='rememberMe')
                         | Remember me
+                div.row.form-group
+                    p#response(hidden='' style='color: red') Error response
                 div.row.form-signin
-                    button.col.btn.btn-primary.m-1(type='submit' onclick='submitForm') Sign in
+                    //button#btnSubmit.col.btn.btn-primary.m-1(type='button') Sign in
+                    button#btnSubmit.col.btn.btn-primary.m-1(type='submit') Sign in
                     a.col.btn.btn-primary.m-1(href='http://localhost:5000/reg' role='button') Sign up
 
     script(type='text/javascript').
-        function submitForm() {
-            const loginForm = $("#myForm")
-            const loginField = $("#loginField")
-            const passwordField = $("#passwordField")
+        $(document).ready(function() {
 
-            const loginValue = loginField.val()
-            const passwordValue = passwordField.val()
+            /*
+            $("#btnSubmit").click(function () {
 
-            const formData = {
-                "login": loginValue,
-                "password": passwordValue
-            }
-            $.ajax({
-                headers: { "Accept": "application/json", },
-                url: loginForm.action,
-                type: loginForm.method,
-                data: JSON.stringify(formData)
-            });
-        }
+                //let isValid
+                //isValid = loginForm.checkValidity()
 
+                const loginForm = $("#myForm")
+                const loginField = $("#loginField")
+                const passwordField = $("#passwordField")
+                const rememberMeBox = $("#rememberMe")
+
+                let formData
+
+                formData = {
+                    "login": loginField.val(),
+                    "password": passwordField.val(),
+                    "remember": rememberMeBox.checked
+                }
+                $.ajax({
+                    url: loginForm.attr('action'),
+                    type: loginForm.attr('method'),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData),
+                }).done((res) => {})
+                    .fail((jqXHR) => {
+                    let responseMsg = $("#response")
+                    let errorData = $.parseJSON(jqXHR.responseText)
+                    responseMsg.html(errorData.message)
+                    responseMsg.removeAttr('hidden')
+                })
+            });*/
+
+            const loginForm = $("#myForm");
+
+            let validateForm = function (event) {
+
+                const loginField = $("#loginField")
+                const passwordField = $("#passwordField")
+                const rememberMeBox = $("#rememberMe")
+
+                let formData = {
+                    "login": loginField.val(),
+                    "password": passwordField.val(),
+                    "remember": rememberMeBox.checked
+                }
+
+                $.ajax({
+                    url: loginForm.attr('action'),
+                    type: loginForm.attr('method'),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData),
+                }).done((res) => {
+                })
+                    .fail((jqXHR) => {
+                        let responseMsg = $("#response")
+                        let errorData = $.parseJSON(jqXHR.responseText)
+                        responseMsg.html(errorData.message)
+                        responseMsg.removeAttr('hidden')
+                    })
+
+                event.preventDefault();
+            };
+
+            loginForm[0].addEventListener("submit", validateForm, true);
+        })

@@ -8,9 +8,9 @@ const { secret } = require('../config/config')
 const ModelsElements = require("../models/models_elements")
 const ErrorResponses = require('../responses/ErrorResponses')
 
-const generateAccessToken = (id, roles) => {
+const generateAccessToken = (id, roles, expiresTimeHours) => {
     const payload = {id, roles}
-    return jwt.sign(payload, secret, {expiresIn: "10h"})
+    return jwt.sign(payload, secret, {expiresIn: expiresTimeHours})
 }
 
 class AuthController {
@@ -18,6 +18,7 @@ class AuthController {
     async reg(req, res) {
         try {
             const errors = validationResult(req)
+
             if (!errors.isEmpty()) {
                 return ErrorResponses.modelValidationError(res, ModelsElements.USER, errors)
             }
@@ -64,6 +65,11 @@ class AuthController {
 
     async login(req, res) {
         try {
+            /*const errors = validationResult(req)
+            if (!errors.isEmpty()) {
+                return ErrorResponses.modelValidationError(res, ModelsElements.USER, errors)
+            }*/
+
             const {login, password} = req.body
             const user = await User.findOne({login})
 
@@ -72,7 +78,7 @@ class AuthController {
             const validPassword = bcrypt.compareSync(password, user.password)
             if (!validPassword){ return ErrorResponses.incorrectPassword(res) }
 
-            const token = generateAccessToken(user._id, user.roles)
+            const token = generateAccessToken(user._id, user.roles, "10h")
 
             let isLogAdmin = false
             user.roles.forEach(role => { if (role === "ADMIN") { isLogAdmin = true } })

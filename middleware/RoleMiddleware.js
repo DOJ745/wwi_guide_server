@@ -28,9 +28,7 @@ module.exports = function(roles) {
             const {roles: userRoles} = jwt.verify(token, secret)
             let hasRole = false
             userRoles.forEach(role => {
-                if (roles.includes(role)) {
-                    hasRole = true
-                }
+                if (roles.includes(role)) { hasRole = true }
             })
 
             if(!hasRole) { ErrorResponses.noRoleAccess(res) }
