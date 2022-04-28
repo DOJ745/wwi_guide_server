@@ -18,7 +18,6 @@ class AuthController {
     async reg(req, res) {
         try {
             const errors = validationResult(req)
-
             if (!errors.isEmpty()) {
                 return ErrorResponses.modelValidationError(res, ModelsElements.USER, errors)
             }

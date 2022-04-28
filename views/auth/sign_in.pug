@@ -34,50 +34,14 @@ block content
                 div.row.form-group
                     p#response(hidden='' style='color: red') Error response
                 div.row.form-signin
-                    //button#btnSubmit.col.btn.btn-primary.m-1(type='button') Sign in
                     button#btnSubmit.col.btn.btn-primary.m-1(type='submit') Sign in
                     a.col.btn.btn-primary.m-1(href='http://localhost:5000/reg' role='button') Sign up
 
     script(type='text/javascript').
         $(document).ready(function() {
-
-            /*
-            $("#btnSubmit").click(function () {
-
-                //let isValid
-                //isValid = loginForm.checkValidity()
-
-                const loginForm = $("#myForm")
-                const loginField = $("#loginField")
-                const passwordField = $("#passwordField")
-                const rememberMeBox = $("#rememberMe")
-
-                let formData
-
-                formData = {
-                    "login": loginField.val(),
-                    "password": passwordField.val(),
-                    "remember": rememberMeBox.checked
-                }
-                $.ajax({
-                    url: loginForm.attr('action'),
-                    type: loginForm.attr('method'),
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    data: JSON.stringify(formData),
-                }).done((res) => {})
-                    .fail((jqXHR) => {
-                    let responseMsg = $("#response")
-                    let errorData = $.parseJSON(jqXHR.responseText)
-                    responseMsg.html(errorData.message)
-                    responseMsg.removeAttr('hidden')
-                })
-            });*/
-
             const loginForm = $("#myForm");
 
             let validateForm = function (event) {
-
                 const loginField = $("#loginField")
                 const passwordField = $("#passwordField")
                 const rememberMeBox = $("#rememberMe")
@@ -94,8 +58,7 @@ block content
                     dataType: 'json',
                     contentType: 'application/json',
                     data: JSON.stringify(formData),
-                }).done((res) => {
-                })
+                }).done((res) => {})
                     .fail((jqXHR) => {
                         let responseMsg = $("#response")
                         let errorData = $.parseJSON(jqXHR.responseText)
