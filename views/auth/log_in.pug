@@ -72,6 +72,8 @@ block content
                     })
                     .fail((jqXHR) => {
                         let errorData = $.parseJSON(jqXHR.responseText)
+                        responseMsg.css("opacity", "0.1");
+                        responseMsg.animate({opacity: '1.0'}, 633);
                         responseMsg.html(errorData.message)
                         responseMsg.removeAttr('hidden')
                     })
