@@ -1,6 +1,5 @@
 const Router = require('express')
 const router = new Router()
-const AuthController = require('../controllers/AuthController')
 const roleMiddleware = require('../middleware/RoleMiddleware')
 
 router.get("test-page",
@@ -10,7 +9,7 @@ router.get("test-page",
 router.get("/", (req, res) => {
     if(req.cookies.access_token)
         res.redirect('/home')
-    else res.render('auth/sign_in', {title: "Sign in"})
+    else res.render('auth/log_in', {title: "Log in"})
 })
 router.get("/reg", (req, res) => {
     res.render('auth/sign_up', {title: "Sign up"})
