@@ -1,5 +1,6 @@
 extends ../basic_layout
 block content
+    link(rel='stylesheet', href='/toggle-pass/css/show-password-toggle.css')
     style.
         button#toggle-rep-password {
             position: absolute;
@@ -108,6 +109,8 @@ block content
 
             let validateForm = function (event) {
                 if (repPasswordField.val() !== passwordField.val()) {
+                    responseMsg.css("opacity", "0.1");
+                    responseMsg.animate({opacity: '1.0'}, 633);
                     responseMsg.html('Passwords are not equal!')
                     responseMsg.removeAttr('hidden')
                 }
@@ -124,12 +127,16 @@ block content
                         data: formData
                     })
                         .done((res) => {
+                            responseMsg.css("opacity", "0.1");
+                            responseMsg.animate({opacity: '1.0'}, 633);
                             responseMsg.attr('style', 'color: green')
                             responseMsg.removeAttr('hidden')
                             responseMsg.html(res.message)
                         })
                         .fail((jqXHR) => {
                             let errorData = $.parseJSON(jqXHR.responseText)
+                            responseMsg.css("opacity", "0.1");
+                            responseMsg.animate({opacity: '1.0'}, 633);
                             responseMsg.attr('style', 'color: red')
                             responseMsg.html(errorData.message)
                             responseMsg.removeAttr('hidden')
