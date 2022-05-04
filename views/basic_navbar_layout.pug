@@ -1,0 +1,61 @@
+extends basic_layout
+
+block content
+    script(type='text/javascript' src='/js/current-page.js')
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+        .container-fluid
+            a.navbar-brand(href='/home') WWI Guide DB
+            button.navbar-toggler(
+                type='button',
+                data-bs-toggle='collapse',
+                data-bs-target='#navbarNav',
+                aria-controls='navbarNav',
+                aria-expanded='false',
+                aria-label='Toggle navigation')
+                span.navbar-toggler-icon
+            #navbarNav.collapse.navbar-collapse
+                ul.navbar-nav
+                    li.nav-item
+                        a.nav-link(href='/home') Home
+                    li.nav-item
+                        a.nav-link(href='/years') Years
+                    li.nav-item
+                        a.nav-link(href='/events') Events
+                    li.nav-item
+                        a.nav-link(href='/ranks') Ranks
+                    li.nav-item
+                        a.nav-link(href='/countries') Countries
+                    li.nav-item
+                        a.nav-link(href='/achievements') Achievements
+                    li.nav-item
+                        a.nav-link(href='/armament') Armament
+                    li.nav-item
+                        a.nav-link(href='/users') Users
+                    li.nav-item
+                        a.nav-link(href='/logs') Logs
+
+                    li.nav-item.dropdown
+                        a#navbarTestsMenu.nav-link.dropdown-toggle(
+                            href='/tests',
+                            role='button',
+                            data-bs-toggle='dropdown',
+                            aria-expanded='false')
+                            | Tests
+                        ul.dropdown-menu(aria-labelledby='navbarTestsMenu')
+                            li
+                                a.dropdown-item(href='/tests-questions') Questions
+                            li
+                                a.dropdown-item(href='/tests-answers') Answers
+
+                    li.nav-item.dropdown
+                        a#navbarSurveysMenu.nav-link.dropdown-toggle(
+                            href='/surveys',
+                            role='button',
+                            data-bs-toggle='dropdown',
+                            aria-expanded='false')
+                            | Surveys
+                        ul.dropdown-menu(aria-labelledby='navbarTestsMenu')
+                            li
+                                a.dropdown-item(href='/surveys-questions') Questions
+                            li
+                                a.dropdown-item(href='/surveys-answers') Answers

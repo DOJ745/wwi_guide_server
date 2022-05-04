@@ -59,11 +59,12 @@ class AchievementController extends IDataController {
     async getElems(req, res) {
         try {
             const elems = await Achievement.find()
-            res.json(elems)
+            if(req.baseUrl === '/api.wwi-guide.by') return res.json(elems)
+            else  res.render('data/achievements', {title: "Achievements", elements: elems})
         }
         catch (e) {
             console.log(e)
-            ErrorResponses.badRequest(res, e)
+            return ErrorResponses.badRequest(res, e)
         }
     }
 }

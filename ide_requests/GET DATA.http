@@ -9,3 +9,6 @@ GET {{localhost}}/ranks
 
 ### Get test
 GET {{localhost}}/test
+
+### Get Achievements
+GET {{localhost}}/achievements
