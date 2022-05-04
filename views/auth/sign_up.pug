@@ -47,13 +47,13 @@ block content
                         minlength=6
                         maxlength=18
                         pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=_])(?=\\S+$).{6,18}$"
-                        title="Require:\n" +
-                        "\n- 1 letter (p)\n" +
-                        "\n- 1 capitalize letter (P)\n" +
-                        "\n- 1 unique symbol (@, #, $, %, ^, +, =, _)\n" +
-                        "\n- 1 number\n" +
-                        "\n- without space\n" +
-                        "\n- 6-18 symbols")
+                        title="Require: " +
+                        "1 letter (p); " +
+                        "1 capitalize letter (P); " +
+                        "1 unique symbol (@, #, $, %, ^, +, =, _); " +
+                        "1 number; " +
+                        "without space; " +
+                        "6-18 symbols")
                     button#toggle-password.d-none(type='button'
                         aria-label='Show password as plain text. Warning: this will display your password on the screen.')
                 label.form-label(for='repeatPasswordContainer') Repeat password
@@ -73,76 +73,5 @@ block content
                     a.col.btn.btn-primary.m-1(href='/' role='button') Sign in
 
     script(src='/toggle-pass/js/show-password-toggle.js')
-    script(type='text/javascript').
-        let repPasswordToggle = document.getElementById("repeatPasswordField");
-        repPasswordToggle.onclick = function () {
-            document.getElementById("repeatPasswordField").classList.add("input-password");
-            document.getElementById("toggle-rep-password").classList.remove("d-none");
-
-            const passwordInput = document.getElementById("repeatPasswordField");
-            const togglePasswordButton = document.getElementById("toggle-rep-password");
-
-            togglePasswordButton.addEventListener("click", togglePassword);
-
-            function togglePassword() {
-                if (passwordInput.type === "password") {
-                    passwordInput.type = "text";
-                    togglePasswordButton.setAttribute("aria-label", "Hide password.");
-                } else {
-                    passwordInput.type = "password";
-                    togglePasswordButton.setAttribute(
-                        "aria-label",
-                        "Show password as plain text. " +
-                        "Warning: this will display your password on the screen."
-                    )
-                }
-            }
-        }
-
-    script(type='text/javascript').
-        $(document).ready(function () {
-            const regForm = $("#myForm")
-            const loginField = $("#loginField")
-            const passwordField = $("#passwordField")
-            const repPasswordField = $("#repeatPasswordField")
-            const responseMsg = $("#response")
-
-            let validateForm = function (event) {
-                if (repPasswordField.val() !== passwordField.val()) {
-                    responseMsg.css("opacity", "0.1");
-                    responseMsg.animate({opacity: '1.0'}, 633);
-                    responseMsg.html('Passwords are not equal!')
-                    responseMsg.removeAttr('hidden')
-                }
-                else {
-                    let formData = {
-                        "login": loginField.val(),
-                        "password": passwordField.val()
-                    }
-
-                    $.ajax({
-                        url: regForm.attr('action'),
-                        type: regForm.attr('method'),
-                        headers: {'Accept': 'application/json'},
-                        data: formData
-                    })
-                        .done((res) => {
-                            responseMsg.css("opacity", "0.1");
-                            responseMsg.animate({opacity: '1.0'}, 633);
-                            responseMsg.attr('style', 'color: green')
-                            responseMsg.removeAttr('hidden')
-                            responseMsg.html(res.message)
-                        })
-                        .fail((jqXHR) => {
-                            let errorData = $.parseJSON(jqXHR.responseText)
-                            responseMsg.css("opacity", "0.1");
-                            responseMsg.animate({opacity: '1.0'}, 633);
-                            responseMsg.attr('style', 'color: red')
-                            responseMsg.html(errorData.message)
-                            responseMsg.removeAttr('hidden')
-                        })
-                }
-                event.preventDefault()
-            }
-            regForm[0].addEventListener("submit", validateForm, true)
-        })
+    script(type='text/javascript' src='/js/sign-up-toggle-password.js')
+    script(type='text/javascript' src='/js/sign-up-form.js')
