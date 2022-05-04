@@ -62,4 +62,3 @@ const start = async () => {
 start()
 
 // TODO: API URL for work with data, pages will be SEPARATE from API URL => pages make calls to api
-// TODO: modify bootstrap-show-password-toggle css styles on main PC

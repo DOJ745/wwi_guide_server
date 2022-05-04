@@ -14,7 +14,8 @@ router.get("/", (req, res) => {
 router.get("/reg", (req, res) => {
     res.render('auth/sign_up', {title: "Sign up"})
 })
-router.get("/home", roleMiddleware(['ADMIN']), (req, res) => {
+//router.get("/home", roleMiddleware(['ADMIN']), (req, res) => {
+router.get("/home", (req, res) => {
     res.render('home', {title: "Home"})
 })
 
