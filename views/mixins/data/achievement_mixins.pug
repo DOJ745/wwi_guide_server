@@ -1,20 +1,19 @@
-mixin achievementCard(name, description, points, img)
-    .card.mb-3(style='max-width: 540px;')
+mixin achievementCard(name, description, points, img, id)
+    .card.border-dark.mb-3(style='max-width: 540px;')
         .row.g-0
             .col-md-4
-                img.img-fluid.rounded-start(src=img, alt='IMG')
+                img.img-fluid.rounded-start-(src=img, alt='IMG')
             .col-md-8
-                .card-body
+                .card-body.text-dark
                     h5.card-title= name
                     p.card-text= description
                     p.card-text= "Points: " + points
-                    //p.card-text
-                        small.text-muted Small text
-                    button.btn.btn-primary.m-2(
-                        type='button'
-                        data-toggle='modal'
-                        data-target='#updateModal') Update
-                    button.btn.btn-danger.m-2(
-                        type='button'
-                        data-toggle='modal'
-                        data-target='#deleteModal') Delete
+        .row.justify-content-center
+            button.btn.btn-primary.m-1.w-25(
+                type='button'
+                data-bs-toggle='modal',
+                data-bs-target='#updateModal' + id) Update
+            button.btn.btn-danger.m-1.w-25(
+                type='button'
+                data-bs-toggle='modal'
+                data-bs-target='#deleteModal' + id) Delete

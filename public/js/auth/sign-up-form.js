@@ -3,14 +3,14 @@ $(document).ready(function () {
     const loginField = $("#loginField")
     const passwordField = $("#passwordField")
     const repPasswordField = $("#repeatPasswordField")
-    const responseMsg = $("#response")
+    const resMsg = $("#resMsg")
 
     let validateForm = function (event) {
         if (repPasswordField.val() !== passwordField.val()) {
-            responseMsg.css("opacity", "0.1");
-            responseMsg.animate({opacity: '1.0'}, 633);
-            responseMsg.html('Passwords are not equal!')
-            responseMsg.removeAttr('hidden')
+            resMsg.css("opacity", "0.1");
+            resMsg.animate({opacity: '1.0'}, 633);
+            resMsg.html('Passwords are not equal!')
+            resMsg.removeAttr('hidden')
         }
         else {
             let formData = {
@@ -25,19 +25,19 @@ $(document).ready(function () {
                 data: formData
             })
                 .done((res) => {
-                    responseMsg.css("opacity", "0.1");
-                    responseMsg.animate({opacity: '1.0'}, 633);
-                    responseMsg.attr('style', 'color: green')
-                    responseMsg.removeAttr('hidden')
-                    responseMsg.html(res.message)
+                    resMsg.css("opacity", "0.1");
+                    resMsg.animate({opacity: '1.0'}, 633);
+                    resMsg.attr('style', 'color: green')
+                    resMsg.removeAttr('hidden')
+                    resMsg.html(res.message)
                 })
                 .fail((jqXHR) => {
                     let errorData = $.parseJSON(jqXHR.responseText)
-                    responseMsg.css("opacity", "0.1");
-                    responseMsg.animate({opacity: '1.0'}, 633);
-                    responseMsg.attr('style', 'color: red')
-                    responseMsg.html(errorData.message)
-                    responseMsg.removeAttr('hidden')
+                    resMsg.css("opacity", "0.1");
+                    resMsg.animate({opacity: '1.0'}, 633);
+                    resMsg.attr('style', 'color: red')
+                    resMsg.html(errorData.message)
+                    resMsg.removeAttr('hidden')
                 })
         }
         event.preventDefault()

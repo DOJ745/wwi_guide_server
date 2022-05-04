@@ -47,8 +47,10 @@ router.delete('/events', roleMiddleware(['ADMIN']), eventController.deleteElem)
 router.get('/achievements', achievementController.getElems)
 //router.post('/achievements', roleMiddleware(['ADMIN']), achievementController.addElem)
 router.post('/achievements', achievementController.addElem)
-router.put('/achievements', roleMiddleware(['ADMIN']), achievementController.updateElem)
-router.delete('/achievements', roleMiddleware(['ADMIN']), achievementController.deleteElem)
+//router.put('/achievements', roleMiddleware(['ADMIN']), achievementController.updateElem)
+router.put('/achievements', achievementController.updateElem)
+//router.delete('/achievements', roleMiddleware(['ADMIN']), achievementController.deleteElem)
+router.delete('/achievements', achievementController.deleteElem)
 
 // ----- SURVEYS QUESTIONS -----
 // ----- TESTS QUESTIONS -----

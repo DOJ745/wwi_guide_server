@@ -67,11 +67,11 @@ block content
                     button#toggle-rep-password.d-none(type='button'
                         aria-label='Show password as plain text. Warning: this will display your password on the screen.')
                 div.row.form-group
-                    p#response(hidden='' style='color: red') Error response
+                    p#resMsg(hidden='' style='color: red') Error response
                 div.row.form-signin
                     button#btnSubmit.col.btn.btn-primary.m-1(type='submit') Register
                     a.col.btn.btn-primary.m-1(href='/' role='button') Sign in
 
     script(src='/toggle-pass/js/show-password-toggle.js')
-    script(type='text/javascript' src='/js/sign-up-toggle-password.js')
-    script(type='text/javascript' src='/js/sign-up-form.js')
+    script(type='text/javascript' src='/js/auth/sign-up-toggle-password.js')
+    script(type='text/javascript' src='/js/auth/sign-up-form.js')

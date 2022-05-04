@@ -1,0 +1,35 @@
+mixin modalAchievements(elementId, elementName, elementDescription, elementPoints, elementImg,  modalName)
+    .modal.fade(
+        id=modalName + elementId
+        tabindex='-1',
+        aria-labelledby=elementId + 'modalLabel',
+        aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h5(id=elementId + 'modalLabel').modal-title Update achievement
+                    button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                .modal-body
+                    p.resMsg(hidden='' style='color: red') Error response
+                    form.itemForm(action="/api.wwi-guide.by/achievements" method="PUT")
+                        p.itemId(hidden='')= elementId
+                        label.col-form-label Input new name:
+                        input.nameField.form-control(type='text' value=elementName name="name")
+
+                        label.col-form-label Input new description:
+                        input.descriptionField.form-control(type='text' value=elementDescription name="description")
+
+                        label.col-form-label Input new points:
+                        input.pointsField.form-control(
+                            type='number'
+                            value=elementPoints
+                            name="points"
+                            step="5"
+                            min="30"
+                            max="100")
+
+                        label.col-form-label Input new image url:
+                        input.imgField.form-control(type='url' value=elementImg name="img")
+                        .row
+                            button.col.btn.btn-primary.m-1(type='submit') Save changes
+                            button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close

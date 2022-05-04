@@ -36,10 +36,10 @@ block content
                     label.form-check-label(for='rememberMe')
                         | Remember me
                 div.row.form-group
-                    p#response(hidden='' style='color: red') Error response
+                    p#resMsg(hidden='' style='color: red') Error response
                 div.row.form-signin
                     button#btnSubmit.col.btn.btn-primary.m-1(type='submit') Log in
-                    a.col.btn.btn-primary.m-1(href='http://localhost:5000/reg' role='button') Sign up
+                    a.col.btn.btn-primary.m-1(href='/reg' role='button') Sign up
 
     script(src='/toggle-pass/js/show-password-toggle.js')
-    script(type='text/javascript' src='/js/log-in-form.js')
+    script(type='text/javascript' src='/js/auth/log-in-form.js')

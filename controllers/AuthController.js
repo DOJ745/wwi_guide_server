@@ -73,7 +73,6 @@ class AuthController {
             if (!validPassword){ return ErrorResponses.incorrectPassword(res) }
 
             let token
-            //const token = generateAccessToken(user._id, user.roles, "10h")
 
             let isLogAdmin = false
             user.roles.forEach(role => { if (role === "ADMIN") { isLogAdmin = true } })

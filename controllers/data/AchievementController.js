@@ -34,13 +34,32 @@ class AchievementController extends IDataController {
 
     async updateElem(req, res) {
         try {
-            const errors = validationResult(req)
+            /*const errors = validationResult(req)
             if (!errors.isEmpty()) {
                 return ErrorResponses.modelValidationError(res, ModelsElements.ACHIEVEMENT, errors)
-            }
+            }*/
+            const {name, description, points, img, id} = req.body
+            Achievement.findByIdAndUpdate(id,
+                {
+                    name: name,
+                    description: description,
+                    points: points,
+                    img: img
+                },
+                {new: true},
+                function(err, result) {
+                    if(err) {
+                        return ErrorResponses.crudOperationError(res, ModelsElements.ACHIEVEMENT, CRUD_OPERATIONS.UPDATING, err)
+                    }
+                    else {
+                        return SuccessResponses.successElemOperation(res, ModelsElements.ACHIEVEMENT, CRUD_OPERATIONS.UPDATED)
+                    }
+                }
+            )
         }
         catch (e){
-
+            console.log(e)
+            ErrorResponses.crudOperationError(res, ModelsElements.ACHIEVEMENT, CRUD_OPERATIONS.UPDATING, e)
         }
     }
 

@@ -1,4 +1,10 @@
+mixin insertButton()
+    div.row.justify-content-center
+        button.row.btn.btn-success(type='button' style="height:50px;width:250px;font-size:24px") Insert
+
 mixin tableInfo(tableName, ...items)
-    h3.text-center= tableName + " structure:"
-    each item in items
-        h5.text-center= item
+    div.row.justify-content-center
+        h3.text-center= tableName + " structure:"
+        each item in items
+            h5.text-center= item
+    +insertButton

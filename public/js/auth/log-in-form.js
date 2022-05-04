@@ -3,7 +3,7 @@ $(document).ready(function() {
     const loginField = $("#loginField")
     const passwordField = $("#passwordField")
     const rememberMeBox = $("#rememberMe")
-    const responseMsg = $("#response")
+    const resMsg = $("#resMsg")
 
     rememberMeBox[0].addEventListener('change', function () {
         if (this.checked) { rememberMeBox.val('on') }
@@ -28,10 +28,10 @@ $(document).ready(function() {
             })
             .fail((jqXHR) => {
                 let errorData = $.parseJSON(jqXHR.responseText)
-                responseMsg.css("opacity", "0.1");
-                responseMsg.animate({opacity: '1.0'}, 633);
-                responseMsg.html(errorData.message)
-                responseMsg.removeAttr('hidden')
+                resMsg.css("opacity", "0.1");
+                resMsg.animate({opacity: '1.0'}, 633);
+                resMsg.html(errorData.message)
+                resMsg.removeAttr('hidden')
             })
         event.preventDefault()
     }
