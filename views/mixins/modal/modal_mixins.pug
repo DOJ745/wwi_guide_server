@@ -15,6 +15,7 @@ mixin modalAchievements()
                         input#nameField.form-control(
                             type='text'
                             value=''
+                            required=''
                             name="name"
                             minlength=3
                             maxlength=100)
@@ -24,6 +25,7 @@ mixin modalAchievements()
                             type='text'
                             value=''
                             name="description"
+                            required=''
                             minlength=3
                             maxlength=100)
 
@@ -33,6 +35,7 @@ mixin modalAchievements()
                             value=30
                             name="points"
                             step="5"
+                            required=''
                             min="30"
                             max="100")
 

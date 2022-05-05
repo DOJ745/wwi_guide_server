@@ -31,6 +31,5 @@ Content-Type: application/json
 
 {
   "name": "Achievement 3",
-  "description": "{{loren-ipsum-10}}",
   "points": 100
 }

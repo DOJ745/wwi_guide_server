@@ -24,7 +24,7 @@ class AchievementController extends IDataController {
             const newElem = new Achievement({name: name, description: description, points: points, img: img})
             await newElem.save()
 
-            return SuccessResponses.successElemOperation(res, ModelsElements.ACHIEVEMENT, CRUD_OPERATIONS.ADDED)
+            return SuccessResponses.successElemOperation(res, ModelsElements.ACHIEVEMENT, CRUD_OPERATIONS.ADDED, null)
         }
         catch (e) {
             console.log(e)
@@ -67,6 +67,8 @@ class AchievementController extends IDataController {
             if (!errors.isEmpty()) {
                 return ErrorResponses.modelValidationError(res, ModelsElements.ACHIEVEMENT, errors)
             }
+            const id = req.body
+            Achievement.findByIdAndDelete(id)
         }
         catch (e){
 

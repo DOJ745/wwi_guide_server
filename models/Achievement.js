@@ -14,7 +14,7 @@ const Achievement = new mongoose.Schema({
     description: {
         type: String,
         required: true,
-        default: 'Accomplish something',
+        default: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec.',
         minLength: 3,
         maxLength: 100
     },
