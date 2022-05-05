@@ -1,35 +1,43 @@
-mixin modalAchievements(elementId, elementName, elementDescription, elementPoints, elementImg,  modalName)
-    .modal.fade(
-        id=modalName + elementId
+mixin modalAchievements()
+    #updateModal.modal.fade(
         tabindex='-1',
-        aria-labelledby=elementId + 'modalLabel',
+        aria-labelledby='modalLabel',
         aria-hidden='true')
         .modal-dialog
             .modal-content
                 .modal-header
-                    h5(id=elementId + 'modalLabel').modal-title Update achievement
+                    h5#modalLabel.modal-title Update achievement
                     button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
                 .modal-body
-                    p.resMsg(hidden='' style='color: red') Error response
-                    form.itemForm(action="/api.wwi-guide.by/achievements" method="PUT")
-                        p.itemId(hidden='')= elementId
+                    p#resMsg(hidden='' style='color: red') Error response
+                    form#itemForm(action="/api.wwi-guide.by/achievements" method="PUT")
                         label.col-form-label Input new name:
-                        input.nameField.form-control(type='text' value=elementName name="name")
+                        input#nameField.form-control(
+                            type='text'
+                            value=''
+                            name="name"
+                            minlength=3
+                            maxlength=100)
 
                         label.col-form-label Input new description:
-                        input.descriptionField.form-control(type='text' value=elementDescription name="description")
+                        input#descriptionField.form-control(
+                            type='text'
+                            value=''
+                            name="description"
+                            minlength=3
+                            maxlength=100)
 
                         label.col-form-label Input new points:
-                        input.pointsField.form-control(
+                        input#pointsField.form-control(
                             type='number'
-                            value=elementPoints
+                            value=30
                             name="points"
                             step="5"
                             min="30"
                             max="100")
 
                         label.col-form-label Input new image url:
-                        input.imgField.form-control(type='url' value=elementImg name="img")
+                        input#imgField.form-control(type='url' value='https://pixy.org/images/placeholder.png' name="img")
                         .row
                             button.col.btn.btn-primary.m-1(type='submit') Save changes
                             button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close

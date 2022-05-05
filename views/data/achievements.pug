@@ -15,15 +15,8 @@ block append content
             each element in elements
                 +achievementCard(element.name, element.description, element.points, element.img, element._id)
 
-    each element in elements
-        +modalAchievements(
-            element._id,
-            element.name,
-            element.description,
-            element.points,
-            element.img,
-            "updateModal"
-            )
+
+        +modalAchievements()
 
     script(type='text/javascript' src='/js/data/update-achievement.js')
 

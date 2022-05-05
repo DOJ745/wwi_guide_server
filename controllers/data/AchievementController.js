@@ -48,12 +48,10 @@ class AchievementController extends IDataController {
                 },
                 {new: true},
                 function(err, result) {
-                    if(err) {
+                    if(err)
                         return ErrorResponses.crudOperationError(res, ModelsElements.ACHIEVEMENT, CRUD_OPERATIONS.UPDATING, err)
-                    }
-                    else {
-                        return SuccessResponses.successElemOperation(res, ModelsElements.ACHIEVEMENT, CRUD_OPERATIONS.UPDATED)
-                    }
+                    else
+                        return SuccessResponses.successElemOperation(res, ModelsElements.ACHIEVEMENT, CRUD_OPERATIONS.UPDATED, result)
                 }
             )
         }

@@ -8,14 +8,15 @@ const Achievement = new mongoose.Schema({
         required: true,
         default: 'Achievement 1',
         minLength: 3,
-        maxLength: 128
+        maxLength: 100
     },
 
     description: {
         type: String,
         required: true,
         default: 'Accomplish something',
-        maxLength: 128
+        minLength: 3,
+        maxLength: 100
     },
 
     points: {

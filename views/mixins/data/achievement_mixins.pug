@@ -2,18 +2,20 @@ mixin achievementCard(name, description, points, img, id)
     .card.border-dark.mb-3(style='max-width: 540px;')
         .row.g-0
             .col-md-4
-                img.img-fluid.rounded-start-(src=img, alt='IMG')
+                img.img-fluid.rounded-start-(id='cardImg' + id, src=img, alt='IMG')
             .col-md-8
                 .card-body.text-dark
-                    h5.card-title= name
-                    p.card-text= description
-                    p.card-text= "Points: " + points
+                    h5.card-title(id='cardName' + id)= name
+                    p.card-text(id='cardDescription' + id)= description
+                    p.card-text(id='cardPoints' + id)= "Points: " + points
         .row.justify-content-center
             button.btn.btn-primary.m-1.w-25(
                 type='button'
                 data-bs-toggle='modal',
-                data-bs-target='#updateModal' + id) Update
+                data-bs-target='#updateModal'
+                data-bs-whatever=id) Update
             button.btn.btn-danger.m-1.w-25(
                 type='button'
                 data-bs-toggle='modal'
-                data-bs-target='#deleteModal' + id) Delete
+                data-bs-target='#deleteModal'
+                data-bs-whatever=id) Delete
