@@ -8,6 +8,12 @@ const TestQuestion = new mongoose.Schema({
         default: 'Type question here'
     },
 
+    testThemeId: {
+        type: String,
+        required: true,
+        ref: 'TestTheme'
+    },
+
     img: {
         type: String,
         default: "https://pixy.org/images/placeholder.png"
