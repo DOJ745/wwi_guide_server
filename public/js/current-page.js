@@ -7,7 +7,7 @@ $(document).ready(function() {
         elem.attr('href', '#')
     }
 
-    function setDropdownActive(elem){
+    function setDropdownActive(elem) {
         elem.addClass('active')
     }
 
@@ -46,6 +46,10 @@ $(document).ready(function() {
             break
         case '/logs':
             elem = $(".nav-link").eq(8)
+            setLinkActive(elem)
+            break
+        case '/tests-themes':
+            elem = $(".nav-link").eq(9)
             setLinkActive(elem)
             break
         case '/tests-questions':
