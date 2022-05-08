@@ -45,6 +45,10 @@ router.get("/countries", (req, res) => {
     res.render('data/countries', {title: "Countries"})
 })
 
+router.get("/tests-themess", (req, res) => {
+    res.render('data/tests/tests-themes', {title: "Tests themes"})
+})
+
 router.get("/tests-answers", (req, res) => {
     res.render('data/tests/tests-answers', {title: "Tests answers"})
 })

@@ -7,6 +7,11 @@ const rankController = require('../controllers/data/RankController')
 const userController = require('../controllers/data/UserController')
 const achievementController = require('../controllers/data/AchievementController')
 const eventController = require('../controllers/data/EventController')
+const surveyQuestionController = require('../controllers/data/SurveyQuestionController')
+const surveyAnswerController = require('../controllers/data/SurveyAnswerController')
+const testThemeController = require('../controllers/data/TestThemeController')
+const testQuestionController = require('../controllers/data/TestQuestionController')
+const testAnswerController = require('../controllers/data/TestAnswerController')
 const CheckFactory = require('../middleware/CheckHandlersFactory')
 const roleMiddleware = require('../middleware/RoleMiddleware')
 
@@ -52,10 +57,36 @@ router.put('/achievements', achievementController.updateElem)
 //router.delete('/achievements', roleMiddleware(['ADMIN']), achievementController.deleteElem)
 router.delete('/achievements', achievementController.deleteElem)
 
-// ----- SURVEYS QUESTIONS -----
-// ----- TESTS QUESTIONS -----
 // ----- SURVEYS ANSWERS -----
+router.get('/surveys-answers', surveyAnswerController.getElems)
+router.post('/surveys-answers', roleMiddleware(['ADMIN']), surveyAnswerController.addElem)
+router.put('/surveys-answers', roleMiddleware(['ADMIN']), surveyAnswerController.updateElem)
+router.delete('/surveys-answers', roleMiddleware(['ADMIN']), surveyAnswerController.deleteElem)
+
+// ----- SURVEYS QUESTIONS -----
+router.get('/surveys-questions', surveyQuestionController.getElems)
+router.post('/surveys-questions', roleMiddleware(['ADMIN']), surveyQuestionController.addElem)
+router.put('/surveys-questions', roleMiddleware(['ADMIN']), surveyQuestionController.updateElem)
+router.delete('/surveys-questions', roleMiddleware(['ADMIN']), surveyQuestionController.deleteElem)
+
+// ----- TESTS THEMES -----
+router.get('/tests-themes', testThemeController.getElems)
+router.post('/tests-themes', roleMiddleware(['ADMIN']), testThemeController.addElem)
+router.put('/tests-themes', roleMiddleware(['ADMIN']), testThemeController.updateElem)
+router.delete('/tests-themes', roleMiddleware(['ADMIN']), testThemeController.deleteElem)
+
+// ----- TESTS QUESTIONS -----
+router.get('/tests-questions', testQuestionController.getElems)
+router.post('/tests-questions', roleMiddleware(['ADMIN']), testQuestionController.addElem)
+router.put('/tests-questions', roleMiddleware(['ADMIN']), testQuestionController.updateElem)
+router.delete('/tests-questions', roleMiddleware(['ADMIN']), testQuestionController.deleteElem)
+
 // ----- TESTS ANSWERS -----
+router.get('/tests-answers', testAnswerController.getElems)
+router.post('/tests-answers', roleMiddleware(['ADMIN']), testAnswerController.addElem)
+router.put('/tests-answers', roleMiddleware(['ADMIN']), testAnswerController.updateElem)
+router.delete('/tests-answers', roleMiddleware(['ADMIN']), testAnswerController.deleteElem)
+
 // ----- LOGS -----
 
 module.exports = router
