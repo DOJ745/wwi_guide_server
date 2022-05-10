@@ -18,7 +18,7 @@ const TestAnswer = new mongoose.Schema({
         type: Number,
         required: true,
         default: 10,
-        min: 10,
+        min: 0,
         max: 100
     },
 
