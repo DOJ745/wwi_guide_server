@@ -18,11 +18,11 @@ const SurveyQuestion = new mongoose.Schema({
         default: null
     }],
 
-    armamentId: {
+    armamentId: [{
         type: String,
         ref: 'Armament',
         default: null
-    }
+    }]
 })
 
 module.exports = mongoose.model('SurveyQuestion', SurveyQuestion)

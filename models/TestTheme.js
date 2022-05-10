@@ -7,6 +7,12 @@ const TestTheme = new mongoose.Schema({
         required: true,
         minLength: 4,
         maxLength: 64
+    },
+
+    achievementId:{
+        type: String,
+        required: true,
+        ref: 'Achievement'
     }
 })
 
