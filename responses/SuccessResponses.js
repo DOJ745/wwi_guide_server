@@ -5,7 +5,7 @@ module.exports = {
      * @param res response object
      * @param elementName string
      * @param operationName string
-     * @param operationResult JSON object (added/updated obj; for AJAX)
+     * @param operationResult JSON object for web app (added/updated obj; for AJAX)
      * @returns {json}
      * Status code: 200
      * message: Element successfully added/deleted/updated

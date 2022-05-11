@@ -4,6 +4,7 @@ const ErrorResponses = require("../../responses/ErrorResponses")
 const CRUD_OPERATIONS = require('../../config/crud_operations')
 const ModelsElements = require("../../models/models_elements")
 const {validationResult} = require("express-validator");
+const Armament = require("../../models/Armament");
 
 class CountryController extends IDataController {
     constructor() { super(); }
@@ -18,9 +19,7 @@ class CountryController extends IDataController {
             const {name, img} = req.body
             const candidate = await Country.findOne({name})
 
-            if (candidate) {
-                return ErrorResponses.elementExists(res, ModelsElements.COUNTRY)
-            }
+            if (candidate) {return ErrorResponses.elementExists(res, ModelsElements.COUNTRY)}
 
             const newElem = new Country({name: name, img: img})
             await newElem.save()
@@ -60,7 +59,8 @@ class CountryController extends IDataController {
     async getElems(req, res) {
         try {
             const elems = await Country.find()
-            res.json(elems)
+            if(req.baseUrl === '/api.wwi-guide.by') return res.json(elems)
+            else res.render('data/countries', {title: "Countries", elements: elems})
         }
         catch (e) {
             console.log(e)

@@ -16,7 +16,7 @@ const TestQuestion = new mongoose.Schema({
 
     img: {
         type: String,
-        default: "https://pixy.org/images/placeholder.png"
+        default: null //"https://pixy.org/images/placeholder.png"
     }
 })
 

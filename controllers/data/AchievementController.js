@@ -34,10 +34,10 @@ class AchievementController extends IDataController {
 
     async updateElem(req, res) {
         try {
-            /*const errors = validationResult(req)
+            const errors = validationResult(req)
             if (!errors.isEmpty()) {
                 return ErrorResponses.modelValidationError(res, ModelsElements.ACHIEVEMENT, errors)
-            }*/
+            }
             const {name, description, points, img, id} = req.body
             Achievement.findByIdAndUpdate(id,
                 {
@@ -79,7 +79,7 @@ class AchievementController extends IDataController {
         try {
             const elems = await Achievement.find()
             if(req.baseUrl === '/api.wwi-guide.by') return res.json(elems)
-            else  res.render('data/achievements', {title: "Achievements", elements: elems})
+            else res.render('data/achievements', {title: "Achievements", elements: elems})
         }
         catch (e) {
             console.log(e)

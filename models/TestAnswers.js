@@ -11,7 +11,8 @@ const TestAnswer = new mongoose.Schema({
     isTrue: {
         type: Boolean,
         required: true,
-        default: true
+        default: true,
+        enum: [true, false]
     },
 
     points: {

@@ -5,6 +5,7 @@ const SuccessResponses = require("../../responses/SuccessResponses")
 const ModelsElements = require("../../models/models_elements")
 const CRUD_OPERATIONS = require('../../config/crud_operations')
 const {validationResult} = require("express-validator");
+const Armament = require("../../models/Armament");
 
 class YearController extends IDataController {
     constructor() { super(); }
@@ -42,8 +43,9 @@ class YearController extends IDataController {
 
     async getElems(req, res) {
         try {
-            const years = await Year.find()
-            res.json(years)
+            const elems = await Year.find()
+            if(req.baseUrl === '/api.wwi-guide.by') return res.json(elems)
+            else res.render('data/years', {title: "Years", elements: elems})
         }
         catch (e) {
             console.log(e)

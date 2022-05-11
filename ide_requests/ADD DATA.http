@@ -1,19 +1,3 @@
-### Year
-POST {{localhost}}/years
-Content-Type: application/json
-
-{
-  "date": "1919"
-}
-
-### Country
-POST{{localhost}}/countries
-Content-Type: application/json
-
-{
-  "name": "Austria-Hungary Empire"
-}
-
 ### Rank
 POST {{localhost}}/ranks
 Content-Type: application/json
@@ -32,4 +16,33 @@ Content-Type: application/json
 {
   "name": "Achievement 7",
   "points": 100
+}
+
+### Test Theme
+POST {{localhost}}/tests-themes
+Content-Type: application/json
+
+{
+  "name": "Как всё это началось",
+  "achievementId": "6276950f78d62971b8d5b617"
+}
+
+### Test Question
+POST {{localhost}}/tests-questions
+Content-Type: application/json
+
+{
+  "text": "Где произошло сие вопиющее убийство?",
+  "testThemeId": "627a7b67d4c5b1d12abf3094"
+}
+
+### Test Answer
+POST {{localhost}}/tests-answers
+Content-Type: application/json
+
+{
+  "text": "Около продовольственного магазина 'Деликатесы Морица Шиллера'",
+  "isTrue": true,
+  "points": 20,
+  "testQuestionId": "627a7cbdd4c5b1d12abf309d"
 }

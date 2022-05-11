@@ -6,6 +6,7 @@ const ModelsElements = require("../../models/models_elements")
 const CRUD_OPERATIONS = require('../../config/crud_operations')
 const IDataController = require("../interfaces/DataControllerInterface");
 const {validationResult} = require("express-validator");
+const Armament = require("../../models/Armament");
 
 class EventController extends IDataController {
     constructor() { super(); }
@@ -62,7 +63,8 @@ class EventController extends IDataController {
     async getElems(req, res) {
         try {
             const elems = await Event.find()
-            res.json(elems)
+            if(req.baseUrl === '/api.wwi-guide.by') return res.json(elems)
+            else res.render('data/events', {title: "Events", elements: elems})
         }
         catch (e) {
             console.log(e)

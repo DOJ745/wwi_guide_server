@@ -5,6 +5,7 @@ const ModelsElements = require("../../models/models_elements")
 const CRUD_OPERATIONS = require('../../config/crud_operations')
 const IDataController = require("../interfaces/DataControllerInterface");
 const {validationResult} = require("express-validator");
+const Armament = require("../../models/Armament");
 
 class RankController extends IDataController {
     constructor() { super(); }
@@ -12,9 +13,7 @@ class RankController extends IDataController {
     async addElem(req, res) {
         try {
             const errors = validationResult(req)
-            if (!errors.isEmpty()) {
-                return ErrorResponses.modelValidationError(res, ModelsElements.RANK, errors)
-            }
+            if (!errors.isEmpty()) {return ErrorResponses.modelValidationError(res, ModelsElements.RANK, errors)}
 
             const {name, points, img, countryId} = req.body
 
@@ -62,7 +61,8 @@ class RankController extends IDataController {
     async getElems(req, res) {
         try {
             const elems = await Rank.find()
-            res.json(elems)
+            if(req.baseUrl === '/api.wwi-guide.by') return res.json(elems)
+            else res.render('data/ranks', {title: "Ranks", elements: elems})
         }
         catch (e) {
             console.log(e)
