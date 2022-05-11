@@ -39,7 +39,7 @@ router.delete('/countries', roleMiddleware(['ADMIN']), countryController.deleteE
 // ----- USERS -----
 router.get('/users', roleMiddleware(['ADMIN']), userController.getElems)
 router.post('/users', roleMiddleware(['ADMIN']), userController.addElem)
-router.put('/users', roleMiddleware(['ADMIN']), userController.updateElem)
+router.put('/users', roleMiddleware(['ADMIN', 'USER']), userController.updateElem)
 router.delete('/users', roleMiddleware(['ADMIN']), userController.deleteElem)
 
 // ----- EVENTS -----

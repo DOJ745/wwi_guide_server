@@ -4,7 +4,7 @@ const ModelsElements = require("../../models/models_elements")
 const CRUD_OPERATIONS = require('../../config/crud_operations')
 const IDataController = require("../interfaces/DataControllerInterface");
 const {validationResult} = require("express-validator");
-const Armament = require("../../models/Armament");
+const SuccessResponses = require("../../responses/SuccessResponses");
 
 class UserController extends IDataController {
     constructor() { super(); }
@@ -28,9 +28,27 @@ class UserController extends IDataController {
             if (!errors.isEmpty()) {
                 return ErrorResponses.modelValidationError(res, ModelsElements.USER, errors)
             }
+
+            const {login, rankId, achievements, score} = req.body
+            User.findOneAndUpdate(login,
+                {
+                    rankId: rankId,
+                    achievements: achievements,
+                    score: score
+                },
+                {new: true},
+                function(err, result) {
+                    if(err)
+                        return ErrorResponses.crudOperationError(res, ModelsElements.USER, CRUD_OPERATIONS.UPDATING, err)
+                    else
+                        return SuccessResponses.successElemOperation(res, ModelsElements.USER, CRUD_OPERATIONS.UPDATED, result)
+                }
+            )
+
         }
         catch (e){
-
+            console.log(e)
+            ErrorResponses.crudOperationError(res, ModelsElements.USER, CRUD_OPERATIONS.UPDATING, e)
         }
     }
 
