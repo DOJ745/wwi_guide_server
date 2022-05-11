@@ -1,6 +1,7 @@
 const Router = require('express')
 const router = new Router()
 
+const logController = require('../controllers/data/LogController')
 const yearController = require('../controllers/data/YearController')
 const countryController = require('../controllers/data/CountryController')
 const rankController = require('../controllers/data/RankController')
@@ -93,7 +94,8 @@ router.delete('/tests-answers', roleMiddleware(['ADMIN']), testAnswerController.
 // ----- LOGS -----
 /*
 router.get()
-router.post()
 router.delete()*/
+
+router.post('/logs', roleMiddleware(['USER']), logController.addElem)
 
 module.exports = router

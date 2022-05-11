@@ -4,6 +4,8 @@ const ErrorResponses = require("../../responses/ErrorResponses")
 const CRUD_OPERATIONS = require('../../config/crud_operations')
 const IDataController = require("../interfaces/DataControllerInterface");
 const {validationResult} = require("express-validator");
+const Country = require("../../models/Country");
+const SuccessResponses = require("../../responses/SuccessResponses");
 
 class LogModelController extends IDataController {
     constructor() { super(); }
@@ -14,6 +16,13 @@ class LogModelController extends IDataController {
             if (!errors.isEmpty()) {
                 return ErrorResponses.modelValidationError(res, ModelsElements.LOG_MODEL, errors)
             }
+
+            const {actionName, actionResult, timestamp} = req.body
+
+            const newElem = new LogModel({actionName: actionName, actionResult: actionResult, timestamp: timestamp})
+            await newElem.save()
+
+            return SuccessResponses.successElemOperation(res, ModelsElements.LOG_MODEL, CRUD_OPERATIONS.ADDED, null)
         }
         catch (e) {
             console.log(e)
