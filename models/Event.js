@@ -23,6 +23,12 @@ const Event = new mongoose.Schema({
         type: String,
         ref: 'Year',
         required: true
+    },
+
+    achievementId: {
+        type: String,
+        ref: 'Achievement',
+        required: true
     }
 })
 

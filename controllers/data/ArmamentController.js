@@ -4,7 +4,7 @@ const ModelsElements = require("../../models/models_elements")
 const CRUD_OPERATIONS = require('../../config/crud_operations')
 const IDataController = require("../interfaces/DataControllerInterface");
 const {validationResult} = require("express-validator");
-const Achievement = require("../../models/Achievement");
+const SuccessResponses = require("../../responses/SuccessResponses");
 
 class ArmamentController extends IDataController {
     constructor() { super(); }
@@ -15,6 +15,14 @@ class ArmamentController extends IDataController {
             if (!errors.isEmpty()) {
                 return ErrorResponses.modelValidationError(res, ModelsElements.ARMAMENT, errors)
             }
+            const {title, text, images, category} = req.body
+            const candidate = await Armament.findOne({title})
+            if (candidate) { return ErrorResponses.elementExists(res, ModelsElements.ARMAMENT) }
+
+            const newElem = new Armament({title: title, text: text, images: images, category: category})
+            await newElem.save()
+
+            return SuccessResponses.successElemOperation(res, ModelsElements.ARMAMENT, CRUD_OPERATIONS.ADDED)
         }
         catch (e) {
             console.log(e)

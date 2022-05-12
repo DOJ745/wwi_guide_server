@@ -45,7 +45,8 @@ router.delete('/users', roleMiddleware(['ADMIN']), userController.deleteElem)
 
 // ----- EVENTS -----
 router.get('/events', eventController.getElems)
-router.post('/events', roleMiddleware(['ADMIN']), eventController.addElem)
+//router.post('/events', roleMiddleware(['ADMIN']), eventController.addElem)
+router.post('/events', eventController.addElem)
 router.put('/events', roleMiddleware(['ADMIN']), eventController.updateElem)
 router.delete('/events', roleMiddleware(['ADMIN']), eventController.deleteElem)
 

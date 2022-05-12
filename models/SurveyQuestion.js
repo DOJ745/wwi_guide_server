@@ -22,13 +22,7 @@ const SurveyQuestion = new mongoose.Schema({
         type: String,
         ref: 'Armament',
         default: null
-    }],
-
-    achievementId: {
-        type: String,
-        ref: 'Achievement',
-        required: true
-    }
+    }]
 })
 
 module.exports = mongoose.model('SurveyQuestion', SurveyQuestion)

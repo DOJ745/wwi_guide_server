@@ -24,6 +24,12 @@ const Armament = new mongoose.Schema({
         required: true,
         enum : ['weapon','technique'],
         default: 'weapon'
+    },
+
+    achievementId: {
+        type: String,
+        ref: 'Achievement',
+        required: true
     }
 })
 module.exports = mongoose.model('Armament', Armament)

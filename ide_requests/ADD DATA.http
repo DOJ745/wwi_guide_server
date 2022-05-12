@@ -46,3 +46,18 @@ Content-Type: application/json
   "points": 20,
   "testQuestionId": "627a7cbdd4c5b1d12abf309d"
 }
+
+### Event
+POST {{localhost}}/events
+Content-Type: application/json
+
+{
+  "title": "Начало войны",
+  "text": "<h5>Началось всё в 1914 году</h5>*img-Подпись под картинкой*<h3>Потом что-то ещё случилось</h3>*img-Подпись под картинкой*<p><b>Жирный текст</b> <i>курсивный текст</i> <u>подчеркнутый текст</u></p>",
+  "images": [
+    "https://dic.academic.ru/pictures/wiki/files/102/franz_ferdinand.jpg",
+    "https://dic.academic.ru/pictures/wiki/files/102/franz_ferdinand.jpg",
+    "https://dic.academic.ru/pictures/wiki/files/102/franz_ferdinand.jpg"
+  ],
+  "yearId": "61ebe62d36a81045af82dcca"
+}
