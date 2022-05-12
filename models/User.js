@@ -27,13 +27,6 @@ const User = new mongoose.Schema({
         required: true
     },
 
-    rankId: {
-        type: String,
-        ref: 'Rank',
-        required: true,
-        default: '62388a35efcd519f16afdb7e' // Рядовой (Российская империя)
-    },
-
     achievements: [{
         type: String,
         ref: 'Achievement'

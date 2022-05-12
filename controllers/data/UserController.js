@@ -29,10 +29,9 @@ class UserController extends IDataController {
                 return ErrorResponses.modelValidationError(res, ModelsElements.USER, errors)
             }
 
-            const {login, rankId, achievements, score} = req.body
+            const {login, achievements, score} = req.body
             User.findOneAndUpdate(login,
                 {
-                    rankId: rankId,
                     achievements: achievements,
                     score: score
                 },
