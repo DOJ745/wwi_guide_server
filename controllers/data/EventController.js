@@ -6,7 +6,7 @@ const ModelsElements = require("../../models/models_elements")
 const CRUD_OPERATIONS = require('../../config/crud_operations')
 const IDataController = require("../interfaces/DataControllerInterface");
 const {validationResult} = require("express-validator");
-const Armament = require("../../models/Armament");
+const Achievement = require("../../models/Achievement");
 
 class EventController extends IDataController {
     constructor() { super(); }
@@ -18,14 +18,22 @@ class EventController extends IDataController {
                 return ErrorResponses.modelValidationError(res, ModelsElements.EVENT, errors)
             }
 
-            const {title, text, images, yearId} = req.body
+            const {title, text_paragraphs, images, images_titles, yearId, achievementId} = req.body
             const candidate = await Event.findOne({title})
             const idCandidate = await Year.findOne({yearId})
+            const secondIdCandidate = await Achievement.findOne({achievementId})
 
             if (candidate) { return ErrorResponses.elementExists(res, ModelsElements.EVENT) }
             if (idCandidate === null) { return ErrorResponses.noSuchElement(res, ModelsElements.YEAR) }
+            if (secondIdCandidate === null ) { return ErrorResponses.noSuchElement(res, ModelsElements.ACHIEVEMENT) }
 
-            const newElem = new Event({title: title, text: text, images: images, yearId: yearId})
+            const newElem = new Event({
+                title: title,
+                text_paragraphs: text_paragraphs,
+                yearId: yearId,
+                images: images,
+                images_titles: images_titles,
+                achievementId: achievementId})
             await newElem.save()
 
             return SuccessResponses.successElemOperation(res, ModelsElements.EVENT, CRUD_OPERATIONS.ADDED)

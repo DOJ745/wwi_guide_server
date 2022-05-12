@@ -8,15 +8,22 @@ const Armament = new mongoose.Schema({
         minLength: 3
     },
 
-    text: {
+    text_paragraphs: [{
         type: String,
         required: true,
-        default: "Something about weapon or technique"
-    },
+        default: ["<p>some text</p>", "<p>some text</p>"]
+    }],
 
     images: [{
         type: String,
-        default: "https://pixy.org/images/placeholder.png"
+        required: true,
+        default: ["link", "link"]
+    }],
+
+    images_titles: [{
+        type: String,
+        required: true,
+        default: ["title", "title"]
     }],
 
     category:  {
