@@ -48,8 +48,12 @@ $(document).ready(function() {
             elem = $(".nav-link").eq(8)
             setLinkActive(elem)
             break
-        case '/tests-themes':
+        case '/surveys':
             elem = $(".nav-link").eq(9)
+            setLinkActive(elem)
+            break
+        case '/tests-themes':
+            elem = $(".nav-link").eq(10)
             setLinkActive(elem)
             break
         case '/tests-questions':
@@ -58,14 +62,6 @@ $(document).ready(function() {
             break
         case '/tests-answers':
             elem = $(".nav-link.dropdown-toggle").eq(0)
-            setDropdownActive(elem)
-            break
-        case '/surveys-questions':
-            elem = $(".nav-link.dropdown-toggle").eq(1)
-            setDropdownActive(elem)
-            break
-        case '/surveys-answers':
-            elem = $(".nav-link.dropdown-toggle").eq(1)
             setDropdownActive(elem)
             break
         default:

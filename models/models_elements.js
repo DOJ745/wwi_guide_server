@@ -10,7 +10,6 @@ module.exports = {
     TEST_ANSWER: "test answer",
     TEST_THEME: "test theme",
     LOG_MODEL: "log model",
-    SURVEY_QUESTION: "survey question",
-    SURVEY_ANSWER: "survey answer",
+    SURVEY: "survey",
     ARMAMENT: "armament"
 }

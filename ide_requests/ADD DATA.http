@@ -69,5 +69,20 @@ Content-Type: application/json
     "подпись под третьей картинкой"
   ],
   "yearId": "61ebe62d36a81045af82dcca",
-  "achievementId": "6276951678d62971b8d5b61d"
+  "achievementId": "6276951678d62971b8d5b61d",
+  "surveyId": "627e20e3c7e7a55013c5dc51"
+}
+
+### Survey
+POST {{localhost}}/surveys
+Content-Type: application/json
+
+{
+
+  "question_text": "Понравилась ли вам данная статья?",
+  "points": 5,
+  "answer_variants": [
+    "Да",
+    "Нет"
+  ]
 }

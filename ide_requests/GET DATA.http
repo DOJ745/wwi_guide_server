@@ -12,3 +12,6 @@ GET {{localhost}}/test
 
 ### Get Achievements
 GET {{localhost}}/achievements
+
+### Get Surveys
+GET {{localhost}}/surveys

@@ -8,8 +8,7 @@ const rankController = require('../controllers/data/RankController')
 const userController = require('../controllers/data/UserController')
 const achievementController = require('../controllers/data/AchievementController')
 const eventController = require('../controllers/data/EventController')
-const surveyQuestionController = require('../controllers/data/SurveyQuestionController')
-const surveyAnswerController = require('../controllers/data/SurveyAnswerController')
+const surveyController = require('../controllers/data/SurveyController')
 const testThemeController = require('../controllers/data/TestThemeController')
 const testQuestionController = require('../controllers/data/TestQuestionController')
 const testAnswerController = require('../controllers/data/TestAnswerController')
@@ -59,17 +58,12 @@ router.put('/achievements', achievementController.updateElem)
 //router.delete('/achievements', roleMiddleware(['ADMIN']), achievementController.deleteElem)
 router.delete('/achievements', achievementController.deleteElem)
 
-// ----- SURVEYS ANSWERS -----
-router.get('/surveys-answers', surveyAnswerController.getElems)
-router.post('/surveys-answers', roleMiddleware(['ADMIN']), surveyAnswerController.addElem)
-router.put('/surveys-answers', roleMiddleware(['ADMIN']), surveyAnswerController.updateElem)
-router.delete('/surveys-answers', roleMiddleware(['ADMIN']), surveyAnswerController.deleteElem)
-
-// ----- SURVEYS QUESTIONS -----
-router.get('/surveys-questions', surveyQuestionController.getElems)
-router.post('/surveys-questions', roleMiddleware(['ADMIN']), surveyQuestionController.addElem)
-router.put('/surveys-questions', roleMiddleware(['ADMIN']), surveyQuestionController.updateElem)
-router.delete('/surveys-questions', roleMiddleware(['ADMIN']), surveyQuestionController.deleteElem)
+// ----- SURVEYS -----
+router.get('/surveys', surveyController.getElems)
+//router.post('/surveys-answers', roleMiddleware(['ADMIN']), surveyController.addElem)
+router.post('/surveys', surveyController.addElem)
+router.put('/surveys', roleMiddleware(['ADMIN']), surveyController.updateElem)
+router.delete('/surveys', roleMiddleware(['ADMIN']), surveyController.deleteElem)
 
 // ----- TESTS THEMES -----
 router.get('/tests-themes', testThemeController.getElems)

@@ -57,12 +57,8 @@ router.get("/tests-questions", (req, res) => {
     res.render('data/tests/tests-questions', {title: "Tests questions"})
 })
 
-router.get("/surveys-answers", (req, res) => {
-    res.render('data/surveys/surveys-answers', {title: "Surveys answers"})
-})
-
-router.get("/surveys-questions", (req, res) => {
-    res.render('data/surveys/surveys-questions', {title: "Surveys questions"})
+router.get("/surveys", (req, res) => {
+    res.render('data/surveys', {title: "Surveys"})
 })
 
 router.get("/logs", (req, res) => {

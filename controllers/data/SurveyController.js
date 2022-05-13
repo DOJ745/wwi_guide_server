@@ -1,25 +1,35 @@
-const SurveyQuestion = require('../../models/SurveyQuestion')
-const SurveyAnswer = require('../../models/SurveyAnswer')
+const Survey = require('../../models/Survey')
 const ErrorResponses = require("../../responses/ErrorResponses")
 const ModelsElements = require("../../models/models_elements")
 const CRUD_OPERATIONS = require('../../config/crud_operations')
 const IDataController = require("../interfaces/DataControllerInterface");
 const {validationResult} = require("express-validator");
-const Armament = require("../../models/Armament");
+const SuccessResponses = require("../../responses/SuccessResponses");
 
-class SurveyAnswerController extends IDataController {
+class SurveyController extends IDataController {
     constructor() { super(); }
 
     async addElem(req, res) {
         try {
             const errors = validationResult(req)
             if (!errors.isEmpty()) {
-                return ErrorResponses.modelValidationError(res, ModelsElements.SURVEY_ANSWER, errors)
+                return ErrorResponses.modelValidationError(res, ModelsElements.SURVEY, errors)
             }
+
+            const {question_text, img, points, answer_variants} = req.body
+
+            const newElem = new Survey({
+                question_text: question_text,
+                img: img,
+                points: points,
+                answer_variants: answer_variants  })
+            await newElem.save()
+
+            return SuccessResponses.successElemOperation(res, ModelsElements.SURVEY, CRUD_OPERATIONS.ADDED)
         }
         catch (e) {
             console.log(e)
-            ErrorResponses.crudOperationError(res, ModelsElements.SURVEY_ANSWER, CRUD_OPERATIONS.ADDING,  e)
+            ErrorResponses.crudOperationError(res, ModelsElements.SURVEY, CRUD_OPERATIONS.ADDING,  e)
         }
     }
 
@@ -27,7 +37,7 @@ class SurveyAnswerController extends IDataController {
         try {
             const errors = validationResult(req)
             if (!errors.isEmpty()) {
-                return ErrorResponses.modelValidationError(res, ModelsElements.SURVEY_ANSWER, errors)
+                return ErrorResponses.modelValidationError(res, ModelsElements.SURVEY, errors)
             }
         }
         catch (e){
@@ -39,7 +49,7 @@ class SurveyAnswerController extends IDataController {
         try {
             const errors = validationResult(req)
             if (!errors.isEmpty()) {
-                return ErrorResponses.modelValidationError(res, ModelsElements.SURVEY_ANSWER, errors)
+                return ErrorResponses.modelValidationError(res, ModelsElements.SURVEY, errors)
             }
         }
         catch (e){
@@ -49,9 +59,9 @@ class SurveyAnswerController extends IDataController {
 
     async getElems(req, res) {
         try {
-            const elems = await SurveyAnswer.find()
+            const elems = await Survey.find()
             if(req.baseUrl === '/api.wwi-guide.by') return res.json(elems)
-            else res.render('data/surveys/surveys-answers', {title: "Surveys answers", elements: elems})
+            else res.render('data/survey', {title: "Surveys", elements: elems})
         }
         catch (e) {
             console.log(e)
@@ -59,4 +69,4 @@ class SurveyAnswerController extends IDataController {
         }
     }
 }
-module.exports = new SurveyAnswerController()
+module.exports = new SurveyController()

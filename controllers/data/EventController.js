@@ -1,5 +1,6 @@
 const Event = require('../../models/Event')
 const Year = require('../../models/Year')
+const Survey = require('../../models/Survey')
 const ErrorResponses = require("../../responses/ErrorResponses")
 const SuccessResponses = require("../../responses/SuccessResponses")
 const ModelsElements = require("../../models/models_elements")
@@ -18,14 +19,16 @@ class EventController extends IDataController {
                 return ErrorResponses.modelValidationError(res, ModelsElements.EVENT, errors)
             }
 
-            const {title, text_paragraphs, images, images_titles, yearId, achievementId} = req.body
+            const {title, text_paragraphs, images, images_titles, yearId, achievementId, surveyId} = req.body
             const candidate = await Event.findOne({title})
             const idCandidate = await Year.findOne({yearId})
             const secondIdCandidate = await Achievement.findOne({achievementId})
+            const thirdIdCandidate = await Survey.findOne({surveyId})
 
             if (candidate) { return ErrorResponses.elementExists(res, ModelsElements.EVENT) }
             if (idCandidate === null) { return ErrorResponses.noSuchElement(res, ModelsElements.YEAR) }
             if (secondIdCandidate === null ) { return ErrorResponses.noSuchElement(res, ModelsElements.ACHIEVEMENT) }
+            if (thirdIdCandidate === null ) { return ErrorResponses.noSuchElement(res, ModelsElements.SURVEY) }
 
             const newElem = new Event({
                 title: title,
@@ -33,7 +36,9 @@ class EventController extends IDataController {
                 yearId: yearId,
                 images: images,
                 images_titles: images_titles,
-                achievementId: achievementId})
+                achievementId: achievementId,
+                surveyId: surveyId
+            })
             await newElem.save()
 
             return SuccessResponses.successElemOperation(res, ModelsElements.EVENT, CRUD_OPERATIONS.ADDED)

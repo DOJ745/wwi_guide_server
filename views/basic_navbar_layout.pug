@@ -34,6 +34,8 @@ block content
                     li.nav-item
                         a.nav-link(href='/logs') Logs
                     li.nav-item
+                        a.nav-link(href='/surveys') Surveys
+                    li.nav-item
                         a.nav-link(href='/tests-themes') Tests themes
 
                     li.nav-item.dropdown
@@ -48,16 +50,3 @@ block content
                                 a.dropdown-item(href='/tests-questions') Questions
                             li
                                 a.dropdown-item(href='/tests-answers') Answers
-
-                    li.nav-item.dropdown
-                        a#navbarSurveysMenu.nav-link.dropdown-toggle(
-                            href='/surveys',
-                            role='button',
-                            data-bs-toggle='dropdown',
-                            aria-expanded='false')
-                            | Surveys
-                        ul.dropdown-menu(aria-labelledby='navbarTestsMenu')
-                            li
-                                a.dropdown-item(href='/surveys-questions') Questions
-                            li
-                                a.dropdown-item(href='/surveys-answers') Answers

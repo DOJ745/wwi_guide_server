@@ -37,6 +37,12 @@ const Armament = new mongoose.Schema({
         type: String,
         ref: 'Achievement',
         required: true
+    },
+
+    surveyId: {
+        type: String,
+        ref: 'Survey',
+        required: true
     }
 })
 module.exports = mongoose.model('Armament', Armament)

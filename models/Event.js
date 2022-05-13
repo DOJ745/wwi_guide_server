@@ -36,6 +36,12 @@ const Event = new mongoose.Schema({
         type: String,
         ref: 'Achievement',
         required: true
+    },
+
+    surveyId: {
+        type: String,
+        ref: 'Survey',
+        required: true
     }
 })
 
