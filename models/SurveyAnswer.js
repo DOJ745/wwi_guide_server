@@ -8,14 +8,6 @@ const SurveyAnswer = new mongoose.Schema({
         default: 'Type answer here'
     },
 
-    points: {
-        type: Number,
-        required: true,
-        default: 10,
-        min: 10,
-        max: 100
-    },
-
     surveyQuestionId: {
         type: String,
         required: true,
