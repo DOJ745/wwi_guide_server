@@ -8,6 +8,7 @@ const rankController = require('../controllers/data/RankController')
 const userController = require('../controllers/data/UserController')
 const achievementController = require('../controllers/data/AchievementController')
 const eventController = require('../controllers/data/EventController')
+const armamentController = require('../controllers/data/ArmamentController')
 const surveyController = require('../controllers/data/SurveyController')
 const testThemeController = require('../controllers/data/TestThemeController')
 const testQuestionController = require('../controllers/data/TestQuestionController')
@@ -48,6 +49,13 @@ router.get('/events', eventController.getElems)
 router.post('/events', eventController.addElem)
 router.put('/events', roleMiddleware(['ADMIN']), eventController.updateElem)
 router.delete('/events', roleMiddleware(['ADMIN']), eventController.deleteElem)
+
+// ----- ARMAMENT -----
+router.get('/armament', armamentController.getElems)
+//router.post('/armaments', roleMiddleware(['ADMIN']), armamentController.addElem)
+router.post('/armament', armamentController.addElem)
+router.put('/armament', roleMiddleware(['ADMIN']), armamentController.updateElem)
+router.delete('/armament', roleMiddleware(['ADMIN']), armamentController.deleteElem)
 
 // ----- ACHIEVEMENTS -----
 router.get('/achievements', achievementController.getElems)

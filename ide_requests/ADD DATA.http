@@ -73,6 +73,33 @@ Content-Type: application/json
   "surveyId": "627e20e3c7e7a55013c5dc51"
 }
 
+### Armament
+POST {{localhost}}/armament
+Content-Type: application/json
+
+{
+  "title": "Техника",
+  "text_paragraphs": [
+    "{{loren-ipsum-paragparh-html}}",
+    "{{loren-ipsum-paragparh-html}}",
+    "{{loren-ipsum-paragparh-html}}"
+  ],
+  "images": [
+  "https://dic.academic.ru/pictures/wiki/files/102/franz_ferdinand.jpg",
+  "https://dic.academic.ru/pictures/wiki/files/102/franz_ferdinand.jpg",
+  "https://dic.academic.ru/pictures/wiki/files/102/franz_ferdinand.jpg"
+  ],
+  "images_titles": [
+    "Подпись под первой картинкой",
+    "подпись под второй картинкой",
+    "подпись под третьей картинкой"
+  ],
+  "yearId": "61ebe62d36a81045af82dcca",
+  "achievementId": "6276951678d62971b8d5b61d",
+  "surveyId": "627e20e3c7e7a55013c5dc51",
+  "category": "technique"
+}
+
 ### Survey
 POST {{localhost}}/surveys
 Content-Type: application/json

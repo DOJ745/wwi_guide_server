@@ -29,8 +29,8 @@ const Armament = new mongoose.Schema({
     category:  {
         type: String,
         required: true,
-        enum : ['weapon','technique'],
-        default: 'weapon'
+        enum : ["weapon", "technique"],
+        default: "weapon"
     },
 
     achievementId: {

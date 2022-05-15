@@ -4,6 +4,13 @@ module.exports = {
 
     /**
      * @param res response object
+     * @returns {json}
+     * Status code: 400
+     * message: For armament there is only 2 categories: weapon and technique!
+     */
+    noCategory: function (res) { return res.status(CODES.BAD_REQUEST).json({message: `For armament there is only 2 categories: weapon and technique!`}) },
+    /**
+     * @param res response object
      * @param elementName string
      * @returns {json}
      * Status code: 400
