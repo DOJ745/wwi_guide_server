@@ -1,14 +1,35 @@
 const CODES = require('../config/status_codes')
+const ModelsElements = require("../models/models_elements")
 
 module.exports = {
 
-    /**
-     * @param res response object
-     * @returns {json}
-     * Status code: 400
-     * message: For armament there is only 2 categories: weapon and technique!
-     */
-    noCategory: function (res) { return res.status(CODES.BAD_REQUEST).json({message: `For armament there is only 2 categories: weapon and technique!`}) },
+    foreignKeyConstraint: function (res, elementName) {
+        let childTables
+        switch (elementName)
+        {
+            case ModelsElements.ACHIEVEMENT:
+                childTables = "Armament, Event, TestTheme, Users"
+                break;
+            case ModelsElements.SURVEY:
+                childTables = "Armament, Event"
+                break;
+            case ModelsElements.TEST_THEME:
+                childTables = "Test question"
+                break;
+            case ModelsElements.TEST_QUESTION:
+                childTables = "Test answers"
+                break;
+            case ModelsElements.YEAR:
+                childTables = "Event"
+                break;
+            case ModelsElements.COUNTRY:
+                childTables = "User, Ranks"
+                break;
+            default:
+                break;
+        }
+        return res.status(CODES.BAD_REQUEST).json({message: `For ${elementName} you need to remove this value from all child tables! Child tables for current parent table: ${childTables}`})
+    },
     /**
      * @param res response object
      * @param elementName string

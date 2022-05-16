@@ -1,35 +1,26 @@
 $(document).ready(function() {
-    const form = $("#itemForm")
-    const resMsg = $("#resMsg")
-    const nameField = $("#nameField")
-    const descriptionField = $("#descriptionField")
-    const pointsField = $("#pointsField")
-    const imgField = $("#imgField")
+    const form = $("#itemDeleteForm")
+    const resMsg = $("#resDelMsg")
+    const elementId = $("#elementId")
     let itemId
 
-    const updateModal = document.getElementById('updateModal');
-    updateModal.addEventListener('show.bs.modal', function (event) {
+    const deleteModal = document.getElementById('deleteModal');
+    deleteModal.addEventListener('show.bs.modal', function (event) {
         const button = event.relatedTarget;
         itemId = button.getAttribute('data-bs-whatever');
-
-        nameField.val($('#cardName' + itemId).html())
+        elementId.html("ID: " + itemId)
+        /*nameField.val($('#cardName' + itemId).html())
         descriptionField.val($('#cardDescription' + itemId).html())
         pointsField.val($('#cardPoints' + itemId).html().replace('Points: ', ''))
-        imgField.val($('#cardImg' + itemId).attr('src'))
+        imgField.val($('#cardImg' + itemId).attr('src'))*/
     })
 
-    updateModal.addEventListener('hide.bs.modal', function (event) {
+    deleteModal.addEventListener('hide.bs.modal', function (event) {
         resMsg.attr('hidden', '')
     })
 
-    let updateAchievement = function (event) {
-        let formData = {
-            "name": nameField.val(),
-            "description": descriptionField.val(),
-            "points": pointsField.val(),
-            "img": imgField.val(),
-            'id': itemId
-        }
+    let deleteAchievement = function (event) {
+        let formData =  { 'id': itemId }
 
         $.ajax({
             url: form.attr('action'),
@@ -44,10 +35,11 @@ $(document).ready(function() {
                 resMsg.html(res.message)
                 resMsg.removeAttr('hidden')
 
-                $('#cardName' + itemId).html(res.operationResult.name)
+                ('#cardElem' + itemId).remove()
+                /*$('#cardName' + itemId).html(res.operationResult.name)
                 $('#cardDescription' + itemId).html(res.operationResult.description)
                 $('#cardPoints' + itemId).html(`Points: ${res.operationResult.points}`)
-                $('#cardImg' + itemId).attr('src', res.operationResult.img)
+                $('#cardImg' + itemId).attr('src', res.operationResult.img)*/
             })
             .fail((jqXHR) => {
                 let errorData = $.parseJSON(jqXHR.responseText)
@@ -59,5 +51,5 @@ $(document).ready(function() {
         event.preventDefault()
     }
 
-    form[0].addEventListener("submit", updateAchievement, true)
+    form[0].addEventListener("submit", deleteAchievement, true)
 })

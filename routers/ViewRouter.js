@@ -20,9 +20,7 @@ router.get("/home", (req, res) => {
     res.render('home', {title: "Home"})
 })
 
-/*router.get("/achievements", (req, res) => {
-    res.render('data/achievements', {title: "Achievements", elements: AchievementController.getElems(req, res)})
-})*/
+
 router.get("/achievements", AchievementController.getElems)
 
 router.get("/armament", (req, res) => {

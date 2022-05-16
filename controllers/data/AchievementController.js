@@ -4,6 +4,10 @@ const ModelsElements = require("../../models/models_elements")
 const IDataController = require("../interfaces/DataControllerInterface");
 const SuccessResponses = require("../../responses/SuccessResponses");
 const CRUD_OPERATIONS = require("../../config/crud_operations");
+const Armament = require('../../models/Armament')
+const Event = require('../../models/Event')
+const TestTheme = require('../../models/TestTheme')
+const User = require('../../models/User')
 const {validationResult} = require("express-validator");
 
 class AchievementController extends IDataController {
@@ -39,7 +43,7 @@ class AchievementController extends IDataController {
                 return ErrorResponses.modelValidationError(res, ModelsElements.ACHIEVEMENT, errors)
             }
             const {name, description, points, img, id} = req.body
-            Achievement.findByIdAndUpdate(id,
+            await Achievement.findByIdAndUpdate(id,
                 {
                     name: name,
                     description: description,
@@ -67,11 +71,37 @@ class AchievementController extends IDataController {
             if (!errors.isEmpty()) {
                 return ErrorResponses.modelValidationError(res, ModelsElements.ACHIEVEMENT, errors)
             }
-            const id = req.body
-            Achievement.findByIdAndDelete(id)
-        }
-        catch (e){
+            //let isFound = false
+            const {id} = req.body
 
+            const foreignUsers = await User.find({achievements: { $in: [id]} })
+            if(foreignUsers.length > 0) {
+                return ErrorResponses.foreignKeyConstraint(res, ModelsElements.ACHIEVEMENT)
+            }
+            const foreignArmaments = await Armament.find({achievementId: id})
+            if(foreignArmaments.length > 0) {
+                return ErrorResponses.foreignKeyConstraint(res, ModelsElements.ACHIEVEMENT)
+            }
+            const foreignEvents = await Armament.find({achievementId: id})
+            if(foreignEvents.length > 0) {
+                return ErrorResponses.foreignKeyConstraint(res, ModelsElements.ACHIEVEMENT)
+            }
+            const foreignTestThemes = await TestTheme.find({achievementId: id})
+            if(foreignTestThemes.length > 0) {
+                return ErrorResponses.foreignKeyConstraint(res, ModelsElements.ACHIEVEMENT)
+            }
+
+
+            const deletedAchievement = await Achievement.findByIdAndDelete(id)
+            if(deletedAchievement)
+                return SuccessResponses.successElemOperation(res, ModelsElements.ACHIEVEMENT, CRUD_OPERATIONS.DELETED, null)
+            else
+                return ErrorResponses.crudOperationError(res, ModelsElements.ACHIEVEMENT, CRUD_OPERATIONS.DELETING, err)
+
+        }
+        catch (e) {
+            console.log(e)
+            return ErrorResponses.crudOperationError(res, ModelsElements.ACHIEVEMENT, CRUD_OPERATIONS.DELETING, e)
         }
     }
 

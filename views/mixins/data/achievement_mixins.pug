@@ -1,5 +1,5 @@
 mixin achievementCard(name, description, points, img, id)
-    .card.border-dark.mb-3(style='max-width: 540px;')
+    .card.border-dark.mb-3(style='max-width: 540px;' id='cardElem' + id)
         .row.g-0
             .col-md-4
                 img.img-fluid.rounded-start-(id='cardImg' + id, src=img, alt='IMG')
