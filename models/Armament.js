@@ -33,6 +33,13 @@ const Armament = new mongoose.Schema({
         default: "weapon"
     },
 
+    subcategory: {
+        type: String,
+        required: true,
+        enum : ["ground", "aviation", "navy"],
+        default: null
+    },
+
     achievementId: {
         type: String,
         ref: 'Achievement',

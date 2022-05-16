@@ -18,7 +18,16 @@ class ArmamentController extends IDataController {
                 return ErrorResponses.modelValidationError(res, ModelsElements.ARMAMENT, errors)
             }
 
-            const {title, text_paragraphs, images, images_titles, achievementId, surveyId, category} = req.body
+            const {
+                title,
+                text_paragraphs,
+                images,
+                images_titles,
+                achievementId,
+                surveyId,
+                category,
+                subcategory
+            } = req.body
             const candidate = await Armament.findOne({title})
             const idCandidate = await Achievement.findOne({achievementId})
             const secondIdCandidate = await Survey.findOne({surveyId})
@@ -26,15 +35,12 @@ class ArmamentController extends IDataController {
             if (candidate) { return ErrorResponses.elementExists(res, ModelsElements.EVENT) }
             if (idCandidate === null) { return ErrorResponses.noSuchElement(res, ModelsElements.ACHIEVEMENT) }
             if (secondIdCandidate === null ) { return ErrorResponses.noSuchElement(res, ModelsElements.SURVEY) }
-            /*if (category.localeCompare("weapon") > 0  ||
-                category.localeCompare("weapon") < 0 ||
-                category.localeCompare("technique") > 0 ||
-                category.localeCompare("technique") < 0) { return ErrorResponses.noCategory(res) }*/
 
             const newElem = new Armament({
                 title: title,
                 text_paragraphs: text_paragraphs,
                 category: category,
+                subcategory: subcategory,
                 images: images,
                 images_titles: images_titles,
                 achievementId: achievementId,

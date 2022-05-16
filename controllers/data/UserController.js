@@ -30,7 +30,7 @@ class UserController extends IDataController {
             }
 
             const {login, achievements, score} = req.body
-            User.findOneAndUpdate(login,
+            User.findOneAndUpdate({login: login},
                 {
                     achievements: achievements,
                     score: score
