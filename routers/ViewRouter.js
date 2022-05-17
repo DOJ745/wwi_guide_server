@@ -2,6 +2,17 @@ const Router = require('express')
 const router = new Router()
 const roleMiddleware = require('../middleware/RoleMiddleware')
 const AchievementController = require('../controllers/data/AchievementController')
+const TestThemeController = require('../controllers/data/TestThemeController')
+const CountryController = require('../controllers/data/CountryController')
+const RankController = require('../controllers/data/RankController')
+const YearController = require('../controllers/data/YearController')
+const LogController = require('../controllers/data/LogController')
+const TestQuestionController = require('../controllers/data/TestQuestionController')
+const TestAnswerController = require('../controllers/data/TestAnswerController')
+const SurveyController = require('../controllers/data/SurveyController')
+const UserController = require('../controllers/data/UserController')
+const ArmamentController = require('../controllers/data/ArmamentController')
+const EventController = require('../controllers/data/EventController')
 
 router.get("test-page",
     (req, res) => {
@@ -20,51 +31,17 @@ router.get("/home", (req, res) => {
     res.render('home', {title: "Home"})
 })
 
-
 router.get("/achievements", AchievementController.getElems)
-
-router.get("/armament", (req, res) => {
-    res.render('data/armament', {title: "Armament"})
-})
-
-router.get("/years", (req, res) => {
-    res.render('data/years', {title: "Years"})
-})
-
-router.get("/events", (req, res) => {
-    res.render('data/events', {title: "Events"})
-})
-
-router.get("/ranks", (req, res) => {
-    res.render('data/ranks', {title: "Ranks"})
-})
-
-router.get("/countries", (req, res) => {
-    res.render('data/countries', {title: "Countries"})
-})
-
-router.get("/tests-themes", (req, res) => {
-    res.render('data/tests/tests-themes', {title: "Tests themes"})
-})
-
-router.get("/tests-answers", (req, res) => {
-    res.render('data/tests/tests-answers', {title: "Tests answers"})
-})
-
-router.get("/tests-questions", (req, res) => {
-    res.render('data/tests/tests-questions', {title: "Tests questions"})
-})
-
-router.get("/surveys", (req, res) => {
-    res.render('data/surveys', {title: "Surveys"})
-})
-
-router.get("/logs", (req, res) => {
-    res.render('data/logs', {title: "Logs"})
-})
-
-router.get("/users", (req, res) => {
-    res.render('data/users', {title: "Users"})
-})
+router.get("/armament", ArmamentController.getElems)
+router.get("/years", YearController.getElems)
+router.get("/events", EventController.getElems)
+router.get("/ranks", RankController.getElems)
+router.get("/countries", CountryController.getElems)
+router.get("/tests-themes", TestThemeController.getElems)
+router.get("/tests-answers", TestAnswerController.getElems)
+router.get("/tests-questions", TestQuestionController.getElems)
+router.get("/surveys", SurveyController.getElems)
+router.get("/logs", LogController.getElems)
+router.get("/users", UserController.getElems)
 
 module.exports = router

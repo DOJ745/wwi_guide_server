@@ -53,21 +53,6 @@ class AchievementController extends IDataController {
                 {new: true})
             if(updDoc)
                 return SuccessResponses.successElemOperation(res, ModelsElements.ACHIEVEMENT, CRUD_OPERATIONS.UPDATED, updDoc)
-            /*await Achievement.findByIdAndUpdate(id,
-                {
-                    name: name,
-                    description: description,
-                    points: points,
-                    img: img
-                },
-                {new: true},
-                function(err, result) {
-                    if(err)
-                        return ErrorResponses.crudOperationError(res, ModelsElements.ACHIEVEMENT, CRUD_OPERATIONS.UPDATING, err)
-                    else
-                        return SuccessResponses.successElemOperation(res, ModelsElements.ACHIEVEMENT, CRUD_OPERATIONS.UPDATED, result)
-                }
-            )*/
         }
         catch (e){
             console.log(e)
@@ -99,8 +84,8 @@ class AchievementController extends IDataController {
                 return ErrorResponses.foreignKeyConstraint(res, ModelsElements.ACHIEVEMENT, ModelsElements.TEST_THEME, foreignTestThemes)
             }
 
-            const deletedAchievement = await Achievement.findByIdAndDelete(id)
-            if(deletedAchievement)
+            const deletedDoc = await Achievement.findByIdAndDelete(id)
+            if(deletedDoc)
                 return SuccessResponses.successElemOperation(res, ModelsElements.ACHIEVEMENT, CRUD_OPERATIONS.DELETED, null)
         }
         catch (e) {

@@ -1,1 +1,20 @@
 include ../modal/modal_mixins
+
+mixin createCard(name, achievementId, id)
+    .card.border-dark.mb-3.m-3(style='max-width: 400px;height: 150px' id='cardElem' + id)
+        .row.g-0
+            .col
+                .card-body.text-dark.justify-content-center
+                    h5.card-title(id='cardName' + id)= name
+                    p.card-text(id='cardAchievementId' + id) Achievement ID: #{achievementId}
+        .mt-auto.row.justify-content-center
+            button.col.btn.btn-primary.m-1.w-25(
+                type='button'
+                data-bs-toggle='modal',
+                data-bs-target='#updateModal'
+                data-bs-whatever=id) Update
+            button.col.btn.btn-danger.m-1.w-25(
+                type='button'
+                data-bs-toggle='modal'
+                data-bs-target='#deleteModal'
+                data-bs-whatever=id) Delete

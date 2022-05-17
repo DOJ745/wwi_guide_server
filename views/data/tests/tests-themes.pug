@@ -1,3 +1,19 @@
 extends ../../basic_navbar_layout
+include  ../../mixins/table_info_mixin
+include  ../../mixins/data/test_theme_mixins
 
 block append content
+    .container.h-100
+        +tableInfo("Test themes",
+            "1) Name (string)",
+            "2) AchievementId (string, for null type 'null')")
+
+        div.row.align-items-center.justify-content-center.h-100
+            each element in elements
+                +createCard(element.name, element.achievementId, element._id)
+
+        //+createModals()
+
+    script(type='text/javascript' src='/js/data/test_theme/insert.js')
+    script(type='text/javascript' src='/js/data/test_theme/update.js')
+    script(type='text/javascript' src='/js/data/test_theme/delete.js')

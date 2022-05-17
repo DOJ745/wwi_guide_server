@@ -39,9 +39,34 @@ class TestThemeController extends IDataController {
             if (!errors.isEmpty()) {
                 return ErrorResponses.modelValidationError(res, ModelsElements.TEST_THEME, errors)
             }
+
+            const {name, achievementId, id} = req.body
+            const idCandidate = await Achievement.findById(achievementId)
+            if(idCandidate === null) {
+                const updDoc = await TestTheme.findByIdAndUpdate(id,
+                    {
+                        name: name,
+                        achievementId: null
+                    },
+                    {new: true})
+                if(updDoc)
+                    return SuccessResponses.successElemOperation(res, ModelsElements.TEST_THEME, CRUD_OPERATIONS.UPDATED, updDoc)
+            }
+            else {
+                const updDoc = await TestTheme.findByIdAndUpdate(id,
+                    {
+                        name: name,
+                        achievementId: achievementId
+                    },
+                    {new: true})
+                if(updDoc)
+                    return SuccessResponses.successElemOperation(res, ModelsElements.TEST_THEME, CRUD_OPERATIONS.UPDATED, updDoc)
+            }
+
         }
         catch (e){
-
+            console.log(e)
+            ErrorResponses.crudOperationError(res, ModelsElements.TEST_THEME, CRUD_OPERATIONS.UPDATING, e)
         }
     }
 
@@ -51,9 +76,14 @@ class TestThemeController extends IDataController {
             if (!errors.isEmpty()) {
                 return ErrorResponses.modelValidationError(res, ModelsElements.TEST_THEME, errors)
             }
+            const {id} = req.body
+            const deletedDoc = await TestTheme.findByIdAndDelete(id)
+            if(deletedDoc)
+                return SuccessResponses.successElemOperation(res, ModelsElements.TEST_THEME, CRUD_OPERATIONS.DELETED, null)
         }
-        catch (e){
-
+        catch (e) {
+            console.log("ERROR OCCURRED: " + e)
+            return ErrorResponses.crudOperationError(res, ModelsElements.ACHIEVEMENT, CRUD_OPERATIONS.DELETING, e)
         }
     }
 

@@ -1,6 +1,6 @@
 const Router = require('express')
 const router = new Router()
-
+const ModelsElements = require("../models/models_elements")
 const logController = require('../controllers/data/LogController')
 const yearController = require('../controllers/data/YearController')
 const countryController = require('../controllers/data/CountryController')
@@ -64,7 +64,9 @@ router.post('/achievements', achievementController.addElem)
 //router.put('/achievements', roleMiddleware(['ADMIN']), achievementController.updateElem)
 router.put('/achievements', achievementController.updateElem)
 //router.delete('/achievements', roleMiddleware(['ADMIN']), achievementController.deleteElem)
-router.delete('/achievements', achievementController.deleteElem)
+router.delete('/achievements', (req, res) =>{
+    achievementController.deleteTestElem(req, res, ModelsElements.ACHIEVEMENT)
+})
 
 // ----- SURVEYS -----
 router.get('/surveys', surveyController.getElems)

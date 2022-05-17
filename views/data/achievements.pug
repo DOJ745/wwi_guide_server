@@ -12,9 +12,9 @@ block append content
 
         div.row.align-items-center.justify-content-center.h-100
             each element in elements
-                +achievementCard(element.name, element.description, element.points, element.img, element._id)
+                +createCard(element.name, element.description, element.points, element.img, element._id)
 
-        +modalsAchievement()
+        +createModals()
 
     script(type='text/javascript' src='/js/data/achievement/insert.js')
     script(type='text/javascript' src='/js/data/achievement/update.js')

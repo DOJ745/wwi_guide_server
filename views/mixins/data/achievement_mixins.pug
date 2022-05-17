@@ -1,6 +1,6 @@
 include ../modal/modal_mixins
 
-mixin achievementCard(name, description, points, img, id)
+mixin createCard(name, description, points, img, id)
     .card.border-dark.mb-3.m-3(style='max-width: 400px;height: 230px' id='cardElem' + id)
         .row.g-0
             .col-md-4
@@ -122,7 +122,7 @@ mixin formModalByAction(actionName)
         when "delete"
             +formDeleteModal("achievement")
 
-mixin modalsAchievement()
+mixin createModals()
     +formModalByAction("insert")
     +formModalByAction("update")
     +formModalByAction("delete")
