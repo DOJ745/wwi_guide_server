@@ -31,7 +31,7 @@ class RankController extends IDataController {
                 if(mongoose.Types.ObjectId.isValid(countryId)) {
                     idCandidate = await Country.findById(countryId)
                     if (idCandidate === null){ return ErrorResponses.noSuchElement(res, ModelsElements.COUNTRY) }
-                    newElem = new TestTheme({name: name, achievementId: achievementId})
+                    newElem = new TestTheme({name: name, points: points, img: img, achievementId: achievementId})
                     await newElem.save()
                 }
                 else return ErrorResponses.invalidId(res, ModelsElements.COUNTRY)

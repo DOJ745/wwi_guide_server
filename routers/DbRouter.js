@@ -120,7 +120,10 @@ router.get('/tests-answers', testAnswerController.getElems)
 router.post('/tests-answers', testAnswerController.addElem)
 //router.put('/tests-answers', roleMiddleware(['ADMIN']), testAnswerController.updateElem)
 router.put('/tests-answers', testAnswerController.updateElem)
-router.delete('/tests-answers', roleMiddleware(['ADMIN']), testAnswerController.deleteElem)
+//router.delete('/tests-answers', roleMiddleware(['ADMIN']), testAnswerController.deleteElem)
+router.delete('/tests-answers', (req, res) => {
+    testAnswerController.deleteElem(req, res, ModelsElements.TEST_ANSWER)
+})
 
 // ----- LOGS -----
 

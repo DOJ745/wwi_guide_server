@@ -194,4 +194,31 @@ mixin formDeleteModal(tableName)
                                     button.col.btn.btn-danger.m-1(type='submit') DELETE
                                     button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
 
+        when "test_answer"
+            #deleteModal.modal.fade(
+                tabindex='-1',
+                aria-labelledby='modalLabel',
+                aria-hidden='true')
+                .modal-dialog
+                    .modal-content
+                        .modal-header
+                            h5#modalLabel.modal-title Delete #{tableName}
+                            button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                        .modal-body
+                            h5 Test answer is a child table. Just be careful when deleting it.
+                            p#resDelMsg(hidden='' style='color: red') Error response
+                            form#itemDeleteForm(action="/api.wwi-guide.by/tests-answers" method="DELETE")
+                                p#elementId
+                                label.col-form-label Input test answer ID:
+                                input#nameField.form-control(
+                                    type='text'
+                                    value=''
+                                    required=''
+                                    name="id"
+                                    minlength=24
+                                    maxlength=24)
+                                .row
+                                    button.col.btn.btn-danger.m-1(type='submit') DELETE
+                                    button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
+
 
