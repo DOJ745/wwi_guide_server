@@ -50,6 +50,5 @@ $(document).ready(function() {
             })
         event.preventDefault()
     }
-
     form[0].addEventListener("submit", insertItem, true)
 })

@@ -18,12 +18,16 @@ const roleMiddleware = require('../middleware/RoleMiddleware')
 
 // ----- YEARS -----
 router.get('/years', yearController.getElems)
-router.post('/years',
+/*router.post('/years',
     [CheckFactory.createIsIntNotEmpty('date', 1914, 1918),],
-    yearController.addElem)
-
-router.put('/years', roleMiddleware(['ADMIN']), yearController.updateElem)
-router.delete('/years', roleMiddleware(['ADMIN']), yearController.deleteElem)
+    yearController.addElem)*/
+router.post('/years', yearController.addElem)
+//router.put('/years', roleMiddleware(['ADMIN']), yearController.updateElem)
+router.put('/years', yearController.updateElem)
+//router.delete('/years', roleMiddleware(['ADMIN']), yearController.deleteElem)
+router.delete('/years', (req, res) =>{
+    rankController.deleteElem(req, res, ModelsElements.YEAR)
+})
 
 // ----- RANKS -----
 router.get('/ranks', rankController.getElems)

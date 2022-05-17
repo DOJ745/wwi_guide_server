@@ -5,7 +5,6 @@ const SuccessResponses = require("../../responses/SuccessResponses")
 const ModelsElements = require("../../models/models_elements")
 const CRUD_OPERATIONS = require('../../config/crud_operations')
 const {validationResult} = require("express-validator");
-const Armament = require("../../models/Armament");
 
 class YearController extends IDataController {
     constructor() { super(); }
@@ -25,7 +24,7 @@ class YearController extends IDataController {
             const newElem = new Year({date: date, title: title, img: img})
             await newElem.save()
 
-            return SuccessResponses.successElemOperation(res, ModelsElements.YEAR, CRUD_OPERATIONS.ADDED)
+            return SuccessResponses.successElemOperation(res, ModelsElements.YEAR, CRUD_OPERATIONS.ADDED, null)
         }
         catch (e) {
             console.log(e)
@@ -34,11 +33,26 @@ class YearController extends IDataController {
     }
 
     async updateElem(req, res) {
-
-    }
-
-    async deleteElem(req, res) {
-
+        try {
+            const errors = validationResult(req)
+            if (!errors.isEmpty()) {
+                return ErrorResponses.modelValidationError(res, ModelsElements.YEAR, errors)
+            }
+            const {date, title, img, id} = req.body
+            const updDoc = await Year.findByIdAndUpdate(id,
+                {
+                    date: date,
+                    title: title,
+                    img: img
+                },
+                {new: true})
+            if(updDoc)
+                return SuccessResponses.successElemOperation(res, ModelsElements.YEAR, CRUD_OPERATIONS.UPDATED, updDoc)
+        }
+        catch (e) {
+            console.log(e)
+            ErrorResponses.crudOperationError(res, ModelsElements.YEAR, CRUD_OPERATIONS.UPDATING, e)
+        }
     }
 
     async getElems(req, res) {

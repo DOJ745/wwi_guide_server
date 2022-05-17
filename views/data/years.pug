@@ -1,3 +1,20 @@
 extends ../basic_navbar_layout
+include  ../mixins/table_info_mixin
+include  ../mixins/data/year_mixins
 
 block append content
+    .container.h-100
+        +tableInfo("Years",
+            "1) Date (int)",
+            "2) Title (string)",
+            "3) Image (link)")
+
+        div.row.align-items-center.justify-content-center.h-100
+            each element in elements
+                +createCard(element.date, element.title, element.img, element._id)
+
+        +createModals()
+
+    script(type='text/javascript' src='/js/data/year/insert.js')
+    script(type='text/javascript' src='/js/data/year/update.js')
+    script(type='text/javascript' src='/js/data/delete.js')
