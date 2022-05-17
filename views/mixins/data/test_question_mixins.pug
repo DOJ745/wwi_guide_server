@@ -1,1 +1,106 @@
 include ../modal/modal_mixins
+
+mixin createCard(text, testThemeId, img, id)
+    .card.border-dark.mb-3.m-3(style='max-width: 400px;height: 230px' id='cardElem' + id)
+        .row.g-0
+            .col-md-4
+                img.img-fluid.rounded-start-(id='cardImg' + id, src=img, alt='IMG')
+            .col-md-8
+                .card-body.text-dark.justify-content-center
+                    p.card-text(id='cardText' + id)= text
+                    p.card-text(id='cardTestThemeId' + id)= "Test theme ID: " + testThemeId
+        .mt-auto.row.justify-content-center
+            button.col.btn.btn-primary.m-1.w-25(
+                type='button'
+                data-bs-toggle='modal',
+                data-bs-target='#updateModal'
+                data-bs-whatever=id) Update
+            button.col.btn.btn-danger.m-1.w-25(
+                type='button'
+                data-bs-toggle='modal'
+                data-bs-target='#deleteModal'
+                data-bs-whatever=id) Delete
+
+mixin formModalByAction(actionName)
+    case actionName
+        when "insert"
+            #insertModal.modal.fade(
+                tabindex='-1',
+                aria-labelledby='modalLabel',
+                aria-hidden='true')
+                .modal-dialog
+                    .modal-content
+                        .modal-header
+                            h5#modalLabel.modal-title Insert test question
+                            button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                        .modal-body
+                            p#resInsertMsg(hidden='' style='color: red') Error response
+                            form#itemInsertForm(action="/api.wwi-guide.by/tests-questions" method="POST")
+                                label.col-form-label Input text:
+                                input#textInsertField.form-control(
+                                    type='text'
+                                    value=''
+                                    required=''
+                                    name="text"
+                                    minlength=10
+                                    maxlength=128)
+
+                                label.col-form-label Input theme ID:
+                                input#testThemeIdInsertField.form-control(
+                                    type='text'
+                                    value=''
+                                    name="testThemeId"
+                                    required=''
+                                    minlength=4
+                                    maxlength=24)
+
+                                label.col-form-label Input image url:
+                                input#imgInsertField.form-control(type='url' value='https://pixy.org/images/placeholder.png' name="img")
+                                .row
+                                    button.col.btn.btn-success.m-1(type='submit') Add
+                                    button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
+
+        when "update"
+            #updateModal.modal.fade(
+                tabindex='-1',
+                aria-labelledby='modalLabel',
+                aria-hidden='true')
+                .modal-dialog
+                    .modal-content
+                        .modal-header
+                            h5#modalLabel.modal-title Update test question
+                            button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                        .modal-body
+                            p#resUpdateMsg(hidden='' style='color: red') Error response
+                            form#itemUpdateForm(action="/api.wwi-guide.by/tests-questions" method="PUT")
+                                label.col-form-label Input new text:
+                                input#textUpdateField.form-control(
+                                    type='text'
+                                    value=''
+                                    required=''
+                                    name="text"
+                                    minlength=10
+                                    maxlength=128)
+
+                                label.col-form-label Input new test theme ID:
+                                input#testThemeIdUpdateField.form-control(
+                                    type='text'
+                                    value=''
+                                    name="testThemeId"
+                                    required=''
+                                    minlength=4
+                                    maxlength=24)
+
+                                label.col-form-label Input image url:
+                                input#imgUpdateField.form-control(type='url' value='https://pixy.org/images/placeholder.png' name="img")
+                                .row
+                                    button.col.btn.btn-primary.m-1(type='submit') Save changes
+                                    button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
+
+        when "delete"
+            +formDeleteModal("test_question")
+
+mixin createModals()
+    +formModalByAction("insert")
+    +formModalByAction("update")
+    +formModalByAction("delete")

@@ -26,7 +26,7 @@ router.post('/years', yearController.addElem)
 router.put('/years', yearController.updateElem)
 //router.delete('/years', roleMiddleware(['ADMIN']), yearController.deleteElem)
 router.delete('/years', (req, res) =>{
-    rankController.deleteElem(req, res, ModelsElements.YEAR)
+    yearController.deleteElem(req, res, ModelsElements.YEAR)
 })
 
 // ----- RANKS -----
@@ -104,8 +104,12 @@ router.delete('/tests-themes', (req, res) => {
 router.get('/tests-questions', testQuestionController.getElems)
 //router.post('/tests-questions', roleMiddleware(['ADMIN']), testQuestionController.addElem)
 router.post('/tests-questions', testQuestionController.addElem)
-router.put('/tests-questions', roleMiddleware(['ADMIN']), testQuestionController.updateElem)
-router.delete('/tests-questions', roleMiddleware(['ADMIN']), testQuestionController.deleteElem)
+//router.put('/tests-questions', roleMiddleware(['ADMIN']), testQuestionController.updateElem)
+router.put('/tests-questions', testQuestionController.updateElem)
+//router.delete('/tests-questions', roleMiddleware(['ADMIN']), testQuestionController.deleteElem)
+router.delete('/tests-questions', (req, res) => {
+    testQuestionController.deleteElem(req, res, ModelsElements.TEST_QUESTION)
+})
 
 // ----- TESTS ANSWERS -----
 router.get('/tests-answers', testAnswerController.getElems)

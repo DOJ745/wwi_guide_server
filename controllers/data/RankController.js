@@ -15,7 +15,7 @@ class RankController extends IDataController {
     async addElem(req, res) {
         try {
             const errors = validationResult(req)
-            if (!errors.isEmpty()) {return ErrorResponses.modelValidationError(res, ModelsElements.RANK, errors)}
+            if (!errors.isEmpty()) { return ErrorResponses.modelValidationError(res, ModelsElements.RANK, errors) }
 
             const {name, points, img, countryId} = req.body
             let newElem, idCandidate
@@ -24,7 +24,7 @@ class RankController extends IDataController {
             if (candidate) { return ErrorResponses.elementExists(res, ModelsElements.RANK) }
 
             if(countryId === "null"){
-                newElem = new Rank({name: name, points: points, img: img, countryId: countryId})
+                newElem = new Rank({name: name, points: points, img: img, countryId: "null"})
                 await newElem.save()
             }
             else {
@@ -74,7 +74,7 @@ class RankController extends IDataController {
                             name: name,
                             points: points,
                             img: img,
-                            countryId: "null"
+                            countryId: countryId
                         },
                         {new: true})
                     if(updDoc)

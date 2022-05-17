@@ -1,3 +1,20 @@
 extends ../../basic_navbar_layout
+include  ../../mixins/table_info_mixin
+include  ../../mixins/data/test_question_mixins
 
 block append content
+    .container.h-100
+        +tableInfo("Tests questions",
+            "1) Text (string)",
+            "2) Test theme ID (string, for null type 'null')",
+            "3) Image (link or null)")
+
+        div.row.align-items-center.justify-content-center.h-100
+            each element in elements
+                +createCard(element.text, element.testThemeId, element.img, element._id)
+
+        +createModals()
+
+    script(type='text/javascript' src='/js/data/test_question/insert.js')
+    script(type='text/javascript' src='/js/data/test_question/update.js')
+    script(type='text/javascript' src='/js/data/delete.js')
