@@ -4,7 +4,6 @@ const ErrorResponses = require("../../responses/ErrorResponses")
 const CRUD_OPERATIONS = require('../../config/crud_operations')
 const IDataController = require("../interfaces/DataControllerInterface");
 const {validationResult} = require("express-validator");
-const Country = require("../../models/Country");
 const SuccessResponses = require("../../responses/SuccessResponses");
 
 class LogModelController extends IDataController {
@@ -37,31 +36,19 @@ class LogModelController extends IDataController {
                 return ErrorResponses.modelValidationError(res, ModelsElements.LOG_MODEL, errors)
             }
         }
-        catch (e){
-
-        }
+        catch (e){}
     }
 
-    async deleteElem(req, res) {
-        try {
-            const errors = validationResult(req)
-            if (!errors.isEmpty()) {
-                return ErrorResponses.modelValidationError(res, ModelsElements.LOG_MODEL, errors)
-            }
-        }
-        catch (e){
-
-        }
-    }
 
     async getElems(req, res) {
         try {
             const elems = await LogModel.find()
-            res.json(elems)
+            if(req.baseUrl === '/api.wwi-guide.by') return res.json(elems)
+            else res.render('data/logs', {title: "Logs", elements: elems})
         }
         catch (e) {
             console.log(e)
-            ErrorResponses.badRequest(res, e)
+            return ErrorResponses.badRequest(res, e)
         }
     }
 }

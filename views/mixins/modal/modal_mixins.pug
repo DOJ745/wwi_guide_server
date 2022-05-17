@@ -1,6 +1,5 @@
 //- when "event"
     when "armament"
-    when "test question" // parent
     when "test answer"
     when "user"
     when "survey" // parent
@@ -158,6 +157,32 @@ mixin formDeleteModal(tableName)
                             form#itemDeleteForm(action="/api.wwi-guide.by/tests-questions" method="DELETE")
                                 p#elementId
                                 label.col-form-label Input test question ID:
+                                input#nameField.form-control(
+                                    type='text'
+                                    value=''
+                                    required=''
+                                    name="id"
+                                    minlength=24
+                                    maxlength=24)
+                                .row
+                                    button.col.btn.btn-danger.m-1(type='submit') DELETE
+                                    button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
+        when "log"
+            #deleteModal.modal.fade(
+                tabindex='-1',
+                aria-labelledby='modalLabel',
+                aria-hidden='true')
+                .modal-dialog
+                    .modal-content
+                        .modal-header
+                            h5#modalLabel.modal-title Delete #{tableName}
+                            button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                        .modal-body
+                            h5 Log only to watch what was user doing. If you no longer need it, just delete.
+                            p#resDelMsg(hidden='' style='color: red') Error response
+                            form#itemDeleteForm(action="/api.wwi-guide.by/logs" method="DELETE")
+                                p#elementId
+                                label.col-form-label Input log ID:
                                 input#nameField.form-control(
                                     type='text'
                                     value=''

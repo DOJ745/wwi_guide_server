@@ -1,3 +1,19 @@
 extends ../basic_navbar_layout
+include  ../mixins/table_info_mixin
+include  ../mixins/data/log_mixins
 
 block append content
+    .container.h-100
+        +tableInfoNoInsertBtn("Logs",
+            "1) Action name (string)",
+            "2) Timestamp (DD/MM/YYYY --- HH:MM:SS)",
+            "3) Action result (string)",
+            "Only for analyse and deleting")
+
+        div.row.align-items-center.justify-content-center.h-100
+            each element in elements
+                +createCard(element.actionName, element.timestamp, element.actionResult, element._id)
+
+        +createModals()
+
+    script(type='text/javascript' src='/js/data/delete.js')

@@ -16,6 +16,9 @@ const testAnswerController = require('../controllers/data/TestAnswerController')
 const CheckFactory = require('../middleware/CheckHandlersFactory')
 const roleMiddleware = require('../middleware/RoleMiddleware')
 
+// TODO: after you have done all pages you should add role middleware and post this app into heroku
+// TODO: send request to test page every 29 minutes
+
 // ----- YEARS -----
 router.get('/years', yearController.getElems)
 /*router.post('/years',
@@ -120,9 +123,11 @@ router.put('/tests-answers', testAnswerController.updateElem)
 router.delete('/tests-answers', roleMiddleware(['ADMIN']), testAnswerController.deleteElem)
 
 // ----- LOGS -----
-/*
-router.get()
-router.delete()*/
+
+router.get('/logs', logController.getElems)
 router.post('/logs', roleMiddleware(['USER']), logController.addElem)
+router.delete('/logs', (req, res) => {
+    logController.deleteElem(req, res, ModelsElements.LOG_MODEL)
+})
 
 module.exports = router

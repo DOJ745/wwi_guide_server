@@ -12,3 +12,9 @@ mixin tableInfo(tableName, ...items)
         each item in items
             h5.text-center= item
     +insertButton
+
+mixin tableInfoNoInsertBtn(tableName, ...items)
+    div.row.justify-content-center
+        h3.text-center= tableName + " structure:"
+        each item in items
+            h5.text-center= item
