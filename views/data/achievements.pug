@@ -14,15 +14,11 @@ block append content
             each element in elements
                 +achievementCard(element.name, element.description, element.points, element.img, element._id)
 
-        //+modalAchievements()
-        +formModalAchievementByAction("insert")
-        +formModalAchievementByAction("update")
-        +formModalAchievementByAction("delete")
+        +modalsAchievement()
 
-
-    script(type='text/javascript' src='/js/data/achievement/insert-achievement.js')
-    script(type='text/javascript' src='/js/data/achievement/update-achievement.js')
-    script(type='text/javascript' src='/js/data/achievement/delete-achievement.js')
+    script(type='text/javascript' src='/js/data/achievement/insert.js')
+    script(type='text/javascript' src='/js/data/achievement/update.js')
+    script(type='text/javascript' src='/js/data/achievement/delete.js')
 
 
 

@@ -1,4 +1,16 @@
-mixin modalDelete(tableName)
+//-when "test theme"
+    when "event"
+    when "armament"
+    when "year"
+    when "test question"
+    when "test answer"
+    when "user"
+    when "survey"
+    when "rank"
+    when "country"
+    default
+
+mixin formDeleteModal(tableName)
     case tableName
         when "achievement"
             #deleteModal.modal.fade(
@@ -26,4 +38,5 @@ mixin modalDelete(tableName)
                                 .row
                                     button.col.btn.btn-danger.m-1(type='submit') DELETE
                                     button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
+
 

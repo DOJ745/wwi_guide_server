@@ -120,5 +120,10 @@ mixin formModalAchievementByAction(actionName)
                                     button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
 
         when "delete"
-            +modalDelete("achievement")
+            +formDeleteModal("achievement")
+
+mixin modalsAchievement()
+    +formModalAchievementByAction("insert")
+    +formModalAchievementByAction("update")
+    +formModalAchievementByAction("delete")
 

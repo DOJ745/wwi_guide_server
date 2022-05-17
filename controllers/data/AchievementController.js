@@ -43,7 +43,17 @@ class AchievementController extends IDataController {
                 return ErrorResponses.modelValidationError(res, ModelsElements.ACHIEVEMENT, errors)
             }
             const {name, description, points, img, id} = req.body
-            await Achievement.findByIdAndUpdate(id,
+            const updDoc = await Achievement.findByIdAndUpdate(id,
+                {
+                    name: name,
+                    description: description,
+                    points: points,
+                    img: img
+                },
+                {new: true})
+            if(updDoc)
+                return SuccessResponses.successElemOperation(res, ModelsElements.ACHIEVEMENT, CRUD_OPERATIONS.UPDATED, updDoc)
+            /*await Achievement.findByIdAndUpdate(id,
                 {
                     name: name,
                     description: description,
@@ -57,7 +67,7 @@ class AchievementController extends IDataController {
                     else
                         return SuccessResponses.successElemOperation(res, ModelsElements.ACHIEVEMENT, CRUD_OPERATIONS.UPDATED, result)
                 }
-            )
+            )*/
         }
         catch (e){
             console.log(e)
