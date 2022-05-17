@@ -17,7 +17,7 @@ $(document).ready(function() {
         resMsg.attr('hidden', '')
     })
 
-    let insertAchievement = function (event) {
+    let insertItem = function (event) {
         let formData = {
             "name": nameField.val(),
             "description": descriptionField.val(),
@@ -51,5 +51,5 @@ $(document).ready(function() {
         event.preventDefault()
     }
 
-    form[0].addEventListener("submit", insertAchievement, true)
+    form[0].addEventListener("submit", insertItem, true)
 })

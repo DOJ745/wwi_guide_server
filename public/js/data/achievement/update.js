@@ -22,7 +22,7 @@ $(document).ready(function() {
         resMsg.attr('hidden', '')
     })
 
-    let updateAchievement = function (event) {
+    let updateItem = function (event) {
         let formData = {
             "name": nameField.val(),
             "description": descriptionField.val(),
@@ -59,5 +59,5 @@ $(document).ready(function() {
         event.preventDefault()
     }
 
-    form[0].addEventListener("submit", updateAchievement, true)
+    form[0].addEventListener("submit", updateItem, true)
 })

@@ -30,18 +30,14 @@ class IDataController {
         if(!this.updateElem) {
             throw new Error("Controller must update elements!")
         }
-
-        if(!this.deleteElem) {
-            throw new Error("Controller must delete elements!")
-        }
     }
 
     getElems(req, res){}
     addElem(req, res){}
     updateElem(req, res){}
-    deleteElem(req, res){}
+    //deleteElem(req, res){}
 
-    async deleteTestElem(req, res, modelNameConst){
+    async deleteElem(req, res, modelNameConst) {
         try {
             const errors = validationResult(req)
             if (!errors.isEmpty()) {

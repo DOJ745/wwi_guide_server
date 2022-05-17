@@ -1,5 +1,4 @@
-//-when "test theme" // parent
-    when "event"
+//- when "event"
     when "armament"
     when "year" // parent
     when "test question" // parent
@@ -26,6 +25,32 @@ mixin formDeleteModal(tableName)
                             p(style='color: red') Achievement is a parent table! You cannot delete this item until it was removed from child tables!
                             p#resDelMsg(hidden='' style='color: red') Error response
                             form#itemDeleteForm(action="/api.wwi-guide.by/achievements" method="DELETE")
+                                p#elementId
+                                label.col-form-label Input #{tableName} ID:
+                                input#nameField.form-control(
+                                    type='text'
+                                    value=''
+                                    required=''
+                                    name="id"
+                                    minlength=24
+                                    maxlength=24)
+                                .row
+                                    button.col.btn.btn-danger.m-1(type='submit') DELETE
+                                    button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
+        when "test_theme"
+            #deleteModal.modal.fade(
+                tabindex='-1',
+                aria-labelledby='modalLabel',
+                aria-hidden='true')
+                .modal-dialog
+                    .modal-content
+                        .modal-header
+                            h5#modalLabel.modal-title Delete #{tableName}
+                            button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                        .modal-body
+                            p(style='color: red') Test theme is a parent table! You cannot delete this item until it was removed from child tables!
+                            p#resDelMsg(hidden='' style='color: red') Error response
+                            form#itemDeleteForm(action="/api.wwi-guide.by/tests-themes" method="DELETE")
                                 p#elementId
                                 label.col-form-label Input #{tableName} ID:
                                 input#nameField.form-control(

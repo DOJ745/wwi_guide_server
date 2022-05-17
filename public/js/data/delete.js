@@ -15,7 +15,7 @@ $(document).ready(function() {
         resMsg.attr('hidden', '')
     })
 
-    let deleteAchievement = function (event) {
+    let deleteItem = function (event) {
         let formData =  { 'id': itemId }
 
         $.ajax({
@@ -44,5 +44,5 @@ $(document).ready(function() {
         event.preventDefault()
     }
 
-    form[0].addEventListener("submit", deleteAchievement, true)
+    form[0].addEventListener("submit", deleteItem, true)
 })

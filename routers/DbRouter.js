@@ -65,7 +65,7 @@ router.post('/achievements', achievementController.addElem)
 router.put('/achievements', achievementController.updateElem)
 //router.delete('/achievements', roleMiddleware(['ADMIN']), achievementController.deleteElem)
 router.delete('/achievements', (req, res) =>{
-    achievementController.deleteTestElem(req, res, ModelsElements.ACHIEVEMENT)
+    achievementController.deleteElem(req, res, ModelsElements.ACHIEVEMENT)
 })
 
 // ----- SURVEYS -----
@@ -79,8 +79,12 @@ router.delete('/surveys', roleMiddleware(['ADMIN']), surveyController.deleteElem
 router.get('/tests-themes', testThemeController.getElems)
 //router.post('/tests-themes', roleMiddleware(['ADMIN']), testThemeController.addElem)
 router.post('/tests-themes', testThemeController.addElem)
-router.put('/tests-themes', roleMiddleware(['ADMIN']), testThemeController.updateElem)
-router.delete('/tests-themes', roleMiddleware(['ADMIN']), testThemeController.deleteElem)
+//router.put('/tests-themes', roleMiddleware(['ADMIN']), testThemeController.updateElem)
+router.put('/tests-themes', testThemeController.updateElem)
+//router.delete('/tests-themes', roleMiddleware(['ADMIN']), testThemeController.deleteElem)
+router.delete('/tests-themes', (req, res) => {
+    testThemeController.deleteElem(req, res, ModelsElements.TEST_THEME)
+})
 
 // ----- TESTS QUESTIONS -----
 router.get('/tests-questions', testQuestionController.getElems)

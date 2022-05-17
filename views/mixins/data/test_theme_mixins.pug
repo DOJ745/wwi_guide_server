@@ -18,3 +18,82 @@ mixin createCard(name, achievementId, id)
                 data-bs-toggle='modal'
                 data-bs-target='#deleteModal'
                 data-bs-whatever=id) Delete
+
+mixin formModalByAction(actionName)
+    case actionName
+        when "insert"
+            #insertModal.modal.fade(
+                tabindex='-1',
+                aria-labelledby='modalLabel',
+                aria-hidden='true')
+                .modal-dialog
+                    .modal-content
+                        .modal-header
+                            h5#modalLabel.modal-title Insert test theme
+                            button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                        .modal-body
+                            p#resInsertMsg(hidden='' style='color: red') Error response
+                            form#itemInsertForm(action="/api.wwi-guide.by/tests-themes" method="POST")
+                                label.col-form-label Input name:
+                                input#nameInsertField.form-control(
+                                    type='text'
+                                    value=''
+                                    required=''
+                                    name="name"
+                                    minlength=4
+                                    maxlength=64)
+
+                                label.col-form-label Input achievement ID:
+                                input#achievementIdInsertField.form-control(
+                                    type='text'
+                                    value=''
+                                    name="achievementId"
+                                    required=''
+                                    minlength=4
+                                    maxlength=24)
+
+                                .row
+                                    button.col.btn.btn-success.m-1(type='submit') Add
+                                    button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
+        when "update"
+            #updateModal.modal.fade(
+                tabindex='-1',
+                aria-labelledby='modalLabel',
+                aria-hidden='true')
+                .modal-dialog
+                    .modal-content
+                        .modal-header
+                            h5#modalLabel.modal-title Update test theme
+                            button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                        .modal-body
+                            p#resUpdateMsg(hidden='' style='color: red') Error response
+                            form#itemUpdateForm(action="/api.wwi-guide.by/tests-themes" method="PUT")
+                                label.col-form-label Input new name:
+                                input#nameUpdateField.form-control(
+                                    type='text'
+                                    value=''
+                                    required=''
+                                    name="name"
+                                    minlength=4
+                                    maxlength=64)
+
+                                label.col-form-label Input new achievement ID:
+                                input#achievementIdUpdateField.form-control(
+                                    type='text'
+                                    value=''
+                                    name="achievementId"
+                                    required=''
+                                    minlength=3
+                                    maxlength=100)
+
+                                .row
+                                    button.col.btn.btn-primary.m-1(type='submit') Save changes
+                                    button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
+
+        when "delete"
+            +formDeleteModal("test_theme")
+
+mixin createModals()
+    +formModalByAction("insert")
+    +formModalByAction("update")
+    +formModalByAction("delete")

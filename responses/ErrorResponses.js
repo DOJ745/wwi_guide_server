@@ -3,6 +3,10 @@ const ModelsElements = require("../models/models_elements")
 
 module.exports = {
 
+    invalidId: function (res, foreignTableNameConst) {
+        return res.status(CODES.BAD_REQUEST).json({message: `Invalid ID for ${foreignTableNameConst} table!`})
+    },
+
     foreignKeyConstraint: function (res, elementName, foreignTableNameConst, foundDocs) {
         let childTables
         let foreignElementsId = []
@@ -47,6 +51,9 @@ module.exports = {
                 break;
             case ModelsElements.TEST_ANSWER:
                 foundDocs.forEach(element => foreignElementsId.push("TEST ANSWER ID: " + element._id))
+                break;
+            case  ModelsElements.TEST_QUESTION:
+                foundDocs.forEach(element => foreignElementsId.push("TEST QUESTION ID: " + element._id))
                 break;
         }
         return res.status(CODES.BAD_REQUEST).json({message: `For ${elementName} you need to remove this 

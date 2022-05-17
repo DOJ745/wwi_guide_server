@@ -60,7 +60,7 @@ class AchievementController extends IDataController {
         }
     }
 
-    async deleteElem(req, res) {
+    /*async deleteElem(req, res) {
         try {
             const errors = validationResult(req)
             if (!errors.isEmpty()) { return ErrorResponses.modelValidationError(res, ModelsElements.ACHIEVEMENT, errors) }
@@ -92,7 +92,7 @@ class AchievementController extends IDataController {
             console.log("ERROR OCCURRED: " + e)
             return ErrorResponses.crudOperationError(res, ModelsElements.ACHIEVEMENT, CRUD_OPERATIONS.DELETING, e)
         }
-    }
+    }*/
 
     async getElems(req, res) {
         try {
