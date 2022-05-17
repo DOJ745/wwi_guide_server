@@ -1,29 +1,29 @@
 include ../modal/modal_mixins
 
 mixin achievementCard(name, description, points, img, id)
-    .card.border-dark.mb-3.m-3(style='max-width: 400px;' id='cardElem' + id)
+    .card.border-dark.mb-3.m-3(style='max-width: 400px;height: 230px' id='cardElem' + id)
         .row.g-0
             .col-md-4
                 img.img-fluid.rounded-start-(id='cardImg' + id, src=img, alt='IMG')
             .col-md-8
-                .card-body.text-dark
+                .card-body.text-dark.justify-content-center
                     h5.card-title(id='cardName' + id)= name
                     p.card-text(id='cardDescription' + id)= description
                     p.card-text(id='cardPoints' + id)= "Points: " + points
-        .row.justify-content-center
-            button.btn.btn-primary.m-1.w-25(
+        .mt-auto.row.justify-content-center
+            button.col.btn.btn-primary.m-1.w-25(
                 type='button'
                 data-bs-toggle='modal',
                 data-bs-target='#updateModal'
                 data-bs-whatever=id) Update
-            button.btn.btn-danger.m-1.w-25(
+            button.col.btn.btn-danger.m-1.w-25(
                 type='button'
                 data-bs-toggle='modal'
                 data-bs-target='#deleteModal'
                 data-bs-whatever=id) Delete
 
 
-mixin formModalAchievementByAction(actionName)
+mixin formModalByAction(actionName)
     case actionName
         when "update"
             #updateModal.modal.fade(
@@ -123,7 +123,7 @@ mixin formModalAchievementByAction(actionName)
             +formDeleteModal("achievement")
 
 mixin modalsAchievement()
-    +formModalAchievementByAction("insert")
-    +formModalAchievementByAction("update")
-    +formModalAchievementByAction("delete")
+    +formModalByAction("insert")
+    +formModalByAction("update")
+    +formModalByAction("delete")
 
