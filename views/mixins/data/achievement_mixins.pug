@@ -25,53 +25,6 @@ mixin createCard(name, description, points, img, id)
 
 mixin formModalByAction(actionName)
     case actionName
-        when "update"
-            #updateModal.modal.fade(
-                tabindex='-1',
-                aria-labelledby='modalLabel',
-                aria-hidden='true')
-                .modal-dialog
-                    .modal-content
-                        .modal-header
-                            h5#modalLabel.modal-title Update achievement
-                            button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
-                        .modal-body
-                            p#resUpdateMsg(hidden='' style='color: red') Error response
-                            form#itemUpdateForm(action="/api.wwi-guide.by/achievements" method="PUT")
-                                label.col-form-label Input new name:
-                                input#nameUpdateField.form-control(
-                                    type='text'
-                                    value=''
-                                    required=''
-                                    name="name"
-                                    minlength=3
-                                    maxlength=100)
-
-                                label.col-form-label Input new description:
-                                input#descriptionUpdateField.form-control(
-                                    type='text'
-                                    value=''
-                                    name="description"
-                                    required=''
-                                    minlength=3
-                                    maxlength=100)
-
-                                label.col-form-label Input new points:
-                                input#pointsUpdateField.form-control(
-                                    type='number'
-                                    value=30
-                                    name="points"
-                                    step="5"
-                                    required=''
-                                    min="30"
-                                    max="100")
-
-                                label.col-form-label Input new image url:
-                                input#imgUpdateField.form-control(type='url' value='https://pixy.org/images/placeholder.png' name="img")
-                                .row
-                                    button.col.btn.btn-primary.m-1(type='submit') Save changes
-                                    button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
-
         when "insert"
             #insertModal.modal.fade(
                 tabindex='-1',
@@ -117,6 +70,53 @@ mixin formModalByAction(actionName)
                                 input#imgInsertField.form-control(type='url' value='https://pixy.org/images/placeholder.png' name="img")
                                 .row
                                     button.col.btn.btn-success.m-1(type='submit') Add
+                                    button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
+
+        when "update"
+            #updateModal.modal.fade(
+                tabindex='-1',
+                aria-labelledby='modalLabel',
+                aria-hidden='true')
+                .modal-dialog
+                    .modal-content
+                        .modal-header
+                            h5#modalLabel.modal-title Update achievement
+                            button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                        .modal-body
+                            p#resUpdateMsg(hidden='' style='color: red') Error response
+                            form#itemUpdateForm(action="/api.wwi-guide.by/achievements" method="PUT")
+                                label.col-form-label Input new name:
+                                input#nameUpdateField.form-control(
+                                    type='text'
+                                    value=''
+                                    required=''
+                                    name="name"
+                                    minlength=3
+                                    maxlength=100)
+
+                                label.col-form-label Input new description:
+                                input#descriptionUpdateField.form-control(
+                                    type='text'
+                                    value=''
+                                    name="description"
+                                    required=''
+                                    minlength=3
+                                    maxlength=100)
+
+                                label.col-form-label Input new points:
+                                input#pointsUpdateField.form-control(
+                                    type='number'
+                                    value=30
+                                    name="points"
+                                    step="5"
+                                    required=''
+                                    min="30"
+                                    max="100")
+
+                                label.col-form-label Input new image url:
+                                input#imgUpdateField.form-control(type='url' value='https://pixy.org/images/placeholder.png' name="img")
+                                .row
+                                    button.col.btn.btn-primary.m-1(type='submit') Save changes
                                     button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
 
         when "delete"

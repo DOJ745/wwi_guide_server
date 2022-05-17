@@ -38,9 +38,14 @@ router.delete('/ranks', (req, res) =>{
 
 // ----- COUNTRIES -----
 router.get('/countries', countryController.getElems)
-router.post('/countries', roleMiddleware(['ADMIN']), countryController.addElem)
-router.put('/countries', roleMiddleware(['ADMIN']), countryController.updateElem)
-router.delete('/countries', roleMiddleware(['ADMIN']), countryController.deleteElem)
+//router.post('/countries', roleMiddleware(['ADMIN']), countryController.addElem)
+router.post('/countries', countryController.addElem)
+//router.put('/countries', roleMiddleware(['ADMIN']), countryController.updateElem)
+router.put('/countries', countryController.updateElem)
+//router.delete('/countries', roleMiddleware(['ADMIN']), countryController.deleteElem)
+router.delete('/countries', (req, res) =>{
+    countryController.deleteElem(req, res, ModelsElements.COUNTRY)
+})
 
 // ----- USERS -----
 router.get('/users', roleMiddleware(['ADMIN']), userController.getElems)

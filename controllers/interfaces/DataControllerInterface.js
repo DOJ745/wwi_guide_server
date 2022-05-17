@@ -150,7 +150,7 @@ class IDataController {
                     }
                     const foreignCountryUsers = await User.find({countryId: id })
                     if(foreignCountryUsers.length > 0) {
-                        return ErrorResponses.foreignKeyConstraint(res, modelNameConst, ModelsElements.USER, foreignCountryRanks)
+                        return ErrorResponses.foreignKeyConstraint(res, modelNameConst, ModelsElements.USER, foreignCountryUsers)
                     }
                     const deletedCountry = await Country.findByIdAndDelete(id)
                     if(deletedCountry)

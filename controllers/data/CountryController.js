@@ -4,7 +4,8 @@ const ErrorResponses = require("../../responses/ErrorResponses")
 const CRUD_OPERATIONS = require('../../config/crud_operations')
 const ModelsElements = require("../../models/models_elements")
 const {validationResult} = require("express-validator");
-const Armament = require("../../models/Armament");
+const SuccessResponses = require("../../responses/SuccessResponses");
+const TestTheme = require("../../models/TestTheme");
 
 class CountryController extends IDataController {
     constructor() { super(); }
@@ -17,14 +18,15 @@ class CountryController extends IDataController {
             }
 
             const {name, img} = req.body
-            const candidate = await Country.findOne({name})
+            let newElem
 
+            const candidate = await Country.findOne({name})
             if (candidate) {return ErrorResponses.elementExists(res, ModelsElements.COUNTRY)}
 
-            const newElem = new Country({name: name, img: img})
+            newElem = new Country({name: name, img: img})
             await newElem.save()
 
-            return res.status(200).json({message: "Country successfully added"})
+            return SuccessResponses.successElemOperation(res, ModelsElements.COUNTRY, CRUD_OPERATIONS.ADDED, null)
         }
         catch (e) {
             console.log(e)
@@ -38,21 +40,19 @@ class CountryController extends IDataController {
             if (!errors.isEmpty()) {
                 return ErrorResponses.modelValidationError(res, ModelsElements.COUNTRY, errors)
             }
+            const {name, img, id} = req.body
+            const updDoc = await Country.findByIdAndUpdate(id,
+                {
+                    name: name,
+                    img: img
+                },
+                {new: true})
+            if(updDoc)
+                return SuccessResponses.successElemOperation(res, ModelsElements.COUNTRY, CRUD_OPERATIONS.UPDATED, updDoc)
         }
         catch (e){
-
-        }
-    }
-
-    async deleteElem(req, res) {
-        try {
-            const errors = validationResult(req)
-            if (!errors.isEmpty()) {
-                return ErrorResponses.modelValidationError(res, ModelsElements.COUNTRY, errors)
-            }
-        }
-        catch (e){
-
+            console.log(e)
+            return ErrorResponses.crudOperationError(res, ModelsElements.COUNTRY, CRUD_OPERATIONS.UPDATING, e)
         }
     }
 
