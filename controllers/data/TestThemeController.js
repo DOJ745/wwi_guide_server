@@ -15,9 +15,10 @@ class TestThemeController extends IDataController {
         try {
             const errors = validationResult(req)
             if (!errors.isEmpty()) { return ErrorResponses.modelValidationError(res, ModelsElements.TEST_THEME, errors) }
-            const {name, achievementId} = req.body
 
+            const {name, achievementId} = req.body
             let newElem, idCandidate
+
             const candidate = await TestTheme.findOne({name})
             if (candidate) { return ErrorResponses.elementExists(res, ModelsElements.TEST_THEME) }
 
@@ -26,10 +27,13 @@ class TestThemeController extends IDataController {
                 await newElem.save()
             }
             else {
-                idCandidate = await Achievement.findById(achievementId)
-                if (idCandidate === null){ return ErrorResponses.noSuchElement(res, ModelsElements.ACHIEVEMENT) }
-                newElem = new TestTheme({name: name, achievementId: achievementId})
-                await newElem.save()
+                if(mongoose.Types.ObjectId.isValid(achievementId)) {
+                    idCandidate = await Achievement.findById(achievementId)
+                    if (idCandidate === null){ return ErrorResponses.noSuchElement(res, ModelsElements.ACHIEVEMENT) }
+                    newElem = new TestTheme({name: name, achievementId: achievementId})
+                    await newElem.save()
+                }
+                else return ErrorResponses.invalidId(res, ModelsElements.ACHIEVEMENT)
             }
             return SuccessResponses.successElemOperation(res, ModelsElements.TEST_THEME, CRUD_OPERATIONS.ADDED, null)
         }
@@ -47,6 +51,7 @@ class TestThemeController extends IDataController {
             }
 
             const {name, achievementId, id} = req.body
+
             if(achievementId === "null"){
                 const updDoc = await TestTheme.findByIdAndUpdate(id,
                     {
@@ -61,7 +66,6 @@ class TestThemeController extends IDataController {
                 if(mongoose.Types.ObjectId.isValid(achievementId)) {
                     const idCandidate = await Achievement.findById(achievementId)
                     if (idCandidate === null){ return ErrorResponses.noSuchElement(res, ModelsElements.ACHIEVEMENT) }
-
                     const updDoc = await TestTheme.findByIdAndUpdate(id,
                         {
                             name: name,
@@ -71,11 +75,8 @@ class TestThemeController extends IDataController {
                     if(updDoc)
                         return SuccessResponses.successElemOperation(res, ModelsElements.TEST_THEME, CRUD_OPERATIONS.UPDATED, updDoc)
                 }
-                else {
-                    return ErrorResponses.invalidId(res, ModelsElements.ACHIEVEMENT)
-                }
+                else return ErrorResponses.invalidId(res, ModelsElements.ACHIEVEMENT)
             }
-
         }
         catch (e){
             console.log(e)

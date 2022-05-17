@@ -1,1 +1,130 @@
 include ../modal/modal_mixins
+
+mixin createCard(name, points, img, countryId, id)
+    .card.border-dark.mb-3.m-3(style='max-width: 400px;height: 220px' id='cardElem' + id)
+        .row.g-0
+            .col-md-4
+                img.img-fluid.rounded-start-(id='cardImg' + id, src=img, alt='IMG')
+            .col-md-8
+                .card-body.text-dark.justify-content-center
+                    h5.card-title(id='cardName' + id)= name
+                    p.card-text(id='cardPoints' + id)= "Points: " + points
+                    p.card-text(id='cardCountryId' + id)= "Country ID: " + countryId
+        .mt-auto.row.justify-content-center
+            button.col.btn.btn-primary.m-1.w-25(
+                type='button'
+                data-bs-toggle='modal',
+                data-bs-target='#updateModal'
+                data-bs-whatever=id) Update
+            button.col.btn.btn-danger.m-1.w-25(
+                type='button'
+                data-bs-toggle='modal'
+                data-bs-target='#deleteModal'
+                data-bs-whatever=id) Delete
+
+mixin formModalByAction(actionName)
+    case actionName
+        when "insert"
+            #insertModal.modal.fade(
+                tabindex='-1',
+                aria-labelledby='modalLabel',
+                aria-hidden='true')
+                .modal-dialog
+                    .modal-content
+                        .modal-header
+                            h5#modalLabel.modal-title Insert rank
+                            button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                        .modal-body
+                            p#resInsertMsg(hidden='' style='color: red') Error response
+                            form#itemInsertForm(action="/api.wwi-guide.by/ranks" method="POST")
+                                label.col-form-label Input name:
+                                input#nameInsertField.form-control(
+                                    type='text'
+                                    value=''
+                                    required=''
+                                    name="name"
+                                    minlength=1
+                                    maxlength=100)
+
+                                label.col-form-label Input points:
+                                input#pointsInsertField.form-control(
+                                    type='number'
+                                    value=100
+                                    name="points"
+                                    step="50"
+                                    required=''
+                                    min="100"
+                                    max="1000")
+
+                                label.col-form-label Input image url:
+                                input#imgInsertField.form-control(type='url' value='https://pixy.org/images/placeholder.png' name="img")
+
+                                label.col-form-label Input country ID:
+                                input#countryIdInsertField.form-control(
+                                    type='text'
+                                    value=''
+                                    name="countryId"
+                                    required=''
+                                    minlength=4
+                                    maxlength=24)
+
+                                .row
+                                    button.col.btn.btn-success.m-1(type='submit') Add
+                                    button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
+
+        when "update"
+            #updateModal.modal.fade(
+                tabindex='-1',
+                aria-labelledby='modalLabel',
+                aria-hidden='true')
+                .modal-dialog
+                    .modal-content
+                        .modal-header
+                            h5#modalLabel.modal-title Update rank
+                            button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                        .modal-body
+                            p#resUpdateMsg(hidden='' style='color: red') Error response
+                            form#itemUpdateForm(action="/api.wwi-guide.by/ranks" method="PUT")
+                                label.col-form-label Input new name:
+                                input#nameUpdateField.form-control(
+                                    type='text'
+                                    value=''
+                                    required=''
+                                    name="name"
+                                    minlength=1
+                                    maxlength=100)
+
+                                label.col-form-label Input new points:
+                                input#pointsUpdateField.form-control(
+                                    type='number'
+                                    value=100
+                                    name="points"
+                                    step="50"
+                                    required=''
+                                    min="100"
+                                    max="1000")
+
+                                label.col-form-label Input new image url:
+                                input#imgUpdateField.form-control(type='url' value='https://pixy.org/images/placeholder.png' name="img")
+
+                                label.col-form-label Input new country ID:
+                                input#countryIdUpdateField.form-control(
+                                    type='text'
+                                    value=''
+                                    name="countryId"
+                                    required=''
+                                    minlength=4
+                                    maxlength=24)
+
+                                .row
+                                    button.col.btn.btn-success.m-1(type='submit') Save changes
+                                    button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
+
+        when "delete"
+            +formDeleteModal("rank")
+
+mixin createModals()
+    +formModalByAction("insert")
+    +formModalByAction("update")
+    +formModalByAction("delete")
+

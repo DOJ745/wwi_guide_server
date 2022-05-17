@@ -27,9 +27,14 @@ router.delete('/years', roleMiddleware(['ADMIN']), yearController.deleteElem)
 
 // ----- RANKS -----
 router.get('/ranks', rankController.getElems)
-router.post('/ranks', roleMiddleware(['ADMIN']), rankController.addElem)
-router.put('/ranks', roleMiddleware(['ADMIN']), rankController.updateElem)
-router.delete('/ranks', roleMiddleware(['ADMIN']), rankController.deleteElem)
+//router.post('/ranks', roleMiddleware(['ADMIN']), rankController.addElem)
+router.post('/ranks', rankController.addElem)
+//router.put('/ranks', roleMiddleware(['ADMIN']), rankController.updateElem)
+router.put('/ranks', rankController.updateElem)
+//router.delete('/ranks', roleMiddleware(['ADMIN']), rankController.deleteElem)
+router.delete('/ranks', (req, res) =>{
+    rankController.deleteElem(req, res, ModelsElements.RANK)
+})
 
 // ----- COUNTRIES -----
 router.get('/countries', countryController.getElems)
@@ -97,14 +102,14 @@ router.delete('/tests-questions', roleMiddleware(['ADMIN']), testQuestionControl
 router.get('/tests-answers', testAnswerController.getElems)
 //router.post('/tests-answers', roleMiddleware(['ADMIN']), testAnswerController.addElem)
 router.post('/tests-answers', testAnswerController.addElem)
-router.put('/tests-answers', roleMiddleware(['ADMIN']), testAnswerController.updateElem)
+//router.put('/tests-answers', roleMiddleware(['ADMIN']), testAnswerController.updateElem)
+router.put('/tests-answers', testAnswerController.updateElem)
 router.delete('/tests-answers', roleMiddleware(['ADMIN']), testAnswerController.deleteElem)
 
 // ----- LOGS -----
 /*
 router.get()
 router.delete()*/
-
 router.post('/logs', roleMiddleware(['USER']), logController.addElem)
 
 module.exports = router

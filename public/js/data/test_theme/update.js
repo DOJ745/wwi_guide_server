@@ -11,7 +11,7 @@ $(document).ready(function() {
         itemId = button.getAttribute('data-bs-whatever');
 
         nameField.val($('#cardName' + itemId).html())
-        achievementIdField.val($('#cardAchievementId' + itemId).html())
+        achievementIdField.val($('#cardAchievementId' + itemId).html().replace("Achievement ID: ", ""))
     })
 
     updateModal.addEventListener('hide.bs.modal', function (event) {

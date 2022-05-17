@@ -1,3 +1,21 @@
 extends ../basic_navbar_layout
+include  ../mixins/table_info_mixin
+include  ../mixins/data/rank_mixins
 
 block append content
+    .container.h-100
+        +tableInfo("Ranks",
+            "1) Name (string)",
+            "2) CountryId (string, for null type 'null')",
+            "3) Points (int)",
+            "4) Image (link)")
+
+        div.row.align-items-center.justify-content-center.h-100
+            each element in elements
+                +createCard(element.name, element.points, element.img, element.countryId, element._id)
+
+        +createModals()
+
+    script(type='text/javascript' src='/js/data/rank/insert.js')
+    script(type='text/javascript' src='/js/data/rank/update.js')
+    script(type='text/javascript' src='/js/data/delete.js')
