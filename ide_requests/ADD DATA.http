@@ -14,7 +14,7 @@ POST {{localhost}}/achievements
 Content-Type: application/json
 
 {
-  "name": "Achievement 55",
+  "name": "Achievement 56",
   "points": 100
 }
 

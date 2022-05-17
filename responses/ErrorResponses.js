@@ -3,8 +3,9 @@ const ModelsElements = require("../models/models_elements")
 
 module.exports = {
 
-    foreignKeyConstraint: function (res, elementName) {
+    foreignKeyConstraint: function (res, elementName, foreignTableNameConst, foundDocs) {
         let childTables
+        let foreignElementsId = []
         switch (elementName)
         {
             case ModelsElements.ACHIEVEMENT:
@@ -28,7 +29,28 @@ module.exports = {
             default:
                 break;
         }
-        return res.status(CODES.BAD_REQUEST).json({message: `For ${elementName} you need to remove this value from all child tables! Child tables for current parent table: ${childTables}`})
+        switch (foreignTableNameConst){
+            case ModelsElements.USER:
+                foundDocs.forEach(element => foreignElementsId.push("USER ID: " + element._id))
+                break;
+            case ModelsElements.TEST_THEME:
+                foundDocs.forEach(element => foreignElementsId.push("TEST THEME ID: " + element._id))
+                break;
+            case ModelsElements.ARMAMENT:
+                foundDocs.forEach(element => foreignElementsId.push("ARMAMENT ID: " + element._id))
+                break;
+            case ModelsElements.EVENT:
+                foundDocs.forEach(element => foreignElementsId.push("EVENT ID: " + element._id))
+                break;
+            case ModelsElements.RANK:
+                foundDocs.forEach(element => foreignElementsId.push("COUNTRY ID: " + element._id))
+                break;
+            case ModelsElements.TEST_ANSWER:
+                foundDocs.forEach(element => foreignElementsId.push("TEST ANSWER ID: " + element._id))
+                break;
+        }
+        return res.status(CODES.BAD_REQUEST).json({message: `For ${elementName} you need to remove this 
+        value from these child tables: ${childTables}.<\/br>Found docs: ${foreignElementsId}`})
     },
     /**
      * @param res response object

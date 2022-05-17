@@ -68,39 +68,33 @@ class AchievementController extends IDataController {
     async deleteElem(req, res) {
         try {
             const errors = validationResult(req)
-            if (!errors.isEmpty()) {
-                return ErrorResponses.modelValidationError(res, ModelsElements.ACHIEVEMENT, errors)
-            }
-            //let isFound = false
+            if (!errors.isEmpty()) { return ErrorResponses.modelValidationError(res, ModelsElements.ACHIEVEMENT, errors) }
+
             const {id} = req.body
 
             const foreignUsers = await User.find({achievements: { $in: [id]} })
             if(foreignUsers.length > 0) {
-                return ErrorResponses.foreignKeyConstraint(res, ModelsElements.ACHIEVEMENT)
+                return ErrorResponses.foreignKeyConstraint(res, ModelsElements.ACHIEVEMENT, ModelsElements.USER, foreignUsers)
             }
             const foreignArmaments = await Armament.find({achievementId: id})
             if(foreignArmaments.length > 0) {
-                return ErrorResponses.foreignKeyConstraint(res, ModelsElements.ACHIEVEMENT)
+                return ErrorResponses.foreignKeyConstraint(res, ModelsElements.ACHIEVEMENT, ModelsElements.ARMAMENT, foreignArmaments)
             }
-            const foreignEvents = await Armament.find({achievementId: id})
+            const foreignEvents = await Event.find({achievementId: id})
             if(foreignEvents.length > 0) {
-                return ErrorResponses.foreignKeyConstraint(res, ModelsElements.ACHIEVEMENT)
+                return ErrorResponses.foreignKeyConstraint(res, ModelsElements.ACHIEVEMENT, ModelsElements.EVENT, foreignEvents)
             }
             const foreignTestThemes = await TestTheme.find({achievementId: id})
             if(foreignTestThemes.length > 0) {
-                return ErrorResponses.foreignKeyConstraint(res, ModelsElements.ACHIEVEMENT)
+                return ErrorResponses.foreignKeyConstraint(res, ModelsElements.ACHIEVEMENT, ModelsElements.TEST_THEME, foreignTestThemes)
             }
-
 
             const deletedAchievement = await Achievement.findByIdAndDelete(id)
             if(deletedAchievement)
                 return SuccessResponses.successElemOperation(res, ModelsElements.ACHIEVEMENT, CRUD_OPERATIONS.DELETED, null)
-            else
-                return ErrorResponses.crudOperationError(res, ModelsElements.ACHIEVEMENT, CRUD_OPERATIONS.DELETING, err)
-
         }
         catch (e) {
-            console.log(e)
+            console.log("ERROR OCCURRED: " + e)
             return ErrorResponses.crudOperationError(res, ModelsElements.ACHIEVEMENT, CRUD_OPERATIONS.DELETING, e)
         }
     }

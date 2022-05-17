@@ -1,7 +1,6 @@
 extends ../basic_navbar_layout
 include  ../mixins/table_info_mixin
 include  ../mixins/data/achievement_mixins
-include  ../mixins/modal/modal_mixins
 
 block append content
     .container.h-100
@@ -15,8 +14,13 @@ block append content
             each element in elements
                 +achievementCard(element.name, element.description, element.points, element.img, element._id)
 
-        +modalAchievements()
+        //+modalAchievements()
+        +formModalAchievementByAction("insert")
+        +formModalAchievementByAction("update")
+        +formModalAchievementByAction("delete")
 
+
+    script(type='text/javascript' src='/js/data/achievement/insert-achievement.js')
     script(type='text/javascript' src='/js/data/achievement/update-achievement.js')
     script(type='text/javascript' src='/js/data/achievement/delete-achievement.js')
 

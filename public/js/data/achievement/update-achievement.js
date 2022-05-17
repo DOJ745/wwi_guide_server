@@ -1,10 +1,10 @@
 $(document).ready(function() {
-    const form = $("#itemForm")
-    const resMsg = $("#resMsg")
-    const nameField = $("#nameField")
-    const descriptionField = $("#descriptionField")
-    const pointsField = $("#pointsField")
-    const imgField = $("#imgField")
+    const form = $("#itemUpdateForm")
+    const resMsg = $("#resUpdateMsg")
+    const nameField = $("#nameUpdateField")
+    const descriptionField = $("#descriptionUpdateField")
+    const pointsField = $("#pointsUpdateField")
+    const imgField = $("#imgUpdateField")
     let itemId
 
     const updateModal = document.getElementById('updateModal');
@@ -51,6 +51,7 @@ $(document).ready(function() {
             .fail((jqXHR) => {
                 let errorData = $.parseJSON(jqXHR.responseText)
                 resMsg.css("opacity", "0.1");
+                resMsg.attr('style', 'color: red')
                 resMsg.animate({opacity: '1.0'}, 633);
                 resMsg.html(errorData.message)
                 resMsg.removeAttr('hidden')

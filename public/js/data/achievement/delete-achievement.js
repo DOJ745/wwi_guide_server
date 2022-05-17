@@ -9,10 +9,6 @@ $(document).ready(function() {
         const button = event.relatedTarget;
         itemId = button.getAttribute('data-bs-whatever');
         elementId.html("ID: " + itemId)
-        /*nameField.val($('#cardName' + itemId).html())
-        descriptionField.val($('#cardDescription' + itemId).html())
-        pointsField.val($('#cardPoints' + itemId).html().replace('Points: ', ''))
-        imgField.val($('#cardImg' + itemId).attr('src'))*/
     })
 
     deleteModal.addEventListener('hide.bs.modal', function (event) {
@@ -35,14 +31,11 @@ $(document).ready(function() {
                 resMsg.html(res.message)
                 resMsg.removeAttr('hidden')
 
-                ('#cardElem' + itemId).remove()
-                /*$('#cardName' + itemId).html(res.operationResult.name)
-                $('#cardDescription' + itemId).html(res.operationResult.description)
-                $('#cardPoints' + itemId).html(`Points: ${res.operationResult.points}`)
-                $('#cardImg' + itemId).attr('src', res.operationResult.img)*/
+                $('#cardElem' + itemId).remove()
             })
             .fail((jqXHR) => {
                 let errorData = $.parseJSON(jqXHR.responseText)
+                resMsg.attr('style', 'color: red')
                 resMsg.css("opacity", "0.1");
                 resMsg.animate({opacity: '1.0'}, 633);
                 resMsg.html(errorData.message)

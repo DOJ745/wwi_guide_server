@@ -1,6 +1,10 @@
 mixin insertButton()
-    div.row.justify-content-center
-        button.row.btn.btn-success(type='button' style="height:50px;width:250px;font-size:24px") Insert
+    div.row.justify-content-center.m-2
+        button.row.btn.btn-success(
+            type='button'
+            style="height:50px;width:250px;font-size:24px"
+            data-bs-toggle='modal'
+            data-bs-target='#insertModal') Insert
 
 mixin tableInfo(tableName, ...items)
     div.row.justify-content-center
