@@ -1,7 +1,7 @@
 include ../modal/modal_mixins
 
 mixin createCard(questionText, answerVariants, points, img, id)
-    .card.border-dark.mb-3.m-3(style='max-width: 400px;height: 230px' id='cardElem' + id)
+    .card.border-dark.mb-3.m-3(style='max-width: 400px;max-height: 230px' id='cardElem' + id)
         .row.g-0
             .col-md-4
                 img.img-fluid.rounded-start-(id='cardImg' + id, src=img, alt='IMG')
