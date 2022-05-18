@@ -8,6 +8,8 @@ const AuthRouter = require('./routers/AuthRouter')
 const DbRouter = require('./routers/DbRouter')
 const ViewRouter = require('./routers/ViewRouter')
 const {dbName, dbUsername, dbPassword, apiURL} = require('./config/config')
+const Cron = require('node-cron'); // for timed requests
+const requestify = require('requestify');
 
 const PORT = process.env.PORT || 5000
 
@@ -48,9 +50,14 @@ app.use(`${apiURL}/auth`, AuthRouter)
 app.use(`${apiURL}`, DbRouter)
 app.use(`/`, ViewRouter)
 
-app.get(`${apiURL}/test`, (req, res) => {
-    res.send("Test GET request 12345678")
+app.get(`${apiURL}/wake-up`, (req, res) => {
+    res.status(200).json({"message": "I'm not sleeping"})
 })
+
+Cron.schedule('* */30 * * * *', () => {
+    requestify.get(`http://localhost:5000${apiURL}/wake-up`)
+        .then(function(response) { console.log(response.getBody()) });
+});
 
 const start = async () => {
     try {

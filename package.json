@@ -23,9 +23,11 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.7",
     "morgan-body": "^2.6.6",
+    "node-cron": "^3.0.0",
     "nodemon": "^2.0.15",
     "npm": "^8.2.0",
-    "pug": "^3.0.2"
+    "pug": "^3.0.2",
+    "requestify": "^0.2.5"
   },
   "engines": {
     "node": "16.13.2",
