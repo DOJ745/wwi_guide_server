@@ -1,3 +1,33 @@
 extends ../basic_navbar_layout
+include  ../mixins/table_info_mixin
+include  ../mixins/data/event_armament_mixins
 
 block append content
+    .container.h-100
+        +tableInfo("Events",
+            "1) Title (string)",
+            "2) Text paragraphs (string array of html string)",
+            "3) Images (string array)",
+            "4) Images titles (string array)",
+            "5) Year ID (for null type 'null')",
+            "6) Achievement ID (for null type 'null')",
+            "7) Survey ID (for null type 'null')")
+
+        div.row.align-items-center.justify-content-center.h-100
+            each element in elements
+                +createEventCard(
+                    element.title,
+                    element.yearId,
+                    element.achievementId,
+                    element.surveyId,
+                    element.text_paragraphs,
+                    element.images,
+                    element.images_titles,
+                    element._id
+                )
+
+        +createEventModals()
+
+    script(type='text/javascript' src='/js/data/event/insert.js')
+    script(type='text/javascript' src='/js/data/event/update.js')
+    script(type='text/javascript' src='/js/data/delete.js')

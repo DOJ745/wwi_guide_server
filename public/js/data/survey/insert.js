@@ -5,7 +5,7 @@ $(document).ready(function() {
     const answerVariantsField = $("#answerVariantsInsertField")
     const pointsField = $("#pointsInsertField")
     const imgField = $("#imgInsertField")
-    let itemId
+    let itemId, tempArray
 
     const insertModal = document.getElementById('insertModal');
     insertModal.addEventListener('show.bs.modal', function (event) {
@@ -18,9 +18,11 @@ $(document).ready(function() {
     })
 
     let insertItem = function (event) {
+        const regExp = /\s*(?:,|$)\s*/
+        tempArray = answerVariantsField.val().split(regExp)
         let formData = {
             "question_text": questionTextField.val(),
-            "answer_variants": answerVariantsField.val(),
+            "answer_variants": tempArray,
             "points": pointsField.val(),
             "img": imgField.val(),
         }

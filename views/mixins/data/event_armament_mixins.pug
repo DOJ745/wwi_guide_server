@@ -1,0 +1,384 @@
+include ../modal/modal_mixins
+
+mixin createEventCard(title, yearId, achievementId, surveyId, textParagraphs, images, imagesTitles, id)
+    .card.border-dark.mb-3.m-3(style='max-width: 800px;' id='cardElem' + id)
+        .row.g-0
+            .col-md-12
+                .card-body.text-dark.justify-content-center
+                    h5.card-title(id='cardTitle' + id)= title
+                    p.card-text(id='cardYearId' + id)= "Year ID: " + yearId
+                    p.card-text(id='cardAchievementId' + id)= "Achievement ID: " + achievementId
+                    p.card-text(id='cardSurveyId' + id)= "Survey ID: " + surveyId
+                    each paragraph in textParagraphs
+                        p.card-text(class=`cardTextParagraph` + id)= "Text paragraph: " + paragraph
+                    each img in images
+                        p.card-text(class=`cardImg` + id)= "Image: " + img
+                    each imgTitle in imagesTitles
+                        p.card-text(class=`cardImgTitle` + id)= "Image title: " + imgTitle
+        .mt-auto.row.justify-content-center
+            button.col.btn.btn-primary.m-1.w-25(
+                type='button'
+                data-bs-toggle='modal',
+                data-bs-target='#updateModal'
+                data-bs-whatever=id) Update
+            button.col.btn.btn-danger.m-1.w-25(
+                type='button'
+                data-bs-toggle='modal'
+                data-bs-target='#deleteModal'
+                data-bs-whatever=id) Delete
+
+mixin createArmamentCard(title, category, subcategory, achievementId, surveyId, textParagraphs, images, imagesTitles, id)
+    .card.border-dark.mb-3.m-3(style='max-width: 800px;' id='cardElem' + id)
+        .row.g-0
+            .col-md-12
+                .card-body.text-dark.justify-content-center
+                    h5.card-title(id='cardTitle' + id)= title
+                    p.card-text(id='cardCategory' + id)= "Category: " + category
+                    p.card-text(id='cardSubcategory' + id)= "Subcategory: " + subcategory
+                    p.card-text(id='cardAchievementId' + id)= "Achievement ID: " + achievementId
+                    p.card-text(id='cardSurveyId' + id)= "Survey ID: " + surveyId
+                    each paragraph in textParagraphs
+                        p.card-text(id='cardTextParagraph' + id)= "Text paragraph: " + paragraph
+                    each img in images
+                        p.card-text(id='cardImg' + id)= "Image: " + img
+                    each imgTitle in imagesTitles
+                        p.card-text(id='cardImgTitle' + id)= "Image title: " + imgTitle
+        .mt-auto.row.justify-content-center
+            button.col.btn.btn-primary.m-1.w-25(
+                type='button'
+                data-bs-toggle='modal',
+                data-bs-target='#updateModal'
+                data-bs-whatever=id) Update
+            button.col.btn.btn-danger.m-1.w-25(
+                type='button'
+                data-bs-toggle='modal'
+                data-bs-target='#deleteModal'
+                data-bs-whatever=id) Delete
+
+
+mixin formEventModalByAction(actionName)
+    case actionName
+        when "insert"
+            #insertModal.modal.fade(
+                tabindex='-1',
+                aria-labelledby='modalLabel',
+                aria-hidden='true')
+                .modal-dialog.modal-xl
+                    .modal-content
+                        .modal-header
+                            h5#modalLabel.modal-title= "Insert event"
+                            button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                        .modal-body
+                            p#resInsertMsg(hidden='' style='color: red') Error response
+                            form#itemInsertForm(
+                                action="/api.wwi-guide.by/events"
+                                method="POST")
+                                label.col-form-label Input title:
+                                input#titleInsertField.form-control(
+                                    type='text'
+                                    value=''
+                                    required=''
+                                    name="title"
+                                    minlength=3
+                                    maxlength=100)
+
+                                label.col-form-label Input year ID:
+                                input#yearIdInsertField.form-control(
+                                    type='text'
+                                    value=''
+                                    name="yearId"
+                                    required=''
+                                    minlength=4
+                                    maxlength=24)
+
+                                label.col-form-label Input achievement ID:
+                                input#achievementIdInsertField.form-control(
+                                    type='text'
+                                    value=''
+                                    name="achievementId"
+                                    required=''
+                                    minlength=4
+                                    maxlength=24)
+
+                                label.col-form-label Input survey ID:
+                                input#surveyIdInsertField.form-control(
+                                    type='text'
+                                    value=''
+                                    name="surveyId"
+                                    required=''
+                                    minlength=4
+                                    maxlength=24)
+
+                                label.col-form-label Input text paragraphs (to separate them use "----- ")
+                                textarea#textParagraphsInsertField.form-control(
+                                    value=""
+                                    name="text_paragraphs",
+                                    required=''
+                                    rows='6')
+
+                                label.col-form-label Input images url (to separate them use ", ")
+                                textarea#imagesInsertField.form-control(
+                                    value=""
+                                    name="images",
+                                    required=''
+                                    rows='6')
+
+                                label.col-form-label Input images titles (to separate them use ", ")
+                                textarea#imagesTitlesInsertField.form-control(
+                                    value=""
+                                    name="images_titles",
+                                    required=''
+                                    rows='6')
+
+                                .row
+                                    button.col.btn.btn-success.m-1(type='submit') Add
+                                    button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
+        when "update"
+            #updateModal.modal.fade(
+                tabindex='-1',
+                aria-labelledby='modalLabel',
+                aria-hidden='true')
+                .modal-dialog.modal-xl
+                    .modal-content
+                        .modal-header
+                            h5#modalLabel.modal-title= "Update event"
+                            button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                        .modal-body
+                            p#resUpdateMsg(hidden='' style='color: red') Error response
+                            form#itemUpdateForm(
+                                action="/api.wwi-guide.by/events"
+                                method="PUT")
+                                label.col-form-label Input new title:
+                                input#titleUpdateField.form-control(
+                                    type='text'
+                                    value=''
+                                    required=''
+                                    name="title"
+                                    minlength=3
+                                    maxlength=100)
+
+                                label.col-form-label Input new year ID:
+                                input#yearIdUpdateField.form-control(
+                                    type='text'
+                                    value=''
+                                    name="yearId"
+                                    required=''
+                                    minlength=4
+                                    maxlength=24)
+
+                                label.col-form-label Input new achievement ID:
+                                input#achievementIdUpdateField.form-control(
+                                    type='text'
+                                    value=''
+                                    name="achievementId"
+                                    required=''
+                                    minlength=4
+                                    maxlength=24)
+
+                                label.col-form-label Input new survey ID:
+                                input#surveyIdUpdateField.form-control(
+                                    type='text'
+                                    value=''
+                                    name="surveyId"
+                                    required=''
+                                    minlength=4
+                                    maxlength=24)
+
+                                label.col-form-label Input new text paragraphs (to separate them use "----- ")
+                                textarea#textParagraphsUpdateField.form-control(
+                                    value=""
+                                    name="text_paragraphs",
+                                    required=''
+                                    rows='6')
+
+                                label.col-form-label Input new images url (to separate them use ", ")
+                                textarea#imagesUpdateField.form-control(
+                                    value=""
+                                    name="images",
+                                    required=''
+                                    rows='6')
+
+                                label.col-form-label Input new images titles (to separate them use ", ")
+                                textarea#imagesTitlesUpdateField.form-control(
+                                    value=""
+                                    name="images_titles",
+                                    required=''
+                                    rows='6')
+
+                                .row
+                                    button.col.btn.btn-primary.m-1(type='submit') Save changes
+                                    button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
+
+        when "delete"
+            +formDeleteModal("event")
+
+mixin createEventModals()
+    +formEventModalByAction("insert")
+    +formEventModalByAction("update")
+    +formEventModalByAction("delete")
+
+mixin formArmamentModalByAction(actionName)
+    case actionName
+        when "insert"
+            #insertModal.modal.fade(
+                tabindex='-1',
+                aria-labelledby='modalLabel',
+                aria-hidden='true')
+                .modal-dialog.modal-xl
+                    .modal-content
+                        .modal-header
+                            h5#modalLabel.modal-title= "Insert event"
+                            button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                        .modal-body
+                            p#resInsertMsg(hidden='' style='color: red') Error response
+                            form#itemInsertForm(
+                                action="/api.wwi-guide.by/armament"
+                                method="POST")
+                                label.col-form-label Input title:
+                                input#titleInsertField.form-control(
+                                    type='text'
+                                    value=''
+                                    required=''
+                                    name="title"
+                                    minlength=3
+                                    maxlength=100)
+
+                                select#categoryInsert.form-select(aria-label='Default select example')
+                                    option(selected='') Choose category
+                                    option(value='weapon') weapon
+                                    option(value='technique') technique
+
+                                select#subcategoryInsert.form-select(aria-label='Default select example', hidden='')
+                                    option(selected='') Choose subcategory (only for technique)
+                                    option(value='weapon') ground
+                                    option(value='technique') aviation
+                                    option(value='technique') navy
+
+                                label.col-form-label Input achievement ID:
+                                input#achievementIdInsertField.form-control(
+                                    type='text'
+                                    value=''
+                                    name="achievementId"
+                                    required=''
+                                    minlength=4
+                                    maxlength=24)
+
+                                label.col-form-label Input survey ID:
+                                input#surveyIdInsertField.form-control(
+                                    type='text'
+                                    value=''
+                                    name="surveyId"
+                                    required=''
+                                    minlength=4
+                                    maxlength=24)
+
+                                label.col-form-label Input text paragraphs (to separate them use "----- ")
+                                textarea#textParagraphsInsertField.form-control(
+                                    value=""
+                                    name="text_paragraphs",
+                                    required=''
+                                    rows='6')
+
+                                label.col-form-label Input images url (to separate them use ", ")
+                                textarea#imagesInsertField.form-control(
+                                    value=""
+                                    name="images",
+                                    required=''
+                                    rows='6')
+
+                                label.col-form-label Input images titles (to separate them use ", ")
+                                textarea#imagesTitlesInsertField.form-control(
+                                    value=""
+                                    name="images_titles",
+                                    required=''
+                                    rows='6')
+
+                                .row
+                                    button.col.btn.btn-success.m-1(type='submit') Add
+                                    button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
+
+        when "update"
+            #updateModal.modal.fade(
+                tabindex='-1',
+                aria-labelledby='modalLabel',
+                aria-hidden='true')
+                .modal-dialog.modal-xl
+                    .modal-content
+                        .modal-header
+                            h5#modalLabel.modal-title= "Update event"
+                            button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                        .modal-body
+                            p#resUpdateMsg(hidden='' style='color: red') Error response
+                            form#itemUpdateForm(
+                                action="/api.wwi-guide.by/armament"
+                                method="PUT")
+                                label.col-form-label Input new title:
+                                input#titleUpdateField.form-control(
+                                    type='text'
+                                    value=''
+                                    required=''
+                                    name="title"
+                                    minlength=3
+                                    maxlength=100)
+
+                                select#categoryUpdate.form-select(aria-label='Default select example')
+                                    option(selected='') Choose category
+                                    option(value='weapon') weapon
+                                    option(value='technique') technique
+
+                                select#subcategoryUpdate.form-select(aria-label='Default select example', hidden='')
+                                    option(selected='') Choose subcategory (only for technique)
+                                    option(value='weapon') ground
+                                    option(value='technique') aviation
+                                    option(value='technique') navy
+
+                                label.col-form-label Input new achievement ID:
+                                input#achievementIdUpdateField.form-control(
+                                    type='text'
+                                    value=''
+                                    name="achievementId"
+                                    required=''
+                                    minlength=4
+                                    maxlength=24)
+
+                                label.col-form-label Input new survey ID:
+                                input#surveyIdUpdateField.form-control(
+                                    type='text'
+                                    value=''
+                                    name="surveyId"
+                                    required=''
+                                    minlength=4
+                                    maxlength=24)
+
+                                label.col-form-label Input new text paragraphs (to separate them use "----- ")
+                                textarea#textParagraphsUpdateField.form-control(
+                                    value=""
+                                    name="text_paragraphs",
+                                    required=''
+                                    rows='6')
+
+                                label.col-form-label Input new images url (to separate them use ", ")
+                                textarea#imagesUpdateField.form-control(
+                                    value=""
+                                    name="images",
+                                    required=''
+                                    rows='6')
+
+                                label.col-form-label Input new images titles (to separate them use ", ")
+                                textarea#imagesTitlesInsertField.form-control(
+                                    value=""
+                                    name="images_titles",
+                                    required=''
+                                    rows='6')
+
+                                .row
+                                    button.col.btn.btn-primary.m-1(type='submit') Save changes
+                                    button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
+
+        when "delete"
+            +formDeleteModal("armament")
+
+mixin createArmamentModals()
+    +formArmamentModalByAction("insert")
+    +formArmamentModalByAction("update")
+    +formArmamentModalByAction("delete")

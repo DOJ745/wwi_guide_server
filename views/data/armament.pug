@@ -1,3 +1,35 @@
 extends ../basic_navbar_layout
+include  ../mixins/table_info_mixin
+include  ../mixins/data/event_armament_mixins
 
 block append content
+    .container.h-100
+        +tableInfo("Armaments",
+            "1) Title (string)",
+            "2) Text paragraphs (string array)",
+            "3) Images (string array)",
+            "4) Images titles (string array)",
+            "5) Category (string, enum)",
+            "6) Subcategory (string, enum)",
+            "7) Achievement ID (for null type 'null')",
+            "8) Survey ID (for null type 'null')")
+
+        div.row.align-items-center.justify-content-center.h-100
+            each element in elements
+                +createArmamentCard(
+                    element.title,
+                    element.category,
+                    element.subcategory,
+                    element.achievementId,
+                    element.surveyId,
+                    element.text_paragraphs,
+                    element.images,
+                    element.images_titles,
+                    element._id
+                )
+
+        +createArmamentModals()
+
+    script(type='text/javascript' src='/js/data/armament/insert.js')
+    script(type='text/javascript' src='/js/data/armament/update.js')
+    script(type='text/javascript' src='/js/data/delete.js')

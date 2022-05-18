@@ -64,21 +64,11 @@ class ArmamentController extends IDataController {
             }
         }
         catch (e){
-
+            console.log(e)
+            return ErrorResponses.crudOperationError(res, ModelsElements.ARMAMENT, CRUD_OPERATIONS.UPDATING, e)
         }
     }
 
-    async deleteElem(req, res) {
-        try {
-            const errors = validationResult(req)
-            if (!errors.isEmpty()) {
-                return ErrorResponses.modelValidationError(res, ModelsElements.ARMAMENT, errors)
-            }
-        }
-        catch (e){
-
-        }
-    }
 
     async getElems(req, res) {
         try {

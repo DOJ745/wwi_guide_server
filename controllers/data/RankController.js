@@ -36,6 +36,7 @@ class RankController extends IDataController {
                 }
                 else return ErrorResponses.invalidId(res, ModelsElements.COUNTRY)
             }
+
             return SuccessResponses.successElemOperation(res, ModelsElements.RANK, CRUD_OPERATIONS.ADDED, null)
         }
         catch (e) {
