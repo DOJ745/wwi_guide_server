@@ -17,7 +17,6 @@ const CheckFactory = require('../middleware/CheckHandlersFactory')
 const roleMiddleware = require('../middleware/RoleMiddleware')
 
 // TODO: after you have done all pages you should add role middleware and post this app into heroku
-// TODO: send request to test page every 29 minutes
 
 // ----- YEARS -----
 router.get('/years', yearController.getElems)
@@ -90,12 +89,12 @@ router.delete('/armament', (req, res) =>{
 
 // ----- ACHIEVEMENTS -----
 router.get('/achievements', achievementController.getElems)
-//router.post('/achievements', roleMiddleware(['ADMIN']), achievementController.addElem)
-router.post('/achievements', achievementController.addElem)
-//router.put('/achievements', roleMiddleware(['ADMIN']), achievementController.updateElem)
-router.put('/achievements', achievementController.updateElem)
+router.post('/achievements', roleMiddleware(['ADMIN']), achievementController.addElem)
+//router.post('/achievements', achievementController.addElem)
+router.put('/achievements', roleMiddleware(['ADMIN']), achievementController.updateElem)
+//router.put('/achievements', achievementController.updateElem)
 //router.delete('/achievements', roleMiddleware(['ADMIN']), achievementController.deleteElem)
-router.delete('/achievements', (req, res) =>{
+router.delete('/achievements', roleMiddleware(['ADMIN']), (req, res) =>{
     achievementController.deleteElem(req, res, ModelsElements.ACHIEVEMENT)
 })
 
