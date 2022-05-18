@@ -54,7 +54,7 @@ app.get(`${apiURL}/wake-up`, (req, res) => {
     res.status(200).json({"message": "I'm not sleeping"})
 })
 
-Cron.schedule('* */30 * * * *', () => {
+Cron.schedule('* */25 * * * *', () => {
     requestify.get(`http://localhost:5000${apiURL}/wake-up`)
         .then(function(response) { console.log(response.getBody()) });
 });
