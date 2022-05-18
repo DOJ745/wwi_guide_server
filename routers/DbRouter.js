@@ -70,15 +70,23 @@ router.delete('/users', (req, res) =>{
 router.get('/events', eventController.getElems)
 //router.post('/events', roleMiddleware(['ADMIN']), eventController.addElem)
 router.post('/events', eventController.addElem)
-router.put('/events', roleMiddleware(['ADMIN']), eventController.updateElem)
-router.delete('/events', roleMiddleware(['ADMIN']), eventController.deleteElem)
+//router.put('/events', roleMiddleware(['ADMIN']), eventController.updateElem)
+router.put('/events', eventController.updateElem)
+//router.delete('/events', roleMiddleware(['ADMIN']), eventController.deleteElem)
+router.delete('/events', (req, res) =>{
+    eventController.deleteElem(req, res, ModelsElements.EVENT)
+})
 
 // ----- ARMAMENT -----
 router.get('/armament', armamentController.getElems)
 //router.post('/armaments', roleMiddleware(['ADMIN']), armamentController.addElem)
 router.post('/armament', armamentController.addElem)
-router.put('/armament', roleMiddleware(['ADMIN']), armamentController.updateElem)
-router.delete('/armament', roleMiddleware(['ADMIN']), armamentController.deleteElem)
+//router.put('/armament', roleMiddleware(['ADMIN']), armamentController.updateElem)
+router.put('/armament', armamentController.updateElem)
+//router.delete('/armament', roleMiddleware(['ADMIN']), armamentController.deleteElem)
+router.delete('/armament', (req, res) =>{
+    armamentController.deleteElem(req, res, ModelsElements.ARMAMENT)
+})
 
 // ----- ACHIEVEMENTS -----
 router.get('/achievements', achievementController.getElems)
@@ -95,8 +103,11 @@ router.delete('/achievements', (req, res) =>{
 router.get('/surveys', surveyController.getElems)
 //router.post('/surveys-answers', roleMiddleware(['ADMIN']), surveyController.addElem)
 router.post('/surveys', surveyController.addElem)
-router.put('/surveys', roleMiddleware(['ADMIN']), surveyController.updateElem)
-router.delete('/surveys', roleMiddleware(['ADMIN']), surveyController.deleteElem)
+//router.put('/surveys', roleMiddleware(['ADMIN']), surveyController.updateElem)
+//router.delete('/surveys', roleMiddleware(['ADMIN']), surveyController.deleteElem)
+router.delete('/surveys', (req, res) =>{
+    surveyController.deleteElem(req, res, ModelsElements.SURVEY)
+})
 
 // ----- TESTS THEMES -----
 router.get('/tests-themes', testThemeController.getElems)
