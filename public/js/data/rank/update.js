@@ -44,7 +44,7 @@ $(document).ready(function() {
                 resMsg.removeAttr('hidden')
 
                 $('#cardName' + itemId).html(res.operationResult.name)
-                $('#cardCountryId' + itemId).html(res.operationResult.countryId)
+                $('#cardCountryId' + itemId).html(`Country ID: ${res.operationResult.countryId}`)
                 $('#cardPoints' + itemId).html(`Points: ${res.operationResult.points}`)
                 $('#cardImg' + itemId).attr('src', res.operationResult.img)
             })

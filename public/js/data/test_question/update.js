@@ -41,7 +41,7 @@ $(document).ready(function() {
                 resMsg.removeAttr('hidden')
 
                 $('#cardText' + itemId).html(res.operationResult.text)
-                $('#cardTestThemeId' + itemId).html(res.operationResult.testThemeId)
+                $('#cardTestThemeId' + itemId).html(`Test theme ID: ${res.operationResult.testThemeId}`)
                 $('#cardImg' + itemId).attr('src', res.operationResult.img)
             })
             .fail((jqXHR) => {

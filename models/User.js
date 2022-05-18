@@ -29,7 +29,8 @@ const User = new mongoose.Schema({
 
     achievements: [{
         type: String,
-        ref: 'Achievement'
+        ref: 'Achievement',
+        default: [""]
     }],
 
     countryId: {

@@ -55,10 +55,16 @@ router.delete('/countries', (req, res) =>{
 })
 
 // ----- USERS -----
-router.get('/users', roleMiddleware(['ADMIN']), userController.getElems)
-router.post('/users', roleMiddleware(['ADMIN']), userController.addElem)
-router.put('/users', roleMiddleware(['ADMIN', 'USER']), userController.updateElem)
-router.delete('/users', roleMiddleware(['ADMIN']), userController.deleteElem)
+//router.get('/users', roleMiddleware(['ADMIN']), userController.getElems)
+router.get('/users', userController.getElems)
+//router.post('/users', roleMiddleware(['ADMIN']), userController.addElem)
+router.post('/users', userController.addElem)
+//router.put('/users', roleMiddleware(['ADMIN', 'USER']), userController.updateElem)
+router.put('/users', userController.updateElem)
+//router.delete('/users', roleMiddleware(['ADMIN']), userController.deleteElem)
+router.delete('/users', (req, res) =>{
+    userController.deleteElem(req, res, ModelsElements.USER)
+})
 
 // ----- EVENTS -----
 router.get('/events', eventController.getElems)

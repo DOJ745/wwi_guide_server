@@ -1,3 +1,30 @@
 extends ../basic_navbar_layout
+include  ../mixins/table_info_mixin
+include  ../mixins/data/user_mixins
 
 block append content
+    .container.h-100
+        +tableInfoNoInsertBtn("Users",
+            "1) Login (string)",
+            "2) Password (hash string)",
+            "3) Roles (string array) !USERS ONLY!",
+            "4) Score (int)",
+            "5) Achievements (JSON string array, for null value type 'null')",
+            "6) CountryId (string)",
+            "You can change only login, achievements and score")
+
+        div.row.align-items-center.justify-content-center.h-100
+            each element in elements
+                +createCard(
+                    element.login,
+                    element.password,
+                    element.roles,
+                    element.score,
+                    element.achievements,
+                    element.countryId,
+                    element._id)
+
+        +createModals()
+
+    script(type='text/javascript' src='/js/data/user/update.js')
+    script(type='text/javascript' src='/js/data/delete.js')

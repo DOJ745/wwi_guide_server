@@ -1,0 +1,11 @@
+### update user
+PUT {{localhost}}/users
+Content-Type: application/json
+
+{
+  "login": "testuser",
+  "score": 150,
+  "achievements": [
+    "6277a8d2ab3138169905ba26"
+  ]
+}

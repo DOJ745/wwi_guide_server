@@ -28,12 +28,12 @@ Content-Type: application/json
 ### Get users without jwt
 GET {{localhost}}/auth/users
 
-### Reg new user
+### Reg new user (Austro-Hungary)
 POST {{localhost}}/auth/reg
 Content-Type: application/json
 
 {
-  "login": "tes",
+  "login": "testuser23",
   "password": "Pass_1",
   "countryId": "61f988955d289d4cb3c483ad"
 }

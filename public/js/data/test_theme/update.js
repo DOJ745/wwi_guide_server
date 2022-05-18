@@ -38,7 +38,7 @@ $(document).ready(function() {
                 resMsg.removeAttr('hidden')
 
                 $('#cardName' + itemId).html(res.operationResult.name)
-                $('#cardAchievementId' + itemId).html(res.operationResult.achievementId)
+                $('#cardAchievementId' + itemId).html(`Achievement ID: ${res.operationResult.achievementId}`)
             })
             .fail((jqXHR) => {
                 let errorData = $.parseJSON(jqXHR.responseText)

@@ -1,224 +1,124 @@
-//- when "event"
-    when "armament"
-    when "test answer"
-    when "user"
-    when "survey" // parent
-    default
+mixin createDelModal(tableName, warningMsg, apiUrl, idLabel)
+    #deleteModal.modal.fade(
+        tabindex='-1',
+        aria-labelledby='modalLabel',
+        aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h5#modalLabel.modal-title Delete #{tableName}
+                    button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                .modal-body
+                    p(style='color: red')= warningMsg
+                    p#resDelMsg(hidden='' style='color: red') Error response
+                    form#itemDeleteForm(action=apiUrl method="DELETE")
+                        p#elementId
+                        label.col-form-label Input #{idLabel} ID:
+                        input#nameField.form-control(
+                            type='text'
+                            value=''
+                            required=''
+                            name="id"
+                            minlength=24
+                            maxlength=24)
+                        .row
+                            button.col.btn.btn-danger.m-1(type='submit') DELETE
+                            button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
+
 
 mixin formDeleteModal(tableName)
     case tableName
         when "achievement"
-            #deleteModal.modal.fade(
-                tabindex='-1',
-                aria-labelledby='modalLabel',
-                aria-hidden='true')
-                .modal-dialog
-                    .modal-content
-                        .modal-header
-                            h5#modalLabel.modal-title Delete #{tableName}
-                            button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
-                        .modal-body
-                            p(style='color: red') Achievement is a parent table! You cannot delete this item until it was removed from child tables!
-                            p#resDelMsg(hidden='' style='color: red') Error response
-                            form#itemDeleteForm(action="/api.wwi-guide.by/achievements" method="DELETE")
-                                p#elementId
-                                label.col-form-label Input #{tableName} ID:
-                                input#nameField.form-control(
-                                    type='text'
-                                    value=''
-                                    required=''
-                                    name="id"
-                                    minlength=24
-                                    maxlength=24)
-                                .row
-                                    button.col.btn.btn-danger.m-1(type='submit') DELETE
-                                    button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
+            +createDelModal(
+                tableName,
+                "Achievement is a parent table! You cannot delete this item until it was removed from child tables!",
+                "/api.wwi-guide.by/achievements",
+                tableName
+            )
         when "test_theme"
-            #deleteModal.modal.fade(
-                tabindex='-1',
-                aria-labelledby='modalLabel',
-                aria-hidden='true')
-                .modal-dialog
-                    .modal-content
-                        .modal-header
-                            h5#modalLabel.modal-title Delete #{tableName}
-                            button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
-                        .modal-body
-                            p(style='color: red') Test theme is a parent table! You cannot delete this item until it was removed from child tables!
-                            p#resDelMsg(hidden='' style='color: red') Error response
-                            form#itemDeleteForm(action="/api.wwi-guide.by/tests-themes" method="DELETE")
-                                p#elementId
-                                label.col-form-label Input test theme ID:
-                                input#nameField.form-control(
-                                    type='text'
-                                    value=''
-                                    required=''
-                                    name="id"
-                                    minlength=24
-                                    maxlength=24)
-                                .row
-                                    button.col.btn.btn-danger.m-1(type='submit') DELETE
-                                    button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
+            +createDelModal(
+                tableName,
+                "Test theme is a parent table! You cannot delete this item until it was removed from child tables!",
+                "/api.wwi-guide.by/tests-themes",
+            "test theme"
+            )
 
         when "rank"
-            #deleteModal.modal.fade(
-                tabindex='-1',
-                aria-labelledby='modalLabel',
-                aria-hidden='true')
-                .modal-dialog
-                    .modal-content
-                        .modal-header
-                            h5#modalLabel.modal-title Delete #{tableName}
-                            button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
-                        .modal-body
-                            h5 Rank is a child table. Just be careful when deleting it.
-                            p#resDelMsg(hidden='' style='color: red') Error response
-                            form#itemDeleteForm(action="/api.wwi-guide.by/ranks" method="DELETE")
-                                p#elementId
-                                label.col-form-label Input #{tableName} ID:
-                                input#nameField.form-control(
-                                    type='text'
-                                    value=''
-                                    required=''
-                                    name="id"
-                                    minlength=24
-                                    maxlength=24)
-                                .row
-                                    button.col.btn.btn-danger.m-1(type='submit') DELETE
-                                    button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
+            +createDelModal(
+                tableName,
+                "Rank is a child table. Just be careful when deleting it.",
+                "/api.wwi-guide.by/ranks",
+                tableName
+            )
 
         when "country"
-            #deleteModal.modal.fade(
-                tabindex='-1',
-                aria-labelledby='modalLabel',
-                aria-hidden='true')
-                .modal-dialog
-                    .modal-content
-                        .modal-header
-                            h5#modalLabel.modal-title Delete #{tableName}
-                            button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
-                        .modal-body
-                            p(style='color: red') Country is a parent table! You cannot delete this item until it was removed from child tables!
-                            p#resDelMsg(hidden='' style='color: red') Error response
-                            form#itemDeleteForm(action="/api.wwi-guide.by/countries" method="DELETE")
-                                p#elementId
-                                label.col-form-label Input #{tableName} ID:
-                                input#nameField.form-control(
-                                    type='text'
-                                    value=''
-                                    required=''
-                                    name="id"
-                                    minlength=24
-                                    maxlength=24)
-                                .row
-                                    button.col.btn.btn-danger.m-1(type='submit') DELETE
-                                    button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
+            +createDelModal(
+                tableName,
+                "Country is a parent table! You cannot delete this item until it was removed from child tables!",
+                "/api.wwi-guide.by/countries",
+                tableName
+            )
 
         when "year"
-            #deleteModal.modal.fade(
-                tabindex='-1',
-                aria-labelledby='modalLabel',
-                aria-hidden='true')
-                .modal-dialog
-                    .modal-content
-                        .modal-header
-                            h5#modalLabel.modal-title Delete #{tableName}
-                            button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
-                        .modal-body
-                            p(style='color: red') Year is a parent table! You cannot delete this item until it was removed from child tables!
-                            p#resDelMsg(hidden='' style='color: red') Error response
-                            form#itemDeleteForm(action="/api.wwi-guide.by/years" method="DELETE")
-                                p#elementId
-                                label.col-form-label Input #{tableName} ID:
-                                input#nameField.form-control(
-                                    type='text'
-                                    value=''
-                                    required=''
-                                    name="id"
-                                    minlength=24
-                                    maxlength=24)
-                                .row
-                                    button.col.btn.btn-danger.m-1(type='submit') DELETE
-                                    button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
+            +createDelModal(
+                tableName,
+                "Year is a parent table! You cannot delete this item until it was removed from child tables!",
+                "/api.wwi-guide.by/years",
+                tableName
+            )
 
         when "test_question"
-            #deleteModal.modal.fade(
-                tabindex='-1',
-                aria-labelledby='modalLabel',
-                aria-hidden='true')
-                .modal-dialog
-                    .modal-content
-                        .modal-header
-                            h5#modalLabel.modal-title Delete #{tableName}
-                            button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
-                        .modal-body
-                            p(style='color: red') Test question is a parent table! You cannot delete this item until it was removed from child tables!
-                            p#resDelMsg(hidden='' style='color: red') Error response
-                            form#itemDeleteForm(action="/api.wwi-guide.by/tests-questions" method="DELETE")
-                                p#elementId
-                                label.col-form-label Input test question ID:
-                                input#nameField.form-control(
-                                    type='text'
-                                    value=''
-                                    required=''
-                                    name="id"
-                                    minlength=24
-                                    maxlength=24)
-                                .row
-                                    button.col.btn.btn-danger.m-1(type='submit') DELETE
-                                    button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
+            +createDelModal(
+                tableName,
+                "Test question is a parent table! You cannot delete this item until it was removed from child tables!",
+                "/api.wwi-guide.by/tests-questions",
+                "test question"
+            )
+
         when "log"
-            #deleteModal.modal.fade(
-                tabindex='-1',
-                aria-labelledby='modalLabel',
-                aria-hidden='true')
-                .modal-dialog
-                    .modal-content
-                        .modal-header
-                            h5#modalLabel.modal-title Delete #{tableName}
-                            button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
-                        .modal-body
-                            h5 Log only to watch what was user doing. If you no longer need it, just delete.
-                            p#resDelMsg(hidden='' style='color: red') Error response
-                            form#itemDeleteForm(action="/api.wwi-guide.by/logs" method="DELETE")
-                                p#elementId
-                                label.col-form-label Input log ID:
-                                input#nameField.form-control(
-                                    type='text'
-                                    value=''
-                                    required=''
-                                    name="id"
-                                    minlength=24
-                                    maxlength=24)
-                                .row
-                                    button.col.btn.btn-danger.m-1(type='submit') DELETE
-                                    button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
+            +createDelModal(
+                tableName,
+                "Log only to watch what was user doing. If you no longer need it, just delete.",
+                "/api.wwi-guide.by/logs",
+                tableName
+            )
 
         when "test_answer"
-            #deleteModal.modal.fade(
-                tabindex='-1',
-                aria-labelledby='modalLabel',
-                aria-hidden='true')
-                .modal-dialog
-                    .modal-content
-                        .modal-header
-                            h5#modalLabel.modal-title Delete #{tableName}
-                            button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
-                        .modal-body
-                            h5 Test answer is a child table. Just be careful when deleting it.
-                            p#resDelMsg(hidden='' style='color: red') Error response
-                            form#itemDeleteForm(action="/api.wwi-guide.by/tests-answers" method="DELETE")
-                                p#elementId
-                                label.col-form-label Input test answer ID:
-                                input#nameField.form-control(
-                                    type='text'
-                                    value=''
-                                    required=''
-                                    name="id"
-                                    minlength=24
-                                    maxlength=24)
-                                .row
-                                    button.col.btn.btn-danger.m-1(type='submit') DELETE
-                                    button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
+            +createDelModal(
+                tableName,
+                "Test answer is a child table. Just be careful when deleting it.",
+                "/api.wwi-guide.by/tests-answers",
+                "test answer"
+            )
+
+        when "user"
+            +createDelModal(
+                tableName,
+                "User is a child table. Just be careful when deleting it.",
+                "/api.wwi-guide.by/users",
+                tableName
+            )
+        when "survey"
+            +createDelModal(
+                tableName,
+                "Survey is a parent table! You cannot delete this item until it was removed from child tables!",
+                "/api.wwi-guide.by/surveys",
+                tableName
+            )
+        when "event"
+            +createDelModal(
+                tableName,
+                "Event is a BIG child table. BE VERY CAREFUL when deleting it.",
+                "/api.wwi-guide.by/events",
+                tableName
+            )
+        when "armament"
+            +createDelModal(
+                tableName,
+                "Armament is a BIG child table. BE VERY CAREFUL when deleting it.",
+                "/api.wwi-guide.by/armament",
+                tableName
+            )
+
 
 

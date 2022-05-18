@@ -1,1 +1,76 @@
 include ../modal/modal_mixins
+
+mixin createCard(login, password, roles, score, achievements, countryId, id)
+    .card.border-dark.mb-3.m-3(style='max-width: 400px;height: 490px' id='cardElem' + id)
+        .row.g-0
+            .col-md-12
+                .card-body.text-dark.justify-content-center
+                    h5.card-title(id='cardLogin' + id)= login
+                    p.card-text(id='cardPassword' + id)= "Password: " + password
+                    p.card-text(id='cardRoles' + id)= "Roles: " + roles
+                    p.card-text(id='cardScore' + id)= "Score: " + score
+                    p.card-text(id='cardAchievements' + id)= "Achievements: " + achievements
+                    p.card-text(id='cardCountryId' + id)= "Country ID: " + countryId
+        .mt-auto.row.justify-content-center
+            button.col.btn.btn-primary.m-1.w-25(
+                type='button'
+                data-bs-toggle='modal',
+                data-bs-target='#updateModal'
+                data-bs-whatever=id) Update
+            button.col.btn.btn-danger.m-1.w-25(
+                type='button'
+                data-bs-toggle='modal'
+                data-bs-target='#deleteModal'
+                data-bs-whatever=id) Delete
+
+mixin formModalByAction(actionName)
+    case actionName
+        when "update"
+            #updateModal.modal.fade(
+                tabindex='-1',
+                aria-labelledby='modalLabel',
+                aria-hidden='true')
+                .modal-dialog
+                    .modal-content
+                        .modal-header
+                            h5#modalLabel.modal-title Update user
+                            button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                        .modal-body
+                            p#resUpdateMsg(hidden='' style='color: red') Error response
+                            form#itemUpdateForm(action="/api.wwi-guide.by/users" method="PUT")
+                                label.col-form-label Input new login:
+                                input#loginUpdateField.form-control(
+                                    type='text'
+                                    value=''
+                                    required=''
+                                    name="login"
+                                    minlength=4
+                                    maxlength=48)
+
+                                label.col-form-label Input new score:
+                                input#scoreUpdateField.form-control(
+                                    type='number'
+                                    value=0
+                                    name="score"
+                                    step="10"
+                                    required=''
+                                    min="0"
+                                    max="1000")
+
+                                label.col-form-label Input new achievement array (for separation use ',' without space):
+                                textarea#achievementsUpdateField.form-control(
+                                    value="elementId1,elementId2"
+                                    name="achievements",
+                                    required=''
+                                    minLength='2'
+                                    rows='4')
+                                .row
+                                    button.col.btn.btn-primary.m-1(type='submit') Save changes
+                                    button.col.btn.btn-secondary.m-1(type='button', data-bs-dismiss='modal') Close
+
+        when "delete"
+            +formDeleteModal("user")
+
+mixin createModals()
+    +formModalByAction("update")
+    +formModalByAction("delete")
