@@ -38,11 +38,11 @@ mixin createArmamentCard(title, category, subcategory, achievementId, surveyId, 
                     p.card-text(id='cardAchievementId' + id)= "Achievement ID: " + achievementId
                     p.card-text(id='cardSurveyId' + id)= "Survey ID: " + surveyId
                     each paragraph in textParagraphs
-                        p.card-text(id='cardTextParagraph' + id)= "Text paragraph: " + paragraph
+                        p.card-text(class='cardTextParagraph' + id)= "Text paragraph: " + paragraph
                     each img in images
-                        p.card-text(id='cardImg' + id)= "Image: " + img
+                        p.card-text(class='cardImg' + id)= "Image: " + img
                     each imgTitle in imagesTitles
-                        p.card-text(id='cardImgTitle' + id)= "Image title: " + imgTitle
+                        p.card-text(class=`cardImgTitle` + id)= "Image title: " + imgTitle
         .mt-auto.row.justify-content-center
             button.col.btn.btn-primary.m-1.w-25(
                 type='button'
@@ -245,14 +245,14 @@ mixin formArmamentModalByAction(actionName)
 
                                 select#categoryInsert.form-select(aria-label='Default select example')
                                     option(selected='') Choose category
-                                    option(value='weapon') weapon
-                                    option(value='technique') technique
+                                    option(value='weapon') Weapon
+                                    option(value='technique') Technique
 
                                 select#subcategoryInsert.form-select(aria-label='Default select example', hidden='')
-                                    option(selected='') Choose subcategory (only for technique)
-                                    option(value='weapon') ground
-                                    option(value='technique') aviation
-                                    option(value='technique') navy
+                                    option(selected='') Choose subcategory
+                                    option(value='ground') Ground
+                                    option(value='aviation') Aviation
+                                    option(value='technique') Navy
 
                                 label.col-form-label Input achievement ID:
                                 input#achievementIdInsertField.form-control(
@@ -322,15 +322,15 @@ mixin formArmamentModalByAction(actionName)
                                     maxlength=100)
 
                                 select#categoryUpdate.form-select(aria-label='Default select example')
-                                    option(selected='') Choose category
-                                    option(value='weapon') weapon
-                                    option(value='technique') technique
+                                    option#chooseCategory(selected='') Choose new category
+                                    option#categoryWeapon(value='weapon') Weapon
+                                    option#categoryTechnique(value='technique') Technique
 
                                 select#subcategoryUpdate.form-select(aria-label='Default select example', hidden='')
-                                    option(selected='') Choose subcategory (only for technique)
-                                    option(value='weapon') ground
-                                    option(value='technique') aviation
-                                    option(value='technique') navy
+                                    option#chooseSubcategory(selected='') Choose new subcategory
+                                    option#subcategoryGround(value='ground') Ground
+                                    option#subcategoryAviation(value='aviation') Aviation
+                                    option#subcategoryNavy(value='navy') Navy
 
                                 label.col-form-label Input new achievement ID:
                                 input#achievementIdUpdateField.form-control(
@@ -365,7 +365,7 @@ mixin formArmamentModalByAction(actionName)
                                     rows='6')
 
                                 label.col-form-label Input new images titles (to separate them use ", ")
-                                textarea#imagesTitlesInsertField.form-control(
+                                textarea#imagesTitlesUpdateField.form-control(
                                     value=""
                                     name="images_titles",
                                     required=''

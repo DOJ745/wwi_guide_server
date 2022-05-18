@@ -37,7 +37,7 @@ const Armament = new mongoose.Schema({
         type: String,
         required: true,
         enum : ["ground", "aviation", "navy"],
-        default: null
+        default: ""
     },
 
     achievementId: {

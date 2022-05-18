@@ -21,8 +21,6 @@ class EventController extends IDataController {
             }
 
             const currentDoc = req.body
-            console.log("CURRENT DOC: " + currentDoc)
-
             let idCandidate, allValid = false
 
             if(currentDoc.yearId === "null") {
@@ -95,7 +93,6 @@ class EventController extends IDataController {
             }
 
             const currentDoc = req.body
-
             let idCandidate, allValid = false
 
             if(currentDoc.yearId === "null") {

@@ -19,7 +19,6 @@ $(document).ready(function() {
         yearIdField.val($('#cardYearId' + itemId).html().replace('Year ID: ', ''))
         achievementIdField.val($('#cardAchievementId' + itemId).html().replace('Achievement ID: ', ''))
         surveyIdField.val($('#cardSurveyId' + itemId).html().replace('Survey ID: ', ''))
-        //textParagraphsField.val($(".cardTextParagraph" + itemId).html().replace('Text paragraph: ', ''))
 
         let allImages = $(".cardImg" + itemId).map(function() {
             return this.innerHTML.replace("Image: ", "");

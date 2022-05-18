@@ -49,7 +49,7 @@ $(document).ready(function() {
                 resMsg.html(res.message)
                 resMsg.removeAttr('hidden')
 
-                setTimeout(reloadPage, 699)
+                setTimeout(reloadPage, 999)
                 function reloadPage(){ location.href = "/events" }
             })
             .fail((jqXHR) => {
