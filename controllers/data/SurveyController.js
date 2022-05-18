@@ -5,6 +5,7 @@ const CRUD_OPERATIONS = require('../../config/crud_operations')
 const IDataController = require("../interfaces/DataControllerInterface");
 const {validationResult} = require("express-validator");
 const SuccessResponses = require("../../responses/SuccessResponses");
+const User = require("../../models/User");
 
 class SurveyController extends IDataController {
     constructor() { super(); }
@@ -22,10 +23,10 @@ class SurveyController extends IDataController {
                 question_text: question_text,
                 img: img,
                 points: points,
-                answer_variants: answer_variants  })
+                answer_variants: answer_variants
+            })
             await newElem.save()
-
-            return SuccessResponses.successElemOperation(res, ModelsElements.SURVEY, CRUD_OPERATIONS.ADDED)
+            return SuccessResponses.successElemOperation(res, ModelsElements.SURVEY, CRUD_OPERATIONS.ADDED, null)
         }
         catch (e) {
             console.log(e)
@@ -39,29 +40,32 @@ class SurveyController extends IDataController {
             if (!errors.isEmpty()) {
                 return ErrorResponses.modelValidationError(res, ModelsElements.SURVEY, errors)
             }
-        }
-        catch (e){
 
+            const {question_text, img, points, answer_variants, id} = req.body
+
+            const updDoc = await Survey.findByIdAndUpdate(id,
+                {
+                    question_text: question_text,
+                    img: img,
+                    points: points,
+                    answer_variants: answer_variants
+                },
+                {new: true})
+            if(updDoc)
+                return SuccessResponses.successElemOperation(res, ModelsElements.SURVEY, CRUD_OPERATIONS.UPDATED, updDoc)
+        }
+        catch (e) {
+            console.log(e)
+            ErrorResponses.crudOperationError(res, ModelsElements.SURVEY, CRUD_OPERATIONS.UPDATING, e)
         }
     }
 
-    async deleteElem(req, res) {
-        try {
-            const errors = validationResult(req)
-            if (!errors.isEmpty()) {
-                return ErrorResponses.modelValidationError(res, ModelsElements.SURVEY, errors)
-            }
-        }
-        catch (e){
-
-        }
-    }
 
     async getElems(req, res) {
         try {
             const elems = await Survey.find()
             if(req.baseUrl === '/api.wwi-guide.by') return res.json(elems)
-            else res.render('data/survey', {title: "Surveys", elements: elems})
+            else res.render('data/surveys', {title: "Surveys", elements: elems})
         }
         catch (e) {
             console.log(e)

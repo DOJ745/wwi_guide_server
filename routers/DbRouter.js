@@ -104,6 +104,7 @@ router.get('/surveys', surveyController.getElems)
 //router.post('/surveys-answers', roleMiddleware(['ADMIN']), surveyController.addElem)
 router.post('/surveys', surveyController.addElem)
 //router.put('/surveys', roleMiddleware(['ADMIN']), surveyController.updateElem)
+router.put('/surveys', surveyController.updateElem)
 //router.delete('/surveys', roleMiddleware(['ADMIN']), surveyController.deleteElem)
 router.delete('/surveys', (req, res) =>{
     surveyController.deleteElem(req, res, ModelsElements.SURVEY)

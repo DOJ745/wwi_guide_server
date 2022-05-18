@@ -1,3 +1,26 @@
 extends ../basic_navbar_layout
+include  ../mixins/table_info_mixin
+include  ../mixins/data/survey_mixins
 
 block append content
+    .container.h-100
+        +tableInfo("Surveys",
+            "1) Question text (string)",
+            "2) Image (url, for null leave empty string)",
+            "3) Points (int)",
+            "4) Answer variants (JSON string array, null not allowed)")
+
+        div.row.align-items-center.justify-content-center.h-100
+            each element in elements
+                +createCard(
+                    element.question_text,
+                    element.answer_variants,
+                    element.points,
+                    element.img,
+                    element._id)
+
+        +createModals()
+
+    script(type='text/javascript' src='/js/data/survey/insert.js')
+    script(type='text/javascript' src='/js/data/survey/update.js')
+    script(type='text/javascript' src='/js/data/delete.js')
