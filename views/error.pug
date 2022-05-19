@@ -1,0 +1,7 @@
+extends basic_layout
+include  mixins/table_info_mixin
+
+
+block content
+    .container.h-100
+        +tableInfoNoInsertBtn("Error occurred", errorMsg)

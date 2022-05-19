@@ -26,22 +26,21 @@ router.get("/", (req, res) => {
 router.get("/reg", (req, res) => {
     res.render('auth/sign_up', {title: "Sign up"})
 })
-//router.get("/home", roleMiddleware(['ADMIN']), (req, res) => {
-router.get("/home", (req, res) => {
+router.get("/home", roleMiddleware(['ADMIN']), (req, res) => {
     res.render('home', {title: "Home"})
 })
 
-router.get("/achievements", AchievementController.getElems)
-router.get("/armament", ArmamentController.getElems)
-router.get("/years", YearController.getElems)
-router.get("/events", EventController.getElems)
-router.get("/ranks", RankController.getElems)
-router.get("/countries", CountryController.getElems)
-router.get("/tests-themes", TestThemeController.getElems)
-router.get("/tests-answers", TestAnswerController.getElems)
-router.get("/tests-questions", TestQuestionController.getElems)
-router.get("/surveys", SurveyController.getElems)
-router.get("/logs", LogController.getElems)
-router.get("/users", UserController.getElems)
+router.get("/achievements", roleMiddleware(['ADMIN']), AchievementController.getElems)
+router.get("/armament", roleMiddleware(['ADMIN']), ArmamentController.getElems)
+router.get("/years", roleMiddleware(['ADMIN']), YearController.getElems)
+router.get("/events", roleMiddleware(['ADMIN']), EventController.getElems)
+router.get("/ranks", roleMiddleware(['ADMIN']), RankController.getElems)
+router.get("/countries", roleMiddleware(['ADMIN']), CountryController.getElems)
+router.get("/tests-themes", roleMiddleware(['ADMIN']), TestThemeController.getElems)
+router.get("/tests-answers", roleMiddleware(['ADMIN']), TestAnswerController.getElems)
+router.get("/tests-questions", roleMiddleware(['ADMIN']), TestQuestionController.getElems)
+router.get("/surveys", roleMiddleware(['ADMIN']), SurveyController.getElems)
+router.get("/logs", roleMiddleware(['ADMIN']), LogController.getElems)
+router.get("/users", roleMiddleware(['ADMIN']), UserController.getElems)
 
 module.exports = router

@@ -15,6 +15,11 @@ const generateAccessToken = (id, roles, expiresTimeHours) => {
 
 class AuthController {
 
+    logOut(req, res) {
+        res.clearCookie("access_token")
+        return res.sendStatus(200);
+    }
+
     async reg(req, res) {
         try {
             const errors = validationResult(req)
@@ -58,7 +63,7 @@ class AuthController {
         }
         catch (e) {
             console.log(e)
-            ErrorResponses.exceptionOccurred(res, "Registration", e)
+            return ErrorResponses.exceptionOccurred(res, "Registration", e)
         }
     }
 
@@ -80,7 +85,7 @@ class AuthController {
             if(isLogAdmin && remember === "off") {
                 token = generateAccessToken(user._id, user.roles, "10h")
                 res.cookie('access_token', token, {
-                    maxAge: 3600000 * 10,
+                    maxAge: 3600000 * 10, // hours
                     httpOnly: true
                 })
                 return res.render('home')
@@ -88,7 +93,7 @@ class AuthController {
             else if(isLogAdmin && remember === "on"){
                 token = generateAccessToken(user._id, user.roles, "336h")
                 res.cookie('access_token', token, {
-                    maxAge: 3600000 * 336,
+                    maxAge: 3600000 * 336, // hours
                     httpOnly: true
                 })
                 return res.render('home')
@@ -111,7 +116,7 @@ class AuthController {
         }
         catch (e) {
             console.log(e)
-            ErrorResponses.exceptionOccurred(res, "Login", e)
+            return ErrorResponses.exceptionOccurred(res, "Login", e)
         }
     }
 }

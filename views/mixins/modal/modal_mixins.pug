@@ -1,3 +1,21 @@
+mixin createLogOutModal()
+    #logOutModal.modal.fade(
+        tabindex='-1',
+        aria-labelledby='modalLabel',
+        aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h5#modalLabel.modal-title Log out
+                    button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                .modal-body
+                    p#resMsg(hidden='' style='color: red') Error response
+                    form#logOutForm(action='/api.wwi-guide.by/auth/log-out' method="POST")
+                        p Are you sure that you want to log out?
+                        .row
+                            button.col.btn.btn-success.m-1(type='submit') Yes
+                            button.col.btn.btn-danger.m-1(type='button', data-bs-dismiss='modal') No
+
 mixin createDelModal(tableName, warningMsg, apiUrl, idLabel)
     #deleteModal.modal.fade(
         tabindex='-1',

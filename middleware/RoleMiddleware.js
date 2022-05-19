@@ -23,7 +23,10 @@ module.exports = function(roles) {
                 token = req.headers.authorization.split(' ')[1]
             }
 
-            else { return ErrorResponses.unauthorized(res) }
+            else {
+                if(req.baseUrl === '/api.wwi-guide.by') return ErrorResponses.unauthorized(res)
+                else return res.render('error', {errorMsg: "401 Unauthorized"})
+            }
 
             const {roles: userRoles} = jwt.verify(token, secret)
             let hasRole = false
@@ -31,13 +34,17 @@ module.exports = function(roles) {
                 if (roles.includes(role)) { hasRole = true }
             })
 
-            if(!hasRole) { ErrorResponses.noRoleAccess(res) }
+            if(!hasRole) {
+                if(req.baseUrl === '/api.wwi-guide.by') return ErrorResponses.noRoleAccess(res)
+                else return res.render('error', {errorMsg: "403 Your role doesn't have access"})
+            }
 
             next()
         }
         catch (e) {
             console.log(e)
-            ErrorResponses.unauthorized(res)
+            if(req.baseUrl === '/api.wwi-guide.by') return ErrorResponses.unauthorized(res)
+            else return res.render('error/error', {errorMsg: "401 Unauthorized"})
         }
     }
 }
