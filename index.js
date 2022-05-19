@@ -55,7 +55,7 @@ app.get(`${apiURL}/wake-up`, (req, res) => {
 })
 
 Cron.schedule('* */25 * * * *', () => {
-    requestify.get(`http://localhost:5000${apiURL}/wake-up`)
+    requestify.get(`${apiURL}/wake-up`)
         .then(function(response) { console.log(response.getBody()) });
 });
 
