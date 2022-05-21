@@ -41,7 +41,7 @@ $(document).ready(function() {
 
     let insertItem = function (event) {
         const regExpComma = /\s*(?:,|$)\s*/
-        const regExpText = /\s*(?:-----|$)\s*/
+        const regExpText = /\s*(?:\n\n|$)\s*/
         tempImages = imagesField.val().split(regExpComma)
         tempImagesTitles = imagesTitlesField.val().split(regExpComma)
         tempTextParagraphs = textParagraphsField.val().split(regExpText)

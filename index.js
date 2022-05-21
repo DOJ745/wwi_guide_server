@@ -53,6 +53,11 @@ app.get(`${apiURL}/wake-up`, (req, res) => {
     res.status(200).json({"message": "I'm not sleeping"})
 })
 
+app.use(function(req, res, next) {
+    res.status(404);
+    return res.render("error", { errorMsg: 'Page not found' });
+});
+
 Cron.schedule('* */25 * * * *', () => {
     requestify.get(`https://quiet-eyrie-18331.herokuapp.com${apiURL}/wake-up`)
         .then(function(response) { console.log(response.getBody()) });

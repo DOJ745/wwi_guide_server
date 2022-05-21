@@ -2,7 +2,13 @@ const CODES = require('../config/status_codes')
 const ModelsElements = require("../models/models_elements")
 
 module.exports = {
-
+    /**
+     * @param res response object
+     * @param foreignTableNameConst constant from class
+     * @returns {json}
+     * Status code: 400
+     * message: Invalid ID for table!
+     */
     invalidId: function (res, foreignTableNameConst) {
         return res.status(CODES.BAD_REQUEST).json({message: `Invalid ID for ${foreignTableNameConst} table!`})
     },
@@ -35,25 +41,25 @@ module.exports = {
         }
         switch (foreignTableNameConst){
             case ModelsElements.USER:
-                foundDocs.forEach(element => foreignElementsId.push("USER ID: " + element._id + "<\/br>"))
+                foundDocs.forEach(element => foreignElementsId.push("<\/br>USER ID: " + element._id + "<\/br>"))
                 break;
             case ModelsElements.TEST_THEME:
-                foundDocs.forEach(element => foreignElementsId.push("TEST THEME ID: " + element._id + "<\/br>"))
+                foundDocs.forEach(element => foreignElementsId.push("<\/br>TEST THEME ID: " + element._id + "<\/br>"))
                 break;
             case ModelsElements.ARMAMENT:
-                foundDocs.forEach(element => foreignElementsId.push("ARMAMENT ID: " + element._id + "<\/br>"))
+                foundDocs.forEach(element => foreignElementsId.push("<\/br>ARMAMENT ID: " + element._id + "<\/br>"))
                 break;
             case ModelsElements.EVENT:
-                foundDocs.forEach(element => foreignElementsId.push("EVENT ID: " + element._id + "<\/br>"))
+                foundDocs.forEach(element => foreignElementsId.push("<\/br>EVENT ID: " + element._id + "<\/br>"))
                 break;
             case ModelsElements.RANK:
-                foundDocs.forEach(element => foreignElementsId.push("RANK ID: " + element._id + "<\/br>"))
+                foundDocs.forEach(element => foreignElementsId.push("<\/br>RANK ID: " + element._id + "<\/br>"))
                 break;
             case ModelsElements.TEST_ANSWER:
-                foundDocs.forEach(element => foreignElementsId.push("TEST ANSWER ID: " + element._id + "<\/br>"))
+                foundDocs.forEach(element => foreignElementsId.push("<\/br>TEST ANSWER ID: " + element._id + "<\/br>"))
                 break;
             case  ModelsElements.TEST_QUESTION:
-                foundDocs.forEach(element => foreignElementsId.push("TEST QUESTION ID: " + element._id + "<\/br>"))
+                foundDocs.forEach(element => foreignElementsId.push("<\/br>TEST QUESTION ID: " + element._id + "<\/br>"))
                 break;
         }
         return res.status(CODES.BAD_REQUEST).json({message: `For ${elementName} you need to remove this 

@@ -80,7 +80,6 @@ $(document).ready(function() {
                 break;
         }
 
-
         let allImages = $(".cardImg" + itemId).map(function() {
             return this.innerHTML.replace("Image: ", "");
         }).get();
@@ -94,8 +93,7 @@ $(document).ready(function() {
         let allTextParagraphs = $(".cardTextParagraph" + itemId).map(function() {
             return this.innerHTML.replace("Text paragraph: ", "");
         }).get();
-        textParagraphsField.html(allTextParagraphs.join("----- "))
-
+        textParagraphsField.html(allTextParagraphs.join("\n\n"))
     })
 
     updateModal.addEventListener('hide.bs.modal', function (event) {
@@ -104,7 +102,7 @@ $(document).ready(function() {
 
     let updateItem = function (event) {
         const regExpComma = /\s*(?:,|$)\s*/
-        const regExpText = /\s*(?:-----|$)\s*/
+        const regExpText = /\s*(?:\n\n|$)\s*/
         tempImages = imagesField.val().split(regExpComma)
         tempImagesTitles = imagesTitlesField.val().split(regExpComma)
         tempTextParagraphs = textParagraphsField.val().split(regExpText)
