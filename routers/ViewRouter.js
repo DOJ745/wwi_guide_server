@@ -31,7 +31,7 @@ router.get("/home", roleMiddleware(['ADMIN']), (req, res) => {
 })
 
 router.get("/achievements", roleMiddleware(['ADMIN']), AchievementController.getElems)
-router.get("/armament", roleMiddleware(['ADMIN']), ArmamentController.getElems)
+router.get("/armaments", roleMiddleware(['ADMIN']), ArmamentController.getElems)
 router.get("/years", roleMiddleware(['ADMIN']), YearController.getElems)
 router.get("/events", roleMiddleware(['ADMIN']), EventController.getElems)
 router.get("/ranks", roleMiddleware(['ADMIN']), RankController.getElems)

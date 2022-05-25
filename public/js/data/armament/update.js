@@ -130,9 +130,10 @@ $(document).ready(function() {
                 resMsg.animate({opacity: '1.0'}, 633);
                 resMsg.html(res.message)
                 resMsg.removeAttr('hidden')
+                $("#updateModal").animate({scrollTop: 0}, 400)
 
                 setTimeout(reloadPage, 1300)
-                function reloadPage(){ location.href = "/armament" }
+                function reloadPage(){ location.href = "/armaments" }
             })
             .fail((jqXHR) => {
                 let errorData = $.parseJSON(jqXHR.responseText)
@@ -141,6 +142,7 @@ $(document).ready(function() {
                 resMsg.animate({opacity: '1.0'}, 633);
                 resMsg.html(errorData.message)
                 resMsg.removeAttr('hidden')
+                $("#updateModal").animate({scrollTop: 0}, 400)
             })
         event.preventDefault()
     }

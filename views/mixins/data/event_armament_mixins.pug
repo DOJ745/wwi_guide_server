@@ -232,7 +232,7 @@ mixin formArmamentModalByAction(actionName)
                         .modal-body
                             p#resInsertMsg(hidden='' style='color: red') Error response
                             form#itemInsertForm(
-                                action="/api.wwi-guide.by/armament"
+                                action="/api.wwi-guide.by/armaments"
                                 method="POST")
                                 label.col-form-label Input title:
                                 input#titleInsertField.form-control(
@@ -310,7 +310,7 @@ mixin formArmamentModalByAction(actionName)
                         .modal-body
                             p#resUpdateMsg(hidden='' style='color: red') Error response
                             form#itemUpdateForm(
-                                action="/api.wwi-guide.by/armament"
+                                action="/api.wwi-guide.by/armaments"
                                 method="PUT")
                                 label.col-form-label Input new title:
                                 input#titleUpdateField.form-control(

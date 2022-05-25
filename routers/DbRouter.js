@@ -55,11 +55,11 @@ router.delete('/events', roleMiddleware(['ADMIN']), (req, res) =>{
     eventController.deleteElem(req, res, ModelsElements.EVENT)
 })
 
-// ----- ARMAMENT -----
-router.get('/armament', armamentController.getElems)
+// ----- ARMAMENTS -----
+router.get('/armaments', armamentController.getElems)
 router.post('/armaments', roleMiddleware(['ADMIN']), armamentController.addElem)
-router.put('/armament', roleMiddleware(['ADMIN']), armamentController.updateElem)
-router.delete('/armament', roleMiddleware(['ADMIN']), (req, res) =>{
+router.put('/armaments', roleMiddleware(['ADMIN']), armamentController.updateElem)
+router.delete('/armaments', roleMiddleware(['ADMIN']), (req, res) =>{
     armamentController.deleteElem(req, res, ModelsElements.ARMAMENT)
 })
 

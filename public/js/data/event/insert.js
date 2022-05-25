@@ -48,6 +48,7 @@ $(document).ready(function() {
                 resMsg.animate({opacity: '1.0'}, 633);
                 resMsg.html(res.message)
                 resMsg.removeAttr('hidden')
+                $("#insertModal").animate({scrollTop: 0}, 400)
 
                 setTimeout(reloadPage, 999)
                 function reloadPage(){ location.href = "/events" }
@@ -59,6 +60,7 @@ $(document).ready(function() {
                 resMsg.animate({opacity: '1.0'}, 633);
                 resMsg.html(errorData.message)
                 resMsg.removeAttr('hidden')
+                $("#insertModal").animate({scrollTop: 0}, 400)
             })
         event.preventDefault()
     }
