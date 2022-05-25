@@ -85,7 +85,7 @@ class AuthController {
             if(isLogAdmin && remember === "off") {
                 token = generateAccessToken(user._id, user.roles, "10h")
                 res.cookie('access_token', token, {
-                    maxAge: 3600000 * 10, // hours
+                    maxAge: 3600000 * 10, // milliseconds * hours
                     httpOnly: true
                 })
                 return res.render('home')
@@ -93,7 +93,7 @@ class AuthController {
             else if(isLogAdmin && remember === "on"){
                 token = generateAccessToken(user._id, user.roles, "336h")
                 res.cookie('access_token', token, {
-                    maxAge: 3600000 * 336, // hours
+                    maxAge: 3600000 * 24 * 14, // milliseconds * hours * days
                     httpOnly: true
                 })
                 return res.render('home')
