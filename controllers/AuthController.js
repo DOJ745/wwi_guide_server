@@ -106,7 +106,6 @@ class AuthController {
                     achievements: user.achievements,
                     roles: user.roles,
                     score: user.score,
-                    rankId: user.rankId,
                     countryId: user.countryId,
                     token
                 });
