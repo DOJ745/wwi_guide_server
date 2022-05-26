@@ -37,14 +37,12 @@ class AuthController {
 
             if(req.url === '/reg') {
                 const userRole = await Role.findOne({value: "USER"})
-                const userRank = await Rank.findOne({ countryId: countryId, points: 100 }  )
 
                 const newUser = new User(
                     {
                         login: login,
                         password: hashPassword,
                         roles: [userRole.value],
-                        rankId: userRank._id,
                         countryId: countryId
                     }
                 )

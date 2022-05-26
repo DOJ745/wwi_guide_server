@@ -1,2 +1,0 @@
-Cluster username: mainUser
-Cluster password: mainUserPassword
