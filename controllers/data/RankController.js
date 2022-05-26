@@ -19,7 +19,6 @@ class RankController extends IDataController {
 
             const {name, points, img, countryId} = req.body
             let newElem, idCandidate
-
             const candidate = await Rank.findOne({name})
             if (candidate) { return ErrorResponses.elementExists(res, ModelsElements.RANK) }
 
