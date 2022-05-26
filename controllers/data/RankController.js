@@ -18,12 +18,17 @@ class RankController extends IDataController {
             if (!errors.isEmpty()) { return ErrorResponses.modelValidationError(res, ModelsElements.RANK, errors) }
 
             const {name, points, img, countryId} = req.body
+            const elems = await Rank.find()
             let newElem, idCandidate
+
+            // Sort by ascending
+            elems.sort(function (a, b) { return a.points - b.points; })
+            await elems.save()
 
             const candidate = await Rank.findOne({name})
             if (candidate) { return ErrorResponses.elementExists(res, ModelsElements.RANK) }
 
-            if(countryId === "null"){
+            if(countryId === "null") {
                 newElem = new Rank({name: name, points: points, img: img, countryId: "null"})
                 await newElem.save()
             }
@@ -36,7 +41,6 @@ class RankController extends IDataController {
                 }
                 else return ErrorResponses.invalidId(res, ModelsElements.COUNTRY)
             }
-
             return SuccessResponses.successElemOperation(res, ModelsElements.RANK, CRUD_OPERATIONS.ADDED, null)
         }
         catch (e) {
